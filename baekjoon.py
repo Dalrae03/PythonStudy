@@ -119,12 +119,13 @@ for _ in range(N):
 
 
 # 백준 4949
-"""
+
 # 짝을 이루는 두 괄호가 있을 때, 그 사이에 있는 문자열도 균형이 잡혀야 한다.
 # -> 여기에 꽂혀서.. 나는 괄호 앞의 띄어쓰기도 봐야하는줄... 그것만 엄청보고 종료조건을 보지않았다...
 # 무조건 for쓸 생각만 했어... 주어진 반복횟수가 없는데도...
 # 주어진 반복횟수가 없다면 whlie을 생각하자.
-# 프린트는 잘 되는데 정답이 안떠... 왤까..? 왜틀렸냐고오옥 짱나네
+# 프린트는 잘 되는데 정답이 안떠... 왤까..? 왜틀렸냐고오옥 짱나네 => ( 하나만 넣었을경우 no가 나와야하는데 yes가 나와... 그래서 틀림.. 수정요망...
+'''
 while True:
     sentances = input()
     stack = []
@@ -150,8 +151,81 @@ while True:
                 print("no")
                 break
 
-    else:
+    if len(stack) == 0:
         print('yes')
+'''
+# 밑의 if문으로 len(stack) == 0 을 사용한다면 )가 먼저왔을 경우에 stack이 빈상태라 no와 yes가 함께 나온다.
+# 따라서 len(stack) == 0 을 사용하려면 ),]가 먼저왔을때 stack에 무언갈 넣을 수 있어야한다...
+
+# 수정완...
+'''
+while True:
+    sentances = input()
+    stack = []
+    i = 0
+
+    if sentances == '.':
+        break
+
+    for sentance in sentances:
+        if sentance == '(' or sentance == '[':
+            stack.append(sentance)
+
+        elif sentance == ')':
+            if len(stack) !=0 and stack[-1] == '(':
+                stack.pop()
+            else:
+                i = 1
+                break
+
+        elif sentance == ']':
+            if len(stack) !=0 and stack[-1] == '[':
+                stack.pop()
+            else:
+                i = 1
+                break
+
+    if i == 0 and len(stack) == 0:
+        print("yes")
+    else:
+        print("no")
+'''
+# true false처럼 i 를 0과 1로 판단한것
+
+
+# 수정 완...
+'''
+while True:
+    sentances = input()
+    stack = []
+
+    if sentances == '.':
+        break
+
+    for sentance in sentances:
+        if sentance == '(' or sentance == '[':
+            stack.append(sentance)
+
+        elif sentance == ')':
+            if len(stack) !=0 and stack[-1] == '(':
+                stack.pop()
+            else:
+                stack.append(')')
+                break
+
+        elif sentance == ']':
+            if len(stack) !=0 and stack[-1] == '[':
+                stack.pop()
+            else:
+                stack.append(']')
+                break
+
+    if len(stack) == 0:
+        print('yes')
+
+    else:
+        print('no')
+'''
 
 
 # 인터넷 카피
@@ -183,31 +257,39 @@ while True :
     else :
         print('no')
 '''
-"""
 
-      
 
 # 백준 1874
 
-import sys
-
 N = int(input())
-C = [0] # +-할 숫자 스택
+stack = [0] # +-할 숫자 스택
 M = [] # 입력할 숫자들 리스트
 j = 0
+result = []
 
 for _ in range(N):  # 입력숫자 리스트를 만듦
     M.append(int(input()))
 
-
 for i in range(N):
-    while C[-1] == M[i]:
-        if len(C) == 0 or C[-1] < M[i]:
+    while stack[-1] != M[i]:
+        if stack[-1] < M[i]:
             j += 1
-            print('+')
-            C.append(j)
+            result.append('+')
+            stack.append(j)
 
-    if C[-1] == M[i]:
-        print('-')
-        C.pop()
+        elif stack[-1] > M[i]:
+            del result[:]
+            result.append('NO')
+            break
 
+    if stack[-1] == M[i]:
+        result.append('-')
+        stack.pop()
+
+    else:
+        break
+
+for i in range(len(result)):
+    print(result[i])
+
+        
