@@ -260,7 +260,7 @@ while True :
 
 
 # 백준 1874
-
+'''
 N = int(input())
 stack = [0] # +-할 숫자 스택
 M = [] # 입력할 숫자들 리스트
@@ -291,5 +291,29 @@ for i in range(N):
 
 for i in range(len(result)):
     print(result[i])
+'''
 
-        
+# 백준 11866 (복습)
+'''
+from collections import deque
+import sys
+
+n, k = map(int, input().rstrip().split())
+N = deque()
+list = []
+
+for i in range(n):
+    N.append(i+1)
+
+for _ in range(len(n)-1):
+    for _ in range(k-1):
+        N.append(N.popleft())
+    b = N.popleft()
+    list.append(b)
+    
+print("<", end ='')
+for i in range(N-1):
+    print(list[i], end = ', ')
+print(list[-1], end = '>')
+'''
+
