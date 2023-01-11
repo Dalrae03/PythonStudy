@@ -317,3 +317,23 @@ for i in range(N-1):
 print(list[-1], end = '>')
 '''
 
+# 백준 5597
+'''
+student = []
+for i in range(30):
+    student.append(i+1)
+
+N = []
+
+for i in range(28):
+    N.append(int(input()))
+
+for i in range(28):
+    for j in range(30):
+        if N[i] == student[j]:
+            del student[j]
+            break
+
+print(student[0])
+print(student[1])
+'''
