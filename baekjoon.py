@@ -337,3 +337,49 @@ for i in range(28):
 print(student[0])
 print(student[1])
 '''
+
+# 백준 11047 (그리디 알고리즘 - 동전 0)
+# 첫번째 if문(if M < K:)있어서 틀렸다고 나옴... 왜...?
+'''
+N, K = map(int, input().split())
+
+money = []
+
+for _ in range(N):
+    money.append(int(input()))
+
+money.reverse()
+count = 0
+
+for M in money:
+    if M < K:
+        count += K // M
+        K = K % M
+
+    if K == 0:
+        break
+
+print(count)
+'''
+
+# 첫번째 if문 없앤 버전인데 이건 또 맞았데... 왜? if문의 유무의 차이가 머야...?
+'''
+N, K = map(int, input().split())
+
+money = []
+
+for _ in range(N):
+    money.append(int(input()))
+
+money.reverse()
+count = 0
+
+for M in money:
+    count += K // M
+    K = K % M
+
+    if K == 0:
+        break
+
+print(count)
+'''
