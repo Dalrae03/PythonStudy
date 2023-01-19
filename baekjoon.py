@@ -352,7 +352,7 @@ money.reverse()
 count = 0
 
 for M in money:
-    if M < K:
+    if M <= K:  # if문의 유무의 문제가 아니라 이상 이하의 문제... 천원 남아있을때 천원짜리를 사용해야하니까... 부등호 추가
         count += K // M
         K = K % M
 
