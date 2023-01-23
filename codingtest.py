@@ -310,6 +310,7 @@ result = sorted(array, key=setting)
 print(result)
 '''
 
+# 백준 1931
 N = int(input())
 count = 0
 m = 0
@@ -323,8 +324,6 @@ number = sorted(number, key=lambda number: number[1])
 
 for num in number:
     a, b = num[0], num[1]
-    if a < 0:
-        break
     if a >= m:
         count += 1
         m = b
