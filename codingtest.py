@@ -311,6 +311,7 @@ print(result)
 '''
 
 # 백준 1931
+'''
 N = int(input())
 count = 0
 m = 0
@@ -329,3 +330,20 @@ for num in number:
         m = b
 
 print(count)
+'''
+
+# 백준 11399
+'''
+N = int(input())
+result = 0
+p = 0
+number = list(map(int, input().split()))
+
+number.sort()
+
+for i in number:
+    p += i
+    result += p
+
+print(result)
+'''
