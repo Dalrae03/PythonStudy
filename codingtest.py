@@ -347,3 +347,43 @@ for i in number:
 
 print(result)
 '''
+
+# 백준 1920
+# 시간 초과. 하지만 결괏값은 맞게 나옴. 아무래도 이진탐색을 사용해야할 듯
+'''
+N = int(input())
+A = list(map(int, input().split()))
+A.sort()
+M = int(input())
+m = list(map(int, input().split()))
+
+for i in m:
+    if i in A:
+        print('1')
+    else:
+        print('0')
+'''
+
+def search (A, i, start, end):
+    while (start <= end):
+        mid = (start + end) // 2
+        if A[mid] > i:
+            end = mid -1
+        elif A[mid] < i:
+            start = mid + 1
+        else:
+            return 1
+    return None
+
+N = int(input())
+A = list(map(int, input().split()))
+A.sort()
+M = int(input())
+m = list(map(int, input().split()))
+
+for i in m:
+    result = search(A, i, 0, N-1)
+    if result == 1:
+        print('1')
+    else:
+        print('0')
