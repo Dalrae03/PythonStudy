@@ -437,7 +437,7 @@ for i in m:
     else:
         print('0')
 '''
-
+'''
 def search (A, i, start, end):
     while (start <= end):
         mid = (start + end) // 2
@@ -461,3 +461,37 @@ for i in m:
         print('1')
     else:
         print('0')
+'''
+
+# 백준 10816
+N = int(input())
+get = list(map(int, input().split()))
+M = int(input())
+List = list(map(int,input().split()))
+count = 0
+
+def search (L, i, start, end):
+    while (start <= end):
+        mid = (start + end) // 2
+        if L[mid] < i:
+            start = mid +1
+        elif L[mid] > i:
+            end = mid -1
+        else:
+            L.pop(mid)
+            return 1
+    return None
+
+get.sort()
+
+for i in List:
+    result = 0
+    while result != None:
+        C = len(get)
+        result = search(get, i, 0, C-1)
+        count += 1
+    count -= 1
+    print(count, end=' ')
+    count = 0
+
+
