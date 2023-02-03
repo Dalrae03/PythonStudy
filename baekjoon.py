@@ -464,6 +464,58 @@ for i in m:
 '''
 
 # 백준 10816
+# 런타임 에러... 왜자꾸나오냐 돌겟다진짜............
+'''
+N = int(input())
+get = sorted(list(map(int, input().split())))
+M = int(input())
+List = list(map(int,input().split()))
+
+def search (L, i, start, end):
+    if start > end:
+        return 0
+    mid = (start + end) // 2
+    if L[mid] < i:
+        return search(L, i, mid+1, end)
+    elif L[mid] > i:
+        return search(L, i, start, mid-1)
+    else:
+        return cnt.get(i)
+
+cnt = {}
+for i in get:
+    if i in cut:
+        cnt[i] += 1
+    else:
+        cnt[i] = 1
+
+for i in List:
+    print(search(get, i, 0, len(get)-1), end=' ')
+'''
+'''
+N = int(input())
+get = list(map(int, input().split()))
+M = int(input())
+List = list(map(int,input().split()))
+
+cnt = {}
+for i in get:
+    if i in cnt:
+        cnt[i] += 1
+    else:
+        cnt[i] = 1
+
+result =[0] * M
+for i in range(M):
+    if List[i] in cnt:
+        result[i] = cnt[List[i]]
+
+for count in result:
+    print(count)
+'''
+
+# 런타임 에러
+'''
 N = int(input())
 get = list(map(int, input().split()))
 M = int(input())
@@ -478,20 +530,66 @@ def search (L, i, start, end):
         elif L[mid] > i:
             end = mid -1
         else:
-            L.pop(mid)
-            return 1
-    return None
+            return L[start:end+1].count(i)
+    return 0
 
 get.sort()
 
 for i in List:
-    result = 0
-    while result != None:
-        C = len(get)
-        result = search(get, i, 0, C-1)
-        count += 1
-    count -= 1
-    print(count, end=' ')
-    count = 0
+    result = (search(get, i, 0, N))
+    print(result, end=' ')
+'''
+# 런타임 에러
+# 메모리제한 초과로 런타임에러 뜰 수 있다.
+'''
+N = int(input())
+get = sorted(list(map(int, input().split())))
+M = int(input())
+List = list(map(int,input().split()))
 
+def binary(n, N, start, end):
+    if start > end:
+        return 0
+    m = (start+end)//2
+    if n == N[m]:
+        return N[start:end+1].count(n)
+    elif n < N[m]:
+        return binary(n, N, start, m-1)
+    else:
+        return binary(n, N, m+1, end)
 
+n_dic = {}
+for n in N:
+    start = 0
+    end = len(N) - 1
+    if n not in n_dic:
+        n_dic[n] = binary(n, N, start, end)
+
+print(' '.join(str(n_dic[x]) if x in n_dic else '0' for x in M ))
+'''
+
+# 런타임 에러
+'''
+N = int(input())
+get = list(map(int, input().split()))
+M = int(input())
+List = list(map(int,input().split()))
+count = 0
+
+def search (L, i, start, end):
+    while (start <= end):
+        mid = (start + end) // 2
+        if L[mid] < i:
+            start = mid +1
+        elif L[mid] > i:
+            end = mid -1
+        else:
+            return L[start:end+1].count(i)
+    return 0
+
+get.sort()
+
+for i in List:
+    result = (search(get, i, 0, N))
+    print(result, end=' ')
+'''
