@@ -593,3 +593,39 @@ for i in List:
     result = (search(get, i, 0, N))
     print(result, end=' ')
 '''
+
+
+# 백준 4673
+'''
+all_numbers = set(range(1, 10001))
+numbers = set()
+
+def d ():
+    for i in range(1, 10001):
+        for j in str(i):
+            i += int(j)
+        numbers.add(i)
+
+d ()
+
+List = sorted(all_numbers-numbers)
+
+for i in List:
+    print(i)
+'''
+
+# 백준 2587
+
+number = []
+
+for i in range(5):
+    number.append(int(input()))
+
+number.sort()
+num = 0
+
+for i in number:
+    num += i
+
+print(int(num / 5))
+print(number[2])
