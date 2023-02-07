@@ -615,7 +615,7 @@ for i in List:
 '''
 
 # 백준 2587
-
+'''
 number = []
 
 for i in range(5):
@@ -629,3 +629,70 @@ for i in number:
 
 print(int(num / 5))
 print(number[2])
+'''
+
+# 백준 2563
+'''
+N = int(input())
+W_paper = []
+paper = [[0]*100 for _ in range(100)]
+
+for _ in range(N):
+    a, b = list(map(int,input().split()))
+
+    for i in range(a, a+10):
+        for j in range(b, b+10):
+            paper[i][j] = 1
+
+count = 0
+for i in range(100):
+    for j in range(100):
+        if paper[i][j] == 1:
+            count += 1
+
+print(count)
+'''
+
+# 백준 2750
+'''
+N = int(input())
+numbers = []
+
+for _ in range(N):
+    numbers.append(int(input()))
+
+numbers.sort()
+
+for i in numbers:
+    print(i)
+'''
+
+# 백준 10989
+# 메모리 초과
+'''
+N = int(input())
+numbers = []
+
+for _ in range(N):
+    numbers.append(int(input()))
+
+count = [0] * (max(numbers)+1)
+
+for i in range(N):
+    count[numbers[i]] += 1
+
+for i in range(len(count)):
+    for j in range(count[i]):
+        print(i)
+'''
+
+# 백준 1181
+'''
+N = int(input())
+word = []
+
+for _ in range(N):
+    word.append(input())
+
+print(word)
+'''
