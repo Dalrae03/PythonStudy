@@ -754,3 +754,15 @@ L = sorted(List.items(), key = lambda x :x[1])
 
 print(L)
 '''
+
+# 백준 1427
+N = input()
+numbers = []
+
+for i in N:
+    numbers.append(int(i))
+
+numbers.sort(reverse=True)
+
+for i in numbers:
+    print(i, end='')
