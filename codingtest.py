@@ -310,3 +310,53 @@ result = sorted(array, key=setting)
 print(result)
 '''
 
+
+# 병합 정렬
+
+def merge_sort(arr):
+    if len(arr) < 2:
+        return arr
+
+    mid = len(arr) // 2
+    low_arr = merge_sort(arr[:mid])
+    high_arr = merge_sort(arr[mid:])
+
+    merged_arr = []
+    l = h = 0
+    while l < len(low_arr) and h < len(high_arr):
+        if low_arr[l] < high_arr[h]:
+            merged_arr.append(low_arr[l])
+            l += 1
+        else:
+            merged_arr.append(high_arr[h])
+            h += 1
+    merged_arr += low_arr[l:]
+    merged_arr += high_arr[h:]
+    return merged_arr
+
+
+# 힙 정렬
+def heapify(unsorted, index, heap_size):
+  largest = index
+  left = 2 * index + 1
+  right = 2 * index + 2
+  
+  if left < heap_size and unsorted[right] > unsorted[largest]:
+    largest = left
+    
+  if right < heap_size and unsorted[right] > unsorted[largest]:
+    largest = right
+    
+  if largest != index:
+    unsorted[largest], unsorted[index] = unsorted[index], unsorted[largest]
+    heapify(unsorted, largest, heap_size)
+
+def heap_sort(unsorted):
+  n = len(unsorted)
+  
+  for i in range(n // 2 - 1, -1, -1):
+    heapify(unsorted, i, n)
+    
+  for i in range(n - 1, 0, -1):
+    unsorted[0], unsorted[i] = unsorted[i], unsorted[0]
+    heapify(unsorted, 0, i)

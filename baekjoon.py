@@ -668,23 +668,61 @@ for i in numbers:
 '''
 
 # 백준 10989
-# 메모리 초과
+# 메모리 초과 -> 왜..? 계수정렬쓰라해서 썼는데...
+# -> for문 안에서 append를 사용하면 메모리 재할당이 이루어져서 메모리를 효율적으로 사용할 수 없다.
+# 따라서 메모리 초과가 일어난 듯 싶다.
+# sys 안썼더니 이번엔 시간초과나서 sys로 수정
 '''
+import sys
+
+N = int(sys.stdin.readline())
+count = [0] * 10001
+
+for _ in range(N):
+    count[int(sys.stdin.readline())] += 1
+
+for i in range(10001):
+    if count[i] != 0:
+        for j in range(count[i]):
+            print(i)
+'''
+'''
+import sys
+N = int(sys.stdin.readline())
+numbers = []
+
+for _ in range(N):
+    numbers.append(int(sys.stdin.readline()))
+
+count = [0] * (max(numbers)+1)
+
+for i in numbers:
+    count[i] += 1
+
+for i in range(len(count)):
+    for j in range(count[i]):
+        print(i)
+
+# 인터넷 검색, 딕셔너리 사용
 N = int(input())
 numbers = []
 
 for _ in range(N):
     numbers.append(int(input()))
 
-count = [0] * (max(numbers)+1)
+frequency = {}
 
-for i in range(N):
-    count[numbers[i]] += 1
+for num in numbers:
+    if num not in frequency:
+        frequency[num] = 1
+    else:
+        frequency[num] += 1
 
-for i in range(len(count)):
-    for j in range(count[i]):
-        print(i)
+for num, count in frequency.items():
+    for _ in range(count):
+        print(num)
 '''
+
 
 # 백준 1181
 '''
@@ -692,7 +730,27 @@ N = int(input())
 word = []
 
 for _ in range(N):
-    word.append(input())
+    W = input()
+    if W not in word:
+        word.append(W)
+    else:
+        continue
 
-print(word)
+word.sort()
+word.sort(key=len)
+
+for i in word:
+    print(i)
+'''
+
+'''
+List = {}
+
+for _ in range(N):
+    W = input()
+    List[W] = len(W)
+
+L = sorted(List.items(), key = lambda x :x[1])
+
+print(L)
 '''
