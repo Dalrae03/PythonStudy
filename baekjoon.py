@@ -756,6 +756,7 @@ print(L)
 '''
 
 # 백준 1427
+'''
 N = input()
 numbers = []
 
@@ -766,3 +767,48 @@ numbers.sort(reverse=True)
 
 for i in numbers:
     print(i, end='')
+'''
+
+# 백준 11650
+'''
+N = int(input())
+number = []
+
+for _ in range(N):
+    number.append(list(map(int, input().split())))
+
+M = sorted(number, key = lambda x : x[1])
+L = sorted(M, key = lambda x : x[0])
+
+for i in range(N):
+    print(L[i][0], end=' ')
+    print(L[i][1])
+'''
+
+# 백준 11651
+'''
+N = int(input())
+number = []
+
+for _ in range(N):
+    number.append(list(map(int, input().split())))
+
+L = sorted(number, key = lambda x : x[0])
+M = sorted(L, key = lambda x : x[1])
+
+for i in range(N):
+    print(M[i][0], end=' ')
+    print(M[i][1])
+'''
+
+# 백준 10814
+N = int(input())
+List = []
+
+for _ in range(N):
+    List.append(list(input().split()))
+
+L = sorted(List, key = int(lambda x : x[0]))
+
+print(List)
+
