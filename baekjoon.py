@@ -808,7 +808,13 @@ List = []
 for _ in range(N):
     List.append(list(input().split()))
 
-L = sorted(List, key = int(lambda x : x[0]))
 
-print(List)
+for i in range(N):
+    List[i][0] = int(List[i][0])
+
+L = sorted(List, key = lambda x : x[0])
+
+for i in range(N):
+    print(L[i][0], end=' ')
+    print(L[i][1])
 
