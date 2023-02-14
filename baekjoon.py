@@ -802,6 +802,7 @@ for i in range(N):
 '''
 
 # 백준 10814
+'''
 N = int(input())
 List = []
 
@@ -817,4 +818,76 @@ L = sorted(List, key = lambda x : x[0])
 for i in range(N):
     print(L[i][0], end=' ')
     print(L[i][1])
+'''
+
+# 백준 10872
+'''
+N = int(input())
+
+def fac (N):
+    if N <= 1:
+        return 1
+    else:
+        return (N * fac(N-1))
+
+print(fac(N))
+'''
+
+# 백준 10870
+'''
+N = int(input())
+
+def fnumber (N):
+    if N == 0:
+        return 0
+    elif N == 1:
+        return 1
+    else:
+        return (fnumber(N-1) + fnumber(N-2))
+
+print(fnumber(N))
+'''
+
+# 백준 25501
+'''
+T = int(input())
+S = []
+count = 0
+
+for _ in range(T):
+    S.append(input())
+
+def recursion(s, l, r, count):
+    count += 1
+    if l >= r:
+        return 1, count
+    elif s[l] != s[r]:
+        return 0, count
+    else:
+        return recursion(s, l+1, r-1, count)
+
+def isPalindrome(s):
+    return recursion(s, 0, len(s)-1, count)
+
+for i in range(T):
+    x, y = isPalindrome(S[i])
+    print(x, end=' ')
+    print(y)
+'''
+
+# 백준 1269
+'''
+N, M = map(int, input().split())
+A = set()
+B = set()
+
+A.update(input().split())
+B.update(input().split())
+
+a = A - B
+b = B - A
+
+print(len(a)+len(b))
+'''
+
 
