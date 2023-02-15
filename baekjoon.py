@@ -890,4 +890,57 @@ b = B - A
 print(len(a)+len(b))
 '''
 
+# 백준 1764
+'''
+N, M = map(int, input().split())
+n = []
+m = []
 
+for _ in range(N):
+    n.append(input())
+
+for _ in range(M):
+    m.append(input())
+
+A = set(n) & set(m)
+B = list(A)
+B.sort()
+
+print(len(B))
+for i in range(len(B)):
+    print(B[i])
+'''
+
+# 백준 14425
+'''
+# 프린트는 잘 되는데 틀렷데......... 왤까....
+N, M = map(int, input().split())
+n = []
+m = []
+
+for _ in range(N):
+    n.append(input())
+
+for _ in range(M):
+    m.append(input())
+
+A = set(n) & set(m)
+B = list(A)
+
+print(len(B))
+'''
+
+N, M = map(int, input().split())
+n = set()
+count = 0
+
+for _ in range(N):
+    n.add(input())
+
+
+for _ in range(M):
+    a = input()
+    if a in n:
+        count += 1
+
+print(count)
