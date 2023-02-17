@@ -929,7 +929,7 @@ B = list(A)
 
 print(len(B))
 '''
-
+'''
 N, M = map(int, input().split())
 n = set()
 count = 0
@@ -944,3 +944,24 @@ for _ in range(M):
         count += 1
 
 print(count)
+'''
+
+# 백준 1541
+
+import sys
+numbers = sys.stdin.readline().rstrip().split('-')
+number = []
+
+for i in numbers:
+    count = 0
+    num = i.split('+')
+    for j in num:
+        count += int(j)
+    number.append(count)
+
+result = number[0]
+
+for i in range(1, len(number)):
+    result -= number[i]
+
+print(result)
