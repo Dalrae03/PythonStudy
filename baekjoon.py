@@ -947,7 +947,7 @@ print(count)
 '''
 
 # 백준 1541
-
+'''
 import sys
 numbers = sys.stdin.readline().rstrip().split('-')
 number = []
@@ -965,3 +965,59 @@ for i in range(1, len(number)):
     result -= number[i]
 
 print(result)
+'''
+
+# 백준 2805
+
+# 메모리 초과...
+'''
+import sys
+
+N, M = map(int, sys.stdin.readline().split())
+wood = list(map(int, sys.stdin.readline().split()))
+
+a = max(wood)
+b = min(wood)
+
+def search ( ma, mi, M, List ):
+    mid = (a + b) // 2
+    cut = [0] * len(List)
+    for i in List:
+        if i >= mid:
+            cut.append(i - mid)
+        else:
+            cut.append(0)
+    all = sum(cut)
+    if all > M:
+        search(ma, mid, M, List)
+    elif all < M:
+        search(mid, mi, M, List)
+    else:
+        return mid
+
+result = search(a, b, M, wood)
+
+print(result)
+'''
+
+import sys
+
+N, M = map(int, sys.stdin.readline().split())
+wood = list(map(int, sys.stdin.readline().split()))
+
+a = max(wood)  # end
+b = 1  # start -> 1이 아닌 min(wood)로 하면 틀렸다고한다. 아마 min보다 더 작은경우도 있을 수 있으니까 그런것같다.
+
+while b <= a:
+    mid = (a + b) // 2
+    log = 0
+    for i in wood:
+        if i >= mid:
+            log += i - mid
+    
+    if log >= M:
+        b = mid + 1
+    else:
+        a = mid - 1
+
+print(a)
