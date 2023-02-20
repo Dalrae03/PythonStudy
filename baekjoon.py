@@ -968,7 +968,6 @@ print(result)
 '''
 
 # 백준 2805
-
 # 메모리 초과...
 '''
 import sys
@@ -999,7 +998,7 @@ result = search(a, b, M, wood)
 
 print(result)
 '''
-
+'''
 import sys
 
 N, M = map(int, sys.stdin.readline().split())
@@ -1021,3 +1020,96 @@ while b <= a:
         a = mid - 1
 
 print(a)
+'''
+
+# 백준 2108
+'''
+from collections import Counter
+import sys
+
+N = int(sys.stdin.readline().rstrip())
+numbers = []
+
+for _ in range(N):
+    numbers.append(int(sys.stdin.readline().rstrip()))
+
+numbers.sort()
+
+cnt = Counter(numbers).most_common(2)
+
+print(round(sum(numbers) / N))
+print(numbers[(N//2)])
+if len(numbers) > 1:
+    if cnt[0][1] == cnt[1][1]:
+        print(cnt[1][0])
+    else:
+        print(cnt[0][0])
+else:
+    print(cnt[0][0])
+print(max(numbers)-min(numbers))
+'''
+
+# 백준 24060
+'''
+import sys
+
+N, K = map(int, sys.stdin.readline().rsplit())
+A = list(map(int, sys.stdin.readline().split()))
+result = []
+
+def merge_sort(arr):
+    if len(arr) < 2:
+        return arr
+
+    mid = (len(arr)+1) // 2
+    low_arr = merge_sort(arr[:mid])
+    high_arr = merge_sort(arr[mid:])
+
+    merged_arr = []
+    l = h = 0
+    while l < len(low_arr) and h < len(high_arr):
+        if low_arr[l] < high_arr[h]:
+            merged_arr.append(low_arr[l])
+            result.append(low_arr[l])
+            l += 1
+        else:
+            merged_arr.append(high_arr[h])
+            result.append(high_arr[h])
+            h += 1
+
+    while l < len(low_arr):
+        merged_arr.append(low_arr[l])
+        result.append(low_arr[l])
+        l += 1   
+    while h < len(high_arr):
+        merged_arr.append(high_arr[h])
+        result.append(high_arr[h])
+        h +=1
+
+    return merged_arr
+
+merge_sort(A)
+
+if len(result) >= K:
+    print(result[K-1])
+
+else:
+    print(-1)
+'''
+
+# 백준 13305
+'''
+import sys
+
+N = int(input())
+R = list(map(int, sys.stdin.readline().rsplit()))
+M = list(map(int, sys.stdin.readline().rsplit()))
+
+money = []
+result = 0
+
+
+
+
+print(result)
+'''
