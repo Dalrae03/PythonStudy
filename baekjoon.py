@@ -1098,18 +1098,20 @@ else:
 '''
 
 # 백준 13305
-'''
+
 import sys
 
 N = int(input())
-R = list(map(int, sys.stdin.readline().rsplit()))
-M = list(map(int, sys.stdin.readline().rsplit()))
+R = list(map(int, sys.stdin.readline().split()))
+M = list(map(int, sys.stdin.readline().split()))
 
 money = []
 result = 0
 
-
-
+low = M[0]
+for i in range(len(R)):
+    result += R[i] * low
+    if M[i+1] < low:
+        low = M[i+1]
 
 print(result)
-'''
