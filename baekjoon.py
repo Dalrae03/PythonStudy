@@ -1098,7 +1098,7 @@ else:
 '''
 
 # 백준 13305
-
+'''
 import sys
 
 N = int(input())
@@ -1115,3 +1115,82 @@ for i in range(len(R)):
         low = M[i+1]
 
 print(result)
+'''
+
+# 백준 1966
+# list는 popleft가 안돼 일단 인풋에서 이미 queue를 list로 바꿔버림...
+'''
+from collections import deque
+import sys
+
+test = int(input())
+
+for _ in range(test):
+    N, M = map(int, sys.stdin.readline().split())
+    qu = deque(list(map(int, sys.stdin.readline().split())))
+    count = 0
+
+    while len(qu) != 0:
+        m = max(qu)
+        frist = qu.popleft()
+        M -= 1
+
+        if frist == m:
+            count += 1
+            if M < 0:
+                print(count)
+                break
+
+        else:
+            qu.append(frist)
+            if M < 0:
+                M = len(qu) - 1      
+'''
+# 참고전과 비슷하게 풀긴했던 내코드... 하지만 답이 1도 안나오고 받기만 잘받음... 도대체 어디가 문제일까...
+# 그냥 인덱스를 쓰지말고 popleft가 조금 더 나을것같긴하다..ㅎㅎㅎㅎ
+'''
+from collections import deque
+import sys
+
+test = int(input())
+
+for _ in range(test):
+    N, M = map(int, sys.stdin.readline().split())
+    qu = deque(list(map(int, sys.stdin.readline().split())))
+    count = 0
+
+    while len(qu) != 0:
+        m = max(qu)
+        # 맨앞자리가 최대값이 아닌경우
+        if qu[0] != m :
+            qu.append(qu.popleft())
+            M -= 1
+            if M < 0:
+                M = len(qu) - 1
+        # 앞자리가 최댓값이고 우리가 알고싶은 수일 경우
+        elif m == qu[0] and M == 0:
+            qu.popleft()
+            count += 1
+            print(count)
+            break
+        # 최댓값이지만 우리가알고싶은 수가 아닐경우
+        else:
+            qu.popleft()
+            count += 1
+'''
+
+# 백준 11382
+'''
+numbers = list(map(int, input().split()))
+print(sum(numbers))
+'''
+
+# 백준 25314
+N = int(input())
+
+R = N // 4
+
+for _ in range(R):
+    print('long', end=' ')
+
+print('int')

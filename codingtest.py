@@ -312,7 +312,7 @@ print(result)
 
 
 # 병합 정렬
-
+'''
 def merge_sort(arr):
     if len(arr) < 2:
         return arr
@@ -333,9 +333,10 @@ def merge_sort(arr):
     merged_arr += low_arr[l:]
     merged_arr += high_arr[h:]
     return merged_arr
-
+'''
 
 # 힙 정렬
+'''
 def heapify(unsorted, index, heap_size):
   largest = index
   left = 2 * index + 1
@@ -360,3 +361,28 @@ def heap_sort(unsorted):
   for i in range(n - 1, 0, -1):
     unsorted[0], unsorted[i] = unsorted[i], unsorted[0]
     heapify(unsorted, 0, i)
+'''
+
+# 주어진 배열에 3개의 수만 더해서 소수 개수를 출력하는 함수
+import math
+
+sum = [1, 2, 3, 4]
+
+numbers = []
+def search (sum):
+    count = 0
+    N = len(sum)
+    for i in range(N-2):
+        for j in range(i+1, N-1):
+            for p in range(j+1, N):
+                numbers.append(sum[i]+sum[j]+sum[p])
+    
+    for i in numbers:
+        for j in range(2, int(math.sqrt(i)+1)):
+            if i % j == 0:
+                break
+        else:
+            count += 1
+    return count
+
+print(search(sum))
