@@ -1186,6 +1186,7 @@ print(sum(numbers))
 '''
 
 # 백준 25314
+'''
 N = int(input())
 
 R = N // 4
@@ -1194,3 +1195,18 @@ for _ in range(R):
     print('long', end=' ')
 
 print('int')
+'''
+
+# 백준 10810
+'''
+N, M = map(int, input().split())
+baskit = [0 for _ in range(N)]
+
+for _ in range(M):
+    frist, last , ball = map(int, input().split())
+    for i in range(frist, last+1):
+        baskit[i-1] = ball
+
+for i in baskit:
+    print(i, end=' ')
+'''
