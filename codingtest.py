@@ -364,6 +364,7 @@ def heap_sort(unsorted):
 '''
 
 # 주어진 배열에 3개의 수만 더해서 소수 개수를 출력하는 함수
+'''
 import math
 
 sum = [1, 2, 3, 4]
@@ -386,3 +387,32 @@ def search (sum):
     return count
 
 print(search(sum))
+'''
+
+# 직사각형을 만들기위한 나머지 좌표 출력하는 함수
+
+def square(arr):
+    result = []
+    x = []
+    y = []
+    for i in range(3):
+        X = arr[i][0]
+        Y = arr[i][1]
+
+        if X in x:
+            x.remove(X)
+        elif X not in x:
+            x.append(X)
+
+        if Y in y:
+            y.remove(Y)
+        elif Y not in y:
+            y.append(Y)
+            
+    result.append(x[0])
+    result.append(y[0])
+
+    return result
+
+S = square([[1, 1], [2, 2], [1, 2]])
+print(S)
