@@ -1210,3 +1210,19 @@ for _ in range(M):
 for i in baskit:
     print(i, end=' ')
 '''
+
+# 백준 11478
+S = input()
+result = []
+
+# 부분 문자열 구햇음.......
+for i in range(len(S)):
+    j = 1 + i
+    start = 0
+    while j <= len(S):
+        result.append(S[start:j])
+        j += 1
+        start += 1
+
+R = list(set(result))
+print(len(R))
