@@ -1212,6 +1212,7 @@ for i in baskit:
 '''
 
 # 백준 11478
+'''
 S = input()
 result = []
 
@@ -1226,3 +1227,74 @@ for i in range(len(S)):
 
 R = list(set(result))
 print(len(R))
+'''
+
+# 백준 10798
+'''
+import sys
+words = []
+result =[]
+max = 0
+
+for _ in range(5):
+    N = sys.stdin.readline().rstrip()
+    words.append(N)
+    len(N)
+    if max < len(N):
+        max = len(N)
+
+for i in range(max):
+    for j in range(5):
+        if (len(words[j])-1) < i:
+            pass
+        else:
+            result.append(words[j][i])
+
+for i in range(len(result)):
+    print(result[i], end='')
+'''
+
+# 백준 25206
+import sys
+subject = []
+score = 0
+S = 0
+
+for i in range(20):
+    subject.append(list(sys.stdin.readline().rstrip().split()))
+
+
+for i in range(20):
+    if subject[i][2] == 'P':
+        pass
+    elif subject[i][2] == 'A+':
+        score += float(subject[i][1]) * 4.5
+        S += float(subject[i][1])
+    elif subject[i][2] == 'A0':
+        score += float(subject[i][1]) * 4
+        S += float(subject[i][1])
+    elif subject[i][2] == 'B+':
+        score += float(subject[i][1]) * 3.5
+        S += float(subject[i][1])
+    elif subject[i][2] == 'B0':
+        score += float(subject[i][1]) * 3
+        S += float(subject[i][1])
+    elif subject[i][2] == 'C+':
+        score += float(subject[i][1]) * 2.5
+        S += float(subject[i][1])
+    elif subject[i][2] == 'C0':
+        score += float(subject[i][1]) * 2
+        S += float(subject[i][1])
+    elif subject[i][2] == 'D+':
+        score += float(subject[i][1]) * 1.5
+        S += float(subject[i][1])
+    elif subject[i][2] == 'D0':
+        score += float(subject[i][1]) * 1
+        S += float(subject[i][1])
+    elif subject[i][2] == 'F':
+        score += float(subject[i][1]) * 0
+        S += float(subject[i][1])    
+
+
+result = score / S
+print(round(result, 6))
