@@ -1263,7 +1263,6 @@ S = 0
 for i in range(20):
     subject.append(list(sys.stdin.readline().rstrip().split()))
 
-
 for i in range(20):
     if subject[i][2] == 'P':
         pass
@@ -1294,7 +1293,6 @@ for i in range(20):
     elif subject[i][2] == 'F':
         score += float(subject[i][1]) * 0
         S += float(subject[i][1])    
-
 
 result = score / S
 print(round(result, 6))
