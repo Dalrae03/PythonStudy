@@ -163,6 +163,102 @@ print(target)
 """
 
 
+# 5. 볼링공 고르기
+"""
+'''
+N, M = map(int, input().split())
+balls = list(map(int, input().split()))
+count = 0
+
+for i in range(N):
+    for j in range(i+1, N):
+        if balls[i] != balls[j]:
+            count += 1
+
+print(count)
+'''
+
+# 다른 답안
+N, M = map(int, input().split())
+balls = list(map(int, input().split()))
+result = 0
+
+array = [0]*11
+
+for i in balls:
+    array[i] += 1
+
+for i in range(1, M+1):
+    N -= array[i]
+    result += N * array[i]
+
+print(result) 
+"""
 
 
 
+# 6. 무지의 먹방라이브
+import heapq
+List = [3,1,2]
+k = 5
+
+# 내 풀이
+'''
+def solution(food_times, k):
+    time = 0
+    answer = 0
+    check = 0
+    N = len(food_times)
+    
+    while time != k:
+        for i in range(N):
+            if food_times[i] != 0:
+                food_times[i] -= 1
+                time += 1
+                answer = i
+            else:
+                check += 1
+            if time == k:
+                break
+
+    if check == N:
+        answer = -1
+    # 여기서 문제. 다음으로 먹어야할 음식의 요소가 0일경우를 고려하지않고 무조건 다음 음식을 먹도록 설정했다... 
+    # 이거 if문 또 분기해서 0아닌 수 나올때까지 for문돌려야할것같은데 그럼 코드가 너무 더러워지지않나...
+    else:
+        if answer == N-1:
+            answer = 1
+        else:
+            answer += 1
+    
+    return answer
+
+print(solution(List,k))
+'''
+
+# 답안
+# 우선순위 큐(힙) 선행 필요 -> 복습요망
+
+def solution(food_times, k):
+    if sum(food_times) <= k:
+        return -1
+
+    q = []
+    for i in range(len(food_times)):
+        heapq.heappush(q,(food_times[i], i+1))
+
+    sum_value = 0
+    previous = 0
+    length = len(food_times)
+
+    while sum_value + ((q[0][0] - previous) * length) <= k:
+        now = heapq.heappop(q)[0]
+        sum_value += (now - previous) * length
+        length -= 1
+        previous = now
+    
+    result = sorted(q, key = lambda x: x[1])
+    return result[(k - sum_value) % length][1]
+    
+
+print(solution(List,k))
