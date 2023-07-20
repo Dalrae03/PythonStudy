@@ -247,17 +247,20 @@ def solution(food_times, k):
     for i in range(len(food_times)):
         heapq.heappush(q,(food_times[i], i+1))
 
-    sum_value = 0
-    previous = 0
+    sum_value = 0 #먹기위해 사용한 시간
+    previous = 0 #직전에 다 먹은 음식 시간
     length = len(food_times)
 
+    # 먹기위해 사용한 시간 + (현재의 음식 시간 - 이전 음식 시간) * 현재 음식 개수와 k비교
+    # 제일 작은 음식을 없애기 위해 list돌았으니까 돈만큼 값을 빼줘야지
     while sum_value + ((q[0][0] - previous) * length) <= k:
         now = heapq.heappop(q)[0]
         sum_value += (now - previous) * length
         length -= 1
-        previous = now
+        previous = now #이전 음식 시간 재설정
     
-    result = sorted(q, key = lambda x: x[1])
+    #남은 음식 중에서 몇 번째 음식인지 확인하여 출력
+    result = sorted(q, key = lambda x: x[1]) #음식의 번호 기준으로 정렬
     return result[(k - sum_value) % length][1]
     
 
