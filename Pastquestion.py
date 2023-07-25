@@ -196,8 +196,8 @@ print(result)
 """
 
 
-
 # 6. 무지의 먹방라이브
+"""
 import heapq
 List = [3,1,2]
 k = 5
@@ -265,3 +265,51 @@ def solution(food_times, k):
     
 
 print(solution(List,k))
+"""
+
+
+
+# II. 구현
+
+# 7. 럭키 스트레이트
+'''
+N = input()
+L = len(N)
+l = int(L/2)
+ln = 0
+rn = 0
+
+for i in range(l):
+    ln += int(N[i])
+
+for i in range(l, L):
+    rn += int(N[i])
+
+if ln == rn:
+    print("LUCKY")
+else:
+    print("READY")
+'''
+'''
+N = input()
+L = len(N)
+sum = 0
+
+for i in range(L//2):
+    sum += int(N[i])
+
+for i in range(L//2, L):
+    sum -= int(N[i])
+
+if sum == 0:
+    print("LUCKY")
+else:
+    print("READY")
+'''
+
+
+# 8. 문자열 재정렬
+N = input()
+print(N)
+N.sort
+print(N)
