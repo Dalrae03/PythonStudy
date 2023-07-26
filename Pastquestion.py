@@ -309,7 +309,37 @@ else:
 
 
 # 8. 문자열 재정렬
+'''
 N = input()
-print(N)
-N.sort
-print(N)
+count = 0
+sum = 0
+
+for i in N:
+    if ord('0') <= ord(i) and ord(i) <= ord('9'):
+        count += 1
+        sum += int(i)
+
+n = sorted(N)
+
+for i in range(count, len(N)):
+    print(n[i], end='')
+print(sum)
+'''
+
+# 다른 풀이
+data = input()
+result = []
+value = 0
+
+for i in data:
+    if i.isalpha():
+        result.append(i)
+    else:
+        value += int(i)
+
+result.sort()
+
+if value != 0:
+    result.append(value)
+
+print(''.join(result))
