@@ -327,6 +327,7 @@ print(sum)
 '''
 
 # 다른 풀이
+'''
 data = input()
 result = []
 value = 0
@@ -343,3 +344,74 @@ if value != 0:
     result.append(value)
 
 print(''.join(result))
+'''
+
+# 9. 문자열 압축
+# https://school.programmers.co.kr/learn/courses/30/lessons/60057
+'''
+s = 'aabbaccc'
+
+# 내 풀이 (망했고, 실패했지만... 해답의 단계와는 비슷했다...)
+
+def solution(s):
+    n = 1
+    l = len(s)
+    count = 0
+    R = []
+    answer = 1000
+
+    while n <= l//2:
+        a = s[0:n]
+        for i in range(n, len(s)-n):
+            b = s[i:i+n]
+            if a == b:
+                count += 1
+            else:
+                if count != 0:
+                    R.append(count)
+                    R.append(b)
+                else:
+                    R.append(b)
+                a = s[i+n: i+n+n]
+                i = i+n+n
+        if answer > len(R):
+            answer = len(R)
+            count = 0
+            R.clear()
+        
+        n += 1
+
+    print(R)
+    return answer
+
+print(solution(s))
+'''
+
+# 해답
+# range(start, stop, step) 3개의 매개변수를 사용
+# 완전탐색이 가능하다. (범위가 1000으로 좁기 때문에)
+# 리스트가 아닌 문자열 연산을 응용하였다.
+'''
+def solution(s):
+    answer = len(s) #answer을 굳이 1000으로 안해도 된다. 초기 길이보다는 더 긴수를 갖지 못할테니까
+
+    for step in range(1, len(s)//2+1):
+        R ="" #리스트 초기화 하려했으면 여기서 했어야 했다...
+        a = s[0:step]
+        count = 1 #카운트 선언과 초기화도 여기서 했어야했다... 그것도 0이 아니라 1로 (근데 0으로 해도 이제 if문으로 잘 가를 수 있다고 본다)
+        for i in range(step, len(s), step):
+            b = s[i:i+step] #b로 따로 빼도 되고 안빼도 되고
+            if a == b:
+                count += 1
+            else:
+                R += str(count) + a if count >= 2 else a #if 조건부 표현식
+                a = s[i:i+step] #문자열 인덱싱이 가지고있는 범위를 초과할 때, 오류가 나지않고 그냥 마지막 요소까지 다 출력을 한다.
+                count = 1
+
+        R += str(count) + a if count >= 2 else a #남은 문자열 처리
+        answer = min(answer, len(R))
+
+    return answer
+
+print(solution(s))
+'''
