@@ -469,3 +469,80 @@ def solution(key, lock):
 print(solution(key, lock))
 '''
 
+
+# 11. 뱀
+
+# 내가 구현한 input정보들 받는 코드
+# 뱀리스트를 만들어서 뱀이 길이가 늘어나도 뱀이 위치한 몸까지 다 기록하고자 했다.
+'''
+n = int(input())
+M = [[0]*n for _ in range(n)]
+apple = int(input())
+for _ in range(apple):
+    x, y = map(int, input().split())
+    M[x-1][y-1] = 1
+
+t = int(input())
+trun = []
+for _ in range(t):
+    trun.append(list(input().split()))
+
+snake = [[0,0]]
+'''
+# 해답
+# 지도가 나와서 좌표'이동' 문제가 나오면 동서남북 이동거리 x,y리스트 만들어야한다
+
+n = int(input())
+M = [[0]* (n+1) for _ in range(n+1)] #n+1만큼 해서 그냥 1부터 시작하게했다 / 0으로 해도 되는데 그럼 -1 다 따져야 해서 더 복잡해질듯
+apple = int(input())
+for _ in range(apple):
+    x, y = map(int, input().split())
+    M[x][y] = 1
+
+t = int(input())
+info = []
+for _ in range(t):
+    x, c = input().split()
+    info.append((int(x), c))
+
+dx = [0, 1, 0, -1]
+dy = [1, 0, -1, 0]
+
+def turn(direction, c):
+    if c == "L":
+        direction = (direction - 1) % 4
+    else:
+        direction = (direction + 1) % 4
+    return direction
+
+def simulate():
+    x, y = 1, 1
+    M[x][y] = 2 #뱀의 머리를 2로 표현
+    direction = 0 #바라보는 방향 처음에는 동쪽
+    time = 0
+    index = 0 #다음에 회전할 정보
+    q = [(x, y)] #뱀이 차지하고있는 위치정보
+    while True:
+        nx = x+dx[direction]
+        ny = y+dy[direction]
+        if 1 <= nx and 1 <= ny and nx <= n and ny <= n and M[nx][ny] != 2:
+            if M[nx][ny] == 0:
+                M[nx][ny] = 2
+                q.append((nx, ny))
+                px, py = q.pop(0)
+                M[px][py] = 0
+            if M[nx][ny] == 1:
+                M[nx][ny] = 2
+                q.append((nx, ny))
+        else:
+            time += 1
+            break
+        x, y = nx, ny
+        time += 1
+        if index < t and time == info[index][0]:
+            direction = turn(direction, info[index][1])
+            index += 1
+    return time
+
+print(simulate())
+
