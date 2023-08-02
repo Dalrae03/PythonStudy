@@ -491,7 +491,7 @@ snake = [[0,0]]
 '''
 # 해답
 # 지도가 나와서 좌표'이동' 문제가 나오면 동서남북 이동거리 x,y리스트 만들어야한다
-
+'''
 n = int(input())
 M = [[0]* (n+1) for _ in range(n+1)] #n+1만큼 해서 그냥 1부터 시작하게했다 / 0으로 해도 되는데 그럼 -1 다 따져야 해서 더 복잡해질듯
 apple = int(input())
@@ -545,4 +545,101 @@ def simulate():
     return time
 
 print(simulate())
+'''
+
+
+# 12. 기둥과 보 설치
+
+# 망한 내 풀이 (오류잡지 못했고, 중간중간 print무더기는 오류 잡기위해서 리스트 내용 확인차 넣음)
+'''
+def solution(n, build_frame):
+    coner = []
+    answer = []
+
+    for i in range(n+1):  #밑바닥 건설
+        coner.append((i, 0))
+
+    for j in build_frame:
+        if j[2] == 0:
+            if(j[0], j[1]) in coner:
+                if j[3] == 1:
+                    coner.append((j[0], j[1]+1))
+                    answer.append([j[0], j[1], j[2]])
+                    print(coner)
+                    print(answer)
+                    print('-' * 20)
+                else:
+                    coner.remove((j[0], j[1]))
+                    coner.remove((j[0], j[1]+1)) #2,0,0을 없앨때 필요한 2,1코너도 없애버림... 그래서 2, 1이 없어서 list요소 오류가 난다.
+                    answer.remove([j[0], j[1], j[2]])
+                    print(coner)
+                    print(answer)
+                    print('-' * 20)
+            else:
+                continue
+        else:
+            if(j[0], j[1]) in coner or (j[0]+1, j[1]) in coner and (j[0], j[1]) in coner:
+                if j[3] == 1:
+                    if (j[0]+1, j[1]) in coner and (j[0], j[1]) in coner:
+                        answer.append([j[0], j[1], j[2]])
+                        print(coner)
+                        print(answer)
+                        print('-' * 20)
+                    else:
+                        coner.append((j[0]+1, j[1]))
+                        answer.append([j[0], j[1], j[2]])
+                        print(coner)
+                        print(answer)
+                        print('-' * 20)
+                else:
+                    coner.remove((j[0], j[1]))
+                    coner.remove((j[0]+1, j[1])) #여기서 오류가 난다... not in list / 1, 1, 1, 0는 조건이 안맞아서 무시해야해.. 그래야 답이 맞아
+                    answer.remove([j[0], j[1], j[2]])
+                    print(coner)
+                    print(answer)
+                    print('-' * 20)
+            else:
+                continue
+    
+    return answer
+
+print(solution(n, frame))
+'''
+
+n = 5
+frame = [[0, 0, 0, 1], [2, 0, 0, 1], [4, 0, 0, 1], [0, 1, 1, 1], [1, 1, 1, 1], [2, 1, 1, 1], [3, 1, 1, 1], [2, 0, 0, 0], [1, 1, 1, 0], [2, 2, 0, 1]]
+
+
+def check(answer):
+    for x, y, stuff in answer:
+        if stuff == 0:
+            if y == 0 or [x - 1, y, 1] in answer or [x, y, 1] in answer or [x, y - 1, 0] in answer:
+                continue
+            return False
+        else:
+            if [x, y - 1, 0] in answer or [x + 1, y - 1, 0] in answer or [x + 1, y, 1] in answer and [x - 1, y, 1] in answer:
+                continue
+            return False
+    return True
+
+
+
+def solution(n, build_frame):
+    answer = []
+
+    for frame in build_frame:
+        x, y, stuff, opreate = frame
+        if opreate == 0:
+            answer.remove([x, y, stuff])
+            if check(answer) == False:
+                answer.append([x, y, stuff])
+        else:
+            answer.append([x, y, stuff])
+            if not check(answer):
+                answer.remove([x, y, stuff])    
+    
+    return sorted(answer)
+
+
+print(solution(n, frame))
 
