@@ -489,6 +489,7 @@ for _ in range(t):
 
 snake = [[0,0]]
 '''
+
 # 해답
 # 지도가 나와서 좌표'이동' 문제가 나오면 동서남북 이동거리 x,y리스트 만들어야한다
 '''
@@ -606,6 +607,8 @@ def solution(n, build_frame):
 print(solution(n, frame))
 '''
 
+# 해답
+'''
 n = 5
 frame = [[0, 0, 0, 1], [2, 0, 0, 1], [4, 0, 0, 1], [0, 1, 1, 1], [1, 1, 1, 1], [2, 1, 1, 1], [3, 1, 1, 1], [2, 0, 0, 0], [1, 1, 1, 0], [2, 2, 0, 1]]
 
@@ -642,4 +645,97 @@ def solution(n, build_frame):
 
 
 print(solution(n, frame))
+'''
 
+# 13. 치킨 배달
+
+# 알고리즘은 맞은것 같은데 백준 1번째 예시는 잘 나오는데 나머지는 안나온다
+# 백준에서 시간초과뜸...ㅠ
+# https://www.acmicpc.net/problem/15686
+
+'''
+N, M = map(int, input().split())
+Map = []
+
+for i in range(N):
+    Map.append(list(map(int, input().split())))
+
+house = []
+chicken = []
+
+for i in range(N):
+    for j in range(N):
+        if Map[i][j] == 1:
+            house.append((i, j))
+        elif Map[i][j] == 2:
+            chicken.append((i, j))
+
+count = []
+road = []
+
+for i in range(len(chicken)):
+    count.append(0)
+
+for i in house:
+    for j in chicken:
+        R = abs(i[0]-j[0])+abs(i[1]-j[1])
+        road.append(R)
+    a = road.index(min(road))
+    count[a] += 1
+    road = []
+
+
+while len(chicken) != M:
+    a = count.index(min(count))
+    count.append(a)
+    chicken.append(a)
+
+
+road = []
+answer = 0
+
+for i in range(len(chicken)):
+    count.append(0)
+
+for i in house:
+    for j in chicken:
+        R = abs(i[0]-j[0])+abs(i[1]-j[1])
+        road.append(R)
+    answer += min(road)
+    road = []
+
+print(answer)
+'''
+
+# 해답
+from itertools import combinations
+
+N, M = map(int, input().split())
+house = []
+chicken = []
+# house, chicken = [], [] 가능
+
+for i in range(N):  #내가 했던것처럼 2차원리스트 만들고 해도 되는데 첫 반복문이 겹치기도 하고 계산속도도 감축할겸 합쳐버리고 2차원 리스트 안만들고
+    Map = list(map(int, input().split()))
+    for j in range(N):
+        if Map[j] == 1:
+            house.append((i, j))
+        elif Map[j] == 2:
+            chicken.append((i, j))
+
+candidates = list(combinations(chicken, M))
+
+def count(candidate):
+    result = 0
+    for hx, hy in house:  #한줄로 각자 따로 대입 가능
+        temp = 1e9
+        for cx, cy in candidate:
+            temp = min(temp, abs(hx-cx)+abs(hy-cy))  #index이 따로 필요 없음
+        result += temp
+    return result
+
+answer = 1e9
+for c in candidates:
+    answer = min(answer, count(c))
+
+print(answer)
