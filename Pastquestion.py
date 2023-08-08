@@ -647,6 +647,7 @@ def solution(n, build_frame):
 print(solution(n, frame))
 '''
 
+
 # 13. 치킨 배달
 
 # 알고리즘은 맞은것 같은데 백준 1번째 예시는 잘 나오는데 나머지는 안나온다
@@ -708,6 +709,7 @@ print(answer)
 '''
 
 # 해답
+'''
 from itertools import combinations
 
 N, M = map(int, input().split())
@@ -739,3 +741,32 @@ for c in candidates:
     answer = min(answer, count(c))
 
 print(answer)
+'''
+
+
+# 14. 외벽점검
+# https://school.programmers.co.kr/learn/courses/30/lessons/60062
+
+# 해답
+from itertools import permutations
+
+def solution(n, weak, dist):
+    length = len(weak) #기본 한바퀴 (길이를 2배로 늘리는것은 허구의 길이기때문에 원래 길이 저장해둬야함)
+    for i in range(length):
+        weak.append(weak[i]+n)
+    answer = len(dist) + 1  #친구 수보다 하나 더 많은 수로 초기화 (왜? -> 친구수의 최소값을 구해야하니까 그런것같은디... 마지막에 min쓸라고)
+    for start in range(length):
+        for friends in list(permutations(dist, len(dist))):
+            count = 1
+            posistion = weak[start] + friends[count - 1]  #출발 위치에서 순열의 0번째 친구가 끝까지 이동했을 경우의 위치
+            for index in range(start, start + length):  # length는 기본 한바퀴
+                if posistion < weak[index]:
+                    count += 1
+                    if count > len(dist):
+                        break
+                    posistion = weak[index] + friends[count - 1]
+            answer = min(answer, count)
+    if answer > len(dist):
+        return -1
+    
+    return answer
