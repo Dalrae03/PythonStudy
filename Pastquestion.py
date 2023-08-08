@@ -748,6 +748,7 @@ print(answer)
 # https://school.programmers.co.kr/learn/courses/30/lessons/60062
 
 # 해답
+'''
 from itertools import permutations
 
 def solution(n, weak, dist):
@@ -770,3 +771,48 @@ def solution(n, weak, dist):
         return -1
     
     return answer
+    '''
+        
+# 큐를 사용한 구현 (다른 풀이 가져옴)
+# 다음에 다시 이해하자... ㅏ어렵다...
+# filter도 쓰네... 다음에 다시보자...
+"""
+from collections import deque
+
+def solution(n, weak, dist):
+    dist.sort(reverse=True)
+    q = deque([weak])  #이게 무슨의미일까... -> deque([[1, 2, 3, 4, 5]])가 print되는데
+    visited = set()  #집합 자료형
+    visited.add(tuple(weak))
+    for i in range(len(dist)):
+        d = dist[i]
+        for _ in range(len(q)):  #len = 1이야
+            current = q.popleft()  #list뭉텅이 출력
+            '''  #원래 풀이에는 없었지만 누군가가 반례를 하나 들어서 이거 추가하면 될듯 하면서 첨언함 (그래서 일단 적어둠)
+            if d>=n-1: 
+                return i+1
+            '''
+            for p in current:
+                l = p
+                r = (p + d) % n
+                if l < r:
+                    temp = tuple(filter(lambda x: x < l or x > r, current))
+                else:
+                    temp = tuple(filter(lambda x: x < l and x > r, current))
+
+                if len(temp) == 0:
+                    return (i + 1)
+                elif temp not in visited:
+                    visited.add(temp)
+                    q.append(list(temp))
+    return -1
+
+
+# 뭐나오나 확인차 작성
+weak = [1,2,3,4,5]
+q = deque([weak])
+visited = set()  #집합 자료형
+visited.add(tuple(weak))
+current = q.popleft()
+print(current)
+"""
