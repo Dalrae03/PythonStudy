@@ -137,6 +137,8 @@ while True:
 print(count)
 '''
 
+
+
 # DFS 메서드 정의 - 깊이 우선 탐색, 재귀함수로 구현 가능
 '''
 def dfs(graph, v, visited):
@@ -201,6 +203,76 @@ visited = [False] * 9
 
 bfs(graph, 1, visited)
 '''
+
+# 149p - 음료수 얼려먹기 (실전문제)
+'''
+N, M = map(int,input().split())
+
+graph = []
+for _ in range(N):
+    graph.append(list(map(int,input().split())))
+
+def dfs(x, y):
+    if x <= -1 or y <= -1 or x >= N or y >= M:
+        return False
+    
+    if graph[x][y] == 0:
+        graph[x][y] = 1
+        dfs(x - 1, y)
+        dfs(x, y - 1)
+        dfs(x + 1, y)
+        dfs(x, y + 1)
+        return True
+
+    return False
+
+result = 0
+for i in range(N):
+    for j in range(M):
+        if dfs(i, j) == True:
+            result += 1
+print(result)
+'''
+
+
+# 152p - 미로탈출 (실전문제)
+
+from collections import deque
+
+N, M = map(int, input().split())
+
+graph = []
+for _ in range(N):
+    graph.append(list(map(int, input().split())))
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, 1, -1]
+
+def bfs(x, y):
+    queue = deque()
+    queue.append((x, y))
+    while queue:
+        x, y = queue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+
+            if nx < 0 or ny < 0 or nx >= N or ny >= m:
+                continue
+            if graph[nx][ny] == 0:
+                continue
+            if graph[nx][ny] == 1:
+                graph[nx][ny] = graph[x][y] + 1
+                queue.append((nx, ny))
+    return graph[N-1][M-1]
+
+print(bfs(0, 0))
+
+
+
+
+
+
 
 # 선택 정렬 - 처음부터 모두 훑으며 앞으로 보내기
 """
