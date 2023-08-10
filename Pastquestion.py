@@ -90,6 +90,7 @@ print(result)
 
 
 # 3. 문자열 뒤집기
+# https://www.acmicpc.net/problem/1439
 """
 S = input()
 
@@ -197,6 +198,7 @@ print(result)
 
 
 # 6. 무지의 먹방라이브
+# https://programmers.co.kr/learn/courses/30/lessons/42891
 """
 import heapq
 List = [3,1,2]
@@ -272,6 +274,7 @@ print(solution(List,k))
 # II. 구현
 
 # 7. 럭키 스트레이트
+# https://www.acmicpc.net/problem/18406
 '''
 N = input()
 L = len(N)
@@ -471,7 +474,7 @@ print(solution(key, lock))
 
 
 # 11. 뱀
-
+# https://www.acmicpc.net/problem/3190
 # 내가 구현한 input정보들 받는 코드
 # 뱀리스트를 만들어서 뱀이 길이가 늘어나도 뱀이 위치한 몸까지 다 기록하고자 했다.
 '''
@@ -550,7 +553,7 @@ print(simulate())
 
 
 # 12. 기둥과 보 설치
-
+# https://school.programmers.co.kr/learn/courses/30/lessons/60061
 # 망한 내 풀이 (오류잡지 못했고, 중간중간 print무더기는 오류 잡기위해서 리스트 내용 확인차 넣음)
 '''
 def solution(n, build_frame):
