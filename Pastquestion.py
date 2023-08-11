@@ -91,23 +91,26 @@ print(result)
 
 # 3. 문자열 뒤집기
 # https://www.acmicpc.net/problem/1439
-"""
+'''
 S = input()
 
 # 내 풀이
-'''
+
 result = 0
 
-frist = S[0]
-for i in range(1, len(S)-1):
+first = S[0]
+for i in range(len(S)-1):  #첫번째 수와 2번째 수가 다를경우도 고려해줘야해!
     s = S[i]
-    if s == frist and s != S[i+1]:
+    if s == first and s != S[i+1]:
         result +=1
 
 print(result)
 '''
 
+
 # 다른 풀이
+'''
+S = input()
 count0 = 0
 count1 = 0
 
@@ -124,7 +127,7 @@ for i in range(len(S)-1):
             count1 += 1
 
 print(min(count0,count1))
-"""
+'''
 
 
 # 4. 만들 수 없는 금액
@@ -477,6 +480,7 @@ print(solution(key, lock))
 # https://www.acmicpc.net/problem/3190
 # 내가 구현한 input정보들 받는 코드
 # 뱀리스트를 만들어서 뱀이 길이가 늘어나도 뱀이 위치한 몸까지 다 기록하고자 했다.
+# 망햇죠
 '''
 n = int(input())
 M = [[0]*n for _ in range(n)]
