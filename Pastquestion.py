@@ -823,3 +823,121 @@ visited.add(tuple(weak))
 current = q.popleft()
 print(current)
 """
+
+
+# III. DFS/BFS 유형
+# 15. 특정 거리의 도시 찾기
+# https://www.acmicpc.net/problem/18352
+'''
+n, m, k, x = map(int, input().split())
+
+graph = []
+
+for _ in range(n+1):
+    graph.append([])
+
+for i in range(m):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+
+visited = [False] * m
+dist = [0] * n
+
+# 아 구현 못하겠어,........ 하 대가리... 안굴러가...
+def dfs(graph, k, x, visited, dist):
+    if visited[k] != False:
+        continue
+    visited[k] = False
+    for i in graph[k]:
+        visited[i] = False
+        dist[i] += 1
+        dfs(graph, i, x, visited, dist)
+
+    return dist
+
+answer = []
+answer = dfs(graph, k, x, visited, dist)
+
+# 없으면 -1 print,... 
+if answer != k:
+    print(-1)
+else:
+    for i in range(len(answer)):
+        if dist[i] == k:
+            print(i)
+'''
+# 그래프에서 모든 간선의 비용이 동일할 때 'BFS'사용
+
+# BFS란걸 알고난뒤 재풀이
+# 답은 잘 나오는데... 시간초과뜸....
+'''
+from collections import deque
+
+n, m, k, x = map(int, input().split())
+graph = []
+
+for _ in range(n+1):
+    graph.append([])
+
+for i in range(m):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+
+
+def bfs(graph, k, x):
+    dist = [300000] * (n+1)
+    queue = deque()
+    queue.append(x)
+    count = 0
+    while queue:
+        a = queue.popleft()
+        count += 1
+        for i in graph[a]:
+            queue.append(i)
+            dist[i] = min(count, dist[i])
+    return dist
+
+d = bfs(graph, k, x)
+
+# 이부분을 좀 줄일 수 있는 방법이 있을 것 같은데...
+if k not in d:
+    print(-1)
+else:
+    for i in range(len(d)):
+        if d[i] == k:
+            print(i)
+'''
+
+# 해답
+# 이것도 시간초과가 뜨네... 미치겠네..... 아니 답인데 시간초과가 뜨는거 실화?
+from collections import deque
+
+n, m, k, x = map(int, input().split())
+graph = [[] for _ in range(n+1)]  #한 줄로 줄일 수 있음
+
+for _ in range(m):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+
+dist = [-1] * (n+1)
+dist[x] = 0
+
+qu = deque([x])
+while qu:
+    now = qu.popleft()
+    for next in graph[now]:
+        if dist[next] == -1:
+            dist[next] = dist[now] + 1
+            qu.append(next)
+
+check = False
+for i in range(1, n+1):
+    if dist[i] == k:
+        print(i)
+        check = True
+
+if check == False:
+    print(-1)
+
+
+
