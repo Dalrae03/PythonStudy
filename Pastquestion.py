@@ -910,9 +910,11 @@ else:
 
 # 해답
 # 이것도 시간초과가 뜨네... 미치겠네..... 아니 답인데 시간초과가 뜨는거 실화?
+'''
+import sys
 from collections import deque
 
-n, m, k, x = map(int, input().split())
+n, m, k, x = map(int, sys.stdin.readline().split())
 graph = [[] for _ in range(n+1)]  #한 줄로 줄일 수 있음
 
 for _ in range(m):
@@ -938,6 +940,66 @@ for i in range(1, n+1):
 
 if check == False:
     print(-1)
+'''
 
+
+# 16. 연구소
+# https://www.acmicpc.net/problem/14502  (백준에 등록은 하지 않았다)
+
+# 해답
+n, m = map(int, input().split())
+temp = [[0] * m for _ in range(n)]
+
+data = []
+for _ in range(n):
+    data.append(list(map(int, input().split())))
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
+result = 0
+
+def virus (x, y):  #근데 이거 재귀함수 넣는걸 좀 변경시켜서 (x+1, y), (x-1, y)이런식으로 넣어도 될 것 같다
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+    
+        if nx >= 0 and nx < n and ny >= 0 and ny < m:
+            if temp[nx][ny] == 0:
+                temp[nx][ny] = 2
+                virus(nx, ny)
+
+def get_score():
+    score = 0
+    for i in range(n):
+        for j in range(m):
+            if temp[i][j] == 0:
+                score += 1
+    return score
+
+def dfs(count):
+    global result
+    if count == 3:
+        for i in range(n):
+            for j in range(m):
+                temp[i][j] = data[i][j]
+        for i in range(n):
+            for j in range(m):
+                if temp[i][j] == 2:
+                    virus(i, j)
+        result = max(result, get_score())
+        return
+
+    for i in range(n):
+        for j in range(m):
+            if data[i][j] == 0:
+                data[i][j] = 1
+                count += 1
+                dfs(count)
+                data[i][j] = 0
+                count -= 1
+
+dfs(0)
+print(result)
 
 
