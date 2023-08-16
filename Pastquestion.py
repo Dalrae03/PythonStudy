@@ -947,6 +947,7 @@ if check == False:
 # https://www.acmicpc.net/problem/14502  (백준에 등록은 하지 않았다)
 
 # 해답
+'''
 n, m = map(int, input().split())
 temp = [[0] * m for _ in range(n)]
 
@@ -1001,5 +1002,112 @@ def dfs(count):
 
 dfs(0)
 print(result)
+'''
 
 
+# 17. 경쟁적 전염
+# https://www.acmicpc.net/problem/18405
+
+# bfs를 사용하여 할 수 있는 데까지 증식시키는 것은 했는데... 시간 타임정해서 출력하는건 못했다...
+'''
+from collections import deque
+
+n, k = map(int, input().split())
+# temp = [[0] * n for _ in range(n)]  필요할까...?
+
+data = []
+for _ in range(n):
+    data.append(list(map(int, input().split())))
+
+s, x, y = map(int, input().split())
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
+q = deque()
+
+for virus in range(1, k+1):
+    for i in range(n):
+        for j in range(n):
+            if data[i][j] == virus:
+                q.append((i, j, virus))
+
+# q = sorted(q, key=lambda x:x[2]) -> 리스트로 변환돼
+
+
+# 바이러스 개수는 한정되어있으니까 바이러스 종류가 바뀌는걸 카운트해서 한바퀴 다 돌면 시간이 하나 증가하도록 만들고자 했다(하지만 실패했다...)
+fv = q[0][2]
+length = len(q)
+count = 0
+t = 0
+
+while q:
+    X, Y, V = q.popleft()
+    if fv != V:
+        count += 1
+        fv = V
+    if t == s:
+        break
+    for i in range(4):
+        nx = X + dx[i]
+        ny = Y + dy[i]
+
+        if nx < 0 or ny < 0 or nx >= n or ny >= n:
+            continue
+        if data[nx][ny] == 0:
+            data[nx][ny] = V
+            q.append((nx, ny, V))
+    if count == length:
+        t += 1
+        count = 0
+    
+
+print(t)
+print(data)
+print(data[x-1][y-1])
+'''
+
+# 해답 (시간 관련과 내가 짰던 코드의 정보 받기과정을 줄인것 제외 그냥 복붙 -> 나름 선방했어! ^!^)
+'''
+from collections import deque
+
+n, k = map(int, input().split())
+graph = []  #전체 보드의 데이터
+data = []
+
+# 굳이 for문 한번 더 써서 시간낭비 하지말고 data받을 때 한번에 바이러스 위치도 같이 받자
+# 시간도 큐 계산에 넣어버림으로써 내가 고민했었던 시간관련 계산 해결
+for i in range(n):
+    graph.append(list(map(int, input().split())))
+    for j in range(n):
+        if graph[i][j] != 0:
+            data.append((graph[i][j], 0, i, j))
+        
+data.sort() #맨 처음 요소가 바이러스 숫자이기때문에 따로 lamda안해도 정렬됨
+# sort는 리스트 정렬로 우리는 큐가 필요하니까 큐로 형변환 해야한다
+q = deque(data)
+
+s, x, y = map(int, input().split())
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
+while q:
+    V, S, X, Y = q.popleft()
+
+    if S == s:
+        break
+
+    for i in range(4):
+        nx = X + dx[i]
+        ny = Y + dy[i]
+
+        if nx < 0 or ny < 0 or nx >= n or ny >= n:
+            continue
+        if graph[nx][ny] == 0:
+            graph[nx][ny] = V
+            q.append((V, S+1, nx, ny))
+
+    
+print(graph[x-1][y-1])
+'''
