@@ -1111,3 +1111,170 @@ while q:
     
 print(graph[x-1][y-1])
 '''
+
+
+
+# 18. 괄호 변환
+# https://school.programmers.co.kr/learn/courses/30/lessons/60058
+
+
+# 구현은 했는데... 처음부터 '올바른 괄호 문자열'이 들어왔을 경우를 처리 못함...
+# 기능은 비슷한데말이야...
+"""
+p = "(()())()"
+
+def solution(p):
+    if p == '':
+        return p
+    
+    count = 0
+    answer = ''
+    check = 0
+    S = 1
+    u = ''
+    v = ''
+    plist = [p[0]]
+    
+    if p[0] == '(':
+        check = 1
+
+    # 나머지는 괜찮은데 인덱싱하는 방법에 문제가 있어서 처음부터 올바른 괄호 문자열이 들어왔을 경우 오류가 나는거였다
+    # 시작이 ( 이고 스택이 비었을 경우 슬라이싱을 하지 않고 그냥 return해야하는데, S+1이라고 슬라이싱을 해버려서 (( / )())() 이렇게 두개로 나뉘어져버림
+    for i in range(1, len(p)):
+        if p[0] != p[i] and plist:
+            plist.pop()
+        elif p[0] == p[i]:
+            plist.append(p[i])
+        elif p[0] != p[i] and not plist:
+            S = i - 1
+            break
+
+    u = p[:S+1]
+    v = p[S+1:]
+    print(u)
+    print(v)
+    U = ''
+
+    if check == 1 and not plist:
+        A = solution(v)
+    else:
+        answer = '('
+        v = solution(v)
+        answer = answer + v + ')'
+        for i in range(1, len(u)-1):
+            if u[i] == '(':
+                U += ')'
+            else:
+                U += '('
+        answer += U
+        return answer
+
+    answer = u + A
+    
+    return answer
+
+print(solution(p))
+"""
+
+
+# 해답
+
+# '균형잡힌 괄호 문자열'의 인덱스 반환
+def balanced_index(p):
+    count = 0
+    for i in range(len(p)):
+        if p[i] == '(':
+            count += 1
+        else:
+            count -= 1
+        if count == 0:
+            return i
+
+
+# '올바른 괄호 문자열'인지 판단
+def check_proper(p):
+    count = 0  #왼쪽 괄호의 개수
+    for i in p:
+        if i == '(':
+            count += 1
+        else:
+            if count == 0:
+                return False
+            count -= 1
+    return True
+
+'''
+def solution(p):
+    answer = ''
+
+    if p == '':
+        return p
+    
+    count = 0
+    check = 0
+    S = 1
+    u = ''
+    v = ''
+    plist = [p[0]]
+    
+
+    for i in range(1, len(p)):
+        if p[0] != p[i] and plist:
+            plist.pop()
+            count += 1
+        elif p[0] == p[i]:
+            plist.append(p[i])
+            count += 1
+        elif p[0] != p[i] and not plist:
+            S = i - 1
+            break
+
+    u = p[:S+1]
+    v = p[S+1:]
+
+    U = ''
+
+    if check_proper(u):
+        answer = u + solution(v)
+        
+
+    else:
+        answer = '('
+        v = solution(v)
+        answer = answer + v + ')'
+        for i in range(1, len(u)-1):  
+            if u[i] == '(':
+                U += ')'
+            else:
+                U += '('
+        answer += U
+    
+    return answer
+'''
+
+def solution(p):
+    count = 0
+    answer = ''
+    if p == '':
+        return answer
+
+    index = balanced_index(p)
+    u = p[:index+1]
+    v = p[index+1:]
+
+    # 이 밑부분은 내가 작성한걸로 해도 ok 
+    if check_proper(u):
+        answer = u + solution(v)
+    else:
+        answer = '('
+        answer += solution(v)
+        answer +=')'
+        u = list(u[1:-1])
+        for i in range(len(u)):
+            if u[i] == '(':
+                u[i] = ')'
+            else:
+                u[i] = '('
+        answer += "".join(u)
+
+print(solution(p))
