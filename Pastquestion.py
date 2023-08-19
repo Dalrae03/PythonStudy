@@ -1336,53 +1336,19 @@ print(min(result))
 
     
 # 해답
-# 아니 책에서는 해답으로나왔는데 답안으로나왔는데 백준에서는 틀렸데요 이게맞아요? 하.............. 죽겠다............
-'''
+# 아니 책에서는 해답으로나왔는데 답안으로나왔는데 백준에서는 틀렸데요 -> Max와 Min의 초기화 값인 1e9를 수정해야한다
+
+# 1e9는 실수다. 문제에서 결과값은 -1e9 <= res <= 1e9이기 때문에 최댓값, 최솟값이 1e9, -1e9라면 Max, Min이 갱신되지 않아 실수로 출력된다
+# int(1e9)로 정수로 변환해주거나 1e9 + 1과 같이 문제에서 나올 수 없는 값을 초기값으로 사용해 주어야 한다.
+# 정확히 잘 이해는 못했는데, 대충 생각해보자면 -1e9, 1e9까지 범위라서 만약 1e9가 나온다면 갱신이 되지 않으니 1e9까지 포함시키는 더 큰 수로 초기화를 해야한다 라는것 같다.
+# 백준에서는 이런 오류가 종종 난다고 하는데 그래서 초기부터 초기화를 1e10으로 잡는 습관을 가지자 
+
 n = int(input())
 data = list(map(int, input().split()))
 add, sub, mul, div = map(int, input().split())
 
-Max = -1e9
-Min = 1e9
-
-def dfs(i, now):
-    global Max, Min, add, sub, mul, div
-    if i == n:
-        Max = max(Max, now)
-        Min = min(Min, now)
-    else:
-        # 각각의 연산자에 대한 재귀 함수 호출이 별도로 이루어짐
-        if add > 0:
-            add -= 1
-            dfs(i+1, now + data[i])
-            add += 1  # 다른 경우의 수에서 해당 연산자를 다시 사용할 수 있도록 함
-        if sub > 0:
-            sub -= 1
-            dfs(i+1, now - data[i])
-            sub += 1
-        if mul > 0:
-            mul -= 1
-            dfs(i+1, now * data[i])
-            mul += 1
-        if div > 0:
-            div -= 1
-            dfs(i+1, int(now / data[i]))  #int(now/data[i])와 //(몫만 걸러내는 연산자)와 다르네...? 이게 그 세부조건(C++연산)에 맞냐 아니냐를 가르는 것같은데...
-            div += 1
-            
-dfs(1, data[0])
-
-print(Max)
-print(Min)
-'''
-
-# 문제의 요구 사항 - 주어진 연산자의 개수를 사용하여 모든 경우의 수를 탐색하는 것
-# 연산자의 개수를 사용하면서 재귀 호출을 하지 않고, 그냥 다음 인덱스로 넘어간 것이 문제
-n = int(input())
-data = list(map(int, input().split()))
-add, sub, mul, div = map(int, input().split())
-
-Max = -1e9
-Min = 1e9
+Max = -1e10
+Min = 1e10
 
 def dfs(i, now):
     global Max, Min, add, sub, mul, div
