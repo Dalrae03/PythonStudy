@@ -1178,7 +1178,7 @@ print(solution(p))
 
 
 # 해답
-
+"""
 # '균형잡힌 괄호 문자열'의 인덱스 반환
 def balanced_index(p):
     count = 0
@@ -1278,3 +1278,137 @@ def solution(p):
         answer += "".join(u)
 
 print(solution(p))
+"""
+
+
+# 19. 연산자 끼워 넣기
+# https://www.acmicpc.net/problem/14888
+
+# 잘 나오긴 하는데 백준에서 시간초과 뜬다 -> 당연하지,.. for문에 if까지 겁나 써댔으니가...
+"""
+from itertools import permutations
+from collections import deque
+
+n = int(input())
+numbers = list(map(int, input().split()))
+e = list(map(int, input().split()))
+E = ['+', '-', '*', '//']
+s = []  #개수까지 고려 해서 넣은 연산자
+result = []  #모든 계산값 담기
+
+for i in range(4):
+    for j in range(e[i]):
+        s.append(E[i])
+
+q = deque(permutations(s, n-1))
+
+while q:
+    m = 1
+    S = q.popleft()
+    x = numbers[0]
+    for i in S:
+        if m < n:
+            y = numbers[m]
+            if i == '+':
+                x = x + y
+                m += 1
+            elif i == '-':
+                x = x - y
+                m += 1
+            elif i == '*':
+                x = x * y
+                m += 1
+            elif i == '//':
+                # 양수로 바꾼 뒤 몫을 취하고, 그 몫을 음수로 바꾼 것과 같다 (음수를 양수로 나눌 때)
+                if x < 0 and y > 0:
+                    x = -x
+                    x = x // y
+                    x = -x
+                    m += 1
+                else:
+                    x = x // y
+                    m += 1
+    result.append(x)
+
+print(max(result))
+print(min(result))
+"""
+
+    
+# 해답
+# 아니 책에서는 해답으로나왔는데 답안으로나왔는데 백준에서는 틀렸데요 이게맞아요? 하.............. 죽겠다............
+'''
+n = int(input())
+data = list(map(int, input().split()))
+add, sub, mul, div = map(int, input().split())
+
+Max = -1e9
+Min = 1e9
+
+def dfs(i, now):
+    global Max, Min, add, sub, mul, div
+    if i == n:
+        Max = max(Max, now)
+        Min = min(Min, now)
+    else:
+        # 각각의 연산자에 대한 재귀 함수 호출이 별도로 이루어짐
+        if add > 0:
+            add -= 1
+            dfs(i+1, now + data[i])
+            add += 1  # 다른 경우의 수에서 해당 연산자를 다시 사용할 수 있도록 함
+        if sub > 0:
+            sub -= 1
+            dfs(i+1, now - data[i])
+            sub += 1
+        if mul > 0:
+            mul -= 1
+            dfs(i+1, now * data[i])
+            mul += 1
+        if div > 0:
+            div -= 1
+            dfs(i+1, int(now / data[i]))  #int(now/data[i])와 //(몫만 걸러내는 연산자)와 다르네...? 이게 그 세부조건(C++연산)에 맞냐 아니냐를 가르는 것같은데...
+            div += 1
+            
+dfs(1, data[0])
+
+print(Max)
+print(Min)
+'''
+
+# 문제의 요구 사항 - 주어진 연산자의 개수를 사용하여 모든 경우의 수를 탐색하는 것
+# 연산자의 개수를 사용하면서 재귀 호출을 하지 않고, 그냥 다음 인덱스로 넘어간 것이 문제
+n = int(input())
+data = list(map(int, input().split()))
+add, sub, mul, div = map(int, input().split())
+
+Max = -1e9
+Min = 1e9
+
+def dfs(i, now):
+    global Max, Min, add, sub, mul, div
+    if i == n:
+        Max = max(Max, now)
+        Min = min(Min, now)
+    else:
+        # 각각의 연산자에 대한 재귀 함수 호출이 별도로 이루어짐
+        if add > 0:
+            add -= 1
+            dfs(i+1, now + data[i])
+            add += 1  # 다른 경우의 수에서 해당 연산자를 다시 사용할 수 있도록 함
+        if sub > 0:
+            sub -= 1
+            dfs(i+1, now - data[i])
+            sub += 1
+        if mul > 0:
+            mul -= 1
+            dfs(i+1, now * data[i])
+            mul += 1
+        if div > 0:
+            div -= 1
+            dfs(i+1, int(now / data[i]))  #int(now/data[i])와 //(몫만 걸러내는 연산자)와 다르네...? 이게 그 세부조건(C++연산)에 맞냐 아니냐를 가르는 것같은데...
+            div += 1
+            
+dfs(1, data[0])
+
+print(Max)
+print(Min)
