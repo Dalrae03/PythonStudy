@@ -949,9 +949,9 @@ if check == False:
 # 해답
 '''
 n, m = map(int, input().split())
-temp = [[0] * m for _ in range(n)]
+temp = [[0] * m for _ in range(n)]  #벽을 설치한 뒤의 리스트
 
-data = []
+data = []  #초기 맵 리스트
 for _ in range(n):
     data.append(list(map(int, input().split())))
 
@@ -1340,9 +1340,9 @@ print(min(result))
 
 # 1e9는 실수다. 문제에서 결과값은 -1e9 <= res <= 1e9이기 때문에 최댓값, 최솟값이 1e9, -1e9라면 Max, Min이 갱신되지 않아 실수로 출력된다
 # int(1e9)로 정수로 변환해주거나 1e9 + 1과 같이 문제에서 나올 수 없는 값을 초기값으로 사용해 주어야 한다.
-# 정확히 잘 이해는 못했는데, 대충 생각해보자면 -1e9, 1e9까지 범위라서 만약 1e9가 나온다면 갱신이 되지 않으니 1e9까지 포함시키는 더 큰 수로 초기화를 해야한다 라는것 같다.
+# -1e9, 1e9까지 범위라서 만약 1e9가 나온다면 갱신이 되지 않으니 1e9까지 포함시키는 더 큰 수로 초기화를 해야한다 라는것 같다.
 # 백준에서는 이런 오류가 종종 난다고 하는데 그래서 초기부터 초기화를 1e10으로 잡는 습관을 가지자 
-
+'''
 n = int(input())
 data = list(map(int, input().split()))
 add, sub, mul, div = map(int, input().split())
@@ -1378,3 +1378,140 @@ dfs(1, data[0])
 
 print(Max)
 print(Min)
+'''
+
+
+# 20. 감시 피하기
+# https://www.acmicpc.net/problem/18428 (백준에 등록하지는 않았다.)
+
+#temp없이, 있이 둘다 해봣는데 함수 호출뒤에 아무것도 안일어나.. 오류도 안나고 yes,no print도 안되고... 왜지?
+# 문제는 있겠지... 아 악 근데 오류는 떠야지ㅠ
+'''
+N = int(input())
+data = []
+temp = [['X'] * N for _ in range(N)]  #이게필요할까...?
+# print(temp)
+
+for _ in range(N):
+    data.append(list(input().split()))
+# print(data)
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
+# 이게 문제인것 같긴 한데...
+def check(data):
+    for i in range(N):
+        for j in range(N):
+            if data[i][j] == 'T':
+                for k in range(4):
+                    while 0 <= i and i < N and 0 <= j and j < N:
+                        nx = i + dx[k]
+                        ny = j + dy[k]
+                        if data[nx][ny] == 'O':
+                            break
+                        elif data[nx][ny] == 'S':
+                            return False
+                        i = nx
+                        j = ny
+                        
+    return True
+
+def dfs(count):
+    if count == 3:
+        for i in range(n):
+            for j in range(m):
+                temp[i][j] = data[i][j]
+        if check(temp):
+            print("YES")
+        else:
+            print("NO")
+    return
+
+    for i in range(N):
+        for j in range(N):
+            if data[i][j] == 'X':
+                data[i][j] == 'O'
+                count += 1
+                dfs(count)
+                data[i][j] = 'X'
+                count -= 1
+
+dfs(0)
+'''
+
+
+# 해답
+# DFS안쓰고 조합 라이브러리 썼어.... 난 DFS로 푸는게 알고싶은데...
+
+from itertools import combinations
+
+N = int(input())
+data = []
+teacher = []
+space = []
+
+for i in range(N):
+    data.append(list(input().split()))
+    for j in range(N):
+        if data[i][j] == 'T':
+            teacher.append((i, j))
+        if data[i][j] == 'X':
+            space.append((i, j))
+        
+def check (x, y, direction):
+    if direction == 0:
+        while y >= 0:
+            if data[x][y] == 'S':
+                return True
+            if data[x][y] == 'O':
+                return False
+            y -= 1
+    if direction == 1:
+        while y < N:
+            if data[x][y] == 'S':
+                return True
+            if data[x][y] == 'O':
+                return False
+            y += 1
+
+    if direction == 2:
+        while x >= 0:
+            if data[x][y] == 'S':
+                return True
+            if data[x][y] == 'O':
+                return False
+            x -= 1
+
+    if direction == 3:
+        while x < N:
+            if data[x][y] == 'S':
+                return True
+            if data[x][y] == 'O':
+                return False
+            x += 1
+    return False
+
+def process():
+    for x, y in teacher:
+        for i in range(4):
+            if check(x, y, i):
+                return True
+    return False
+
+find = False
+
+for wall in combinations(space, 3):
+    for x, y in wall:
+        data[x][y] = 'O'
+    if not process():
+        find = True
+        break
+    for x, y in wall:
+        data[x][y] = 'X'
+
+if find:
+    print("YES")
+else:
+    print("NO")
+
