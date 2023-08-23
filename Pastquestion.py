@@ -1443,7 +1443,7 @@ dfs(0)
 
 # 해답
 # DFS안쓰고 조합 라이브러리 썼어.... 난 DFS로 푸는게 알고싶은데...
-
+"""
 from itertools import combinations
 
 N = int(input())
@@ -1514,4 +1514,182 @@ if find:
     print("YES")
 else:
     print("NO")
+"""
+
+
+
+# 21. 인구이동
+# https://www.acmicpc.net/problem/16234 (백준에 등록은 하지 않음)
+
+# 기능은 대충 구현을 했는데...
+# 문제 1. 각 연결된 나라끼리 계산을 한 것이 아니라 총 모든 나라와 (국경선이 열려있지 않아도) 평균을 계산함
+# 문제 2. DFS/BFS사용을 안했는데...?
+"""
+n, l, r = map(int, input().split())
+
+data = []
+for _ in range(n):
+    data.append(list(map(int,input().split())))
+
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+R = 0
+'''
+sub = []  #각 요소들의 좌표와 빼기 정보
+count = 0  #해당 좌표들의 개수
+check = []  #해당되는 좌표들
+
+
+for i in range(n):
+    for j in range(n):
+        temp = [(i, j), -1, -1, -1, -1]
+        for k in range(4):
+            nx = i + dx[k]
+            ny = j + dy[k]
+            if 0 <= nx and nx < n and 0 <= ny and ny < n:
+                temp[k+1] = abs(data[i][j] - data[nx][ny])
+        sub.append(temp)
+
+
+
+for i in sub:
+    for j in range(1, 5):
+        if l <= i[j] and i[j] <= r:
+            count += 1
+            check.append(i[0])
+            break
+
+
+
+for i in check:
+    x, y = i[0], i[1]
+    result += data[x][y]
+
+result = result // count
+
+for i in check:
+    x, y = i[0], i[1]
+    data[x][y] = result
+'''
+
+            
+while True:
+    result = 0  #더해서 나눈 계산한 숫자
+    sub = []  #각 요소들의 좌표와 빼기 정보
+    count = 0  #해당 좌표들의 개수
+    check = []  #해당되는 좌표들
+    for i in range(n):
+        for j in range(n):
+            temp = [(i, j), -1, -1, -1, -1]
+            for k in range(4):
+                nx = i + dx[k]
+                ny = j + dy[k]
+                if 0 <= nx and nx < n and 0 <= ny and ny < n:
+                    temp[k+1] = abs(data[i][j] - data[nx][ny])
+            sub.append(temp)
+
+    for i in sub:
+        for j in range(1, 5):
+            if l <= i[j] and i[j] <= r:
+                count += 1
+                check.append(i[0])
+                break
+    print(check)
+    if not check:
+        break
+    else:
+        for i in check:
+            x, y = i[0], i[1]
+            result += data[x][y]
+
+        result = result // count
+
+        for i in check:
+            x, y = i[0], i[1]
+            data[x][y] = result
+        print(data)
+        R += 1
+
+print(R)
+"""
+
+# 해답
+# 한 나라에서부터 '연결된' 나라들의 국경선을 알아야하니까 BFS가 적합
+
+from collections import deque
+n, l, r = map(int, input().split())
+
+data = []
+for _ in range(n):
+    data.append(list(map(int,input().split())))
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+result = 0
+
+def process(x, y, index):
+    united = []
+    united.append((x, y))
+    q = deque()
+    q.append((x, y))
+    union[x][y] = index  #현재 연합의 번호 할당
+    summary = data[x][y]
+    count = 1
+    while q:
+        x, y = q.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0 <= nx < n and 0 <= ny < n and union[nx][ny] == -1:
+                if l <= abs(data[nx][ny] - data[x][y]) <= r:
+                    q.append((nx, ny))
+                    union[nx][ny] = index
+                    summary += data[nx][ny]
+                    count += 1
+                    united.append((nx, ny))
+    for i, j in united:
+        data[i][j] = summary // count
+    return
+
+total_count = 0
+
+while True:
+    union = [[-1] * n for _ in range(n)]
+    index = 0
+    for i in range(n):
+        for j in range(n):
+            if union[i][j] == -1:
+                process(i, j, index)
+                index += 1
+    if index == n * n:
+        break
+    total_count += 1
+
+print(total_count)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
