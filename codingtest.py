@@ -236,7 +236,7 @@ print(result)
 
 
 # 152p - 미로탈출 (실전문제)
-
+"""
 from collections import deque
 
 N, M = map(int, input().split())
@@ -267,7 +267,7 @@ def bfs(x, y):
     return graph[N-1][M-1]
 
 print(bfs(0, 0))
-
+"""
 
 
 
@@ -462,7 +462,7 @@ print(search(sum))
 '''
 
 # 직사각형을 만들기위한 나머지 좌표 출력하는 함수
-
+"""
 def square(arr):
     result = []
     x = []
@@ -488,3 +488,70 @@ def square(arr):
 
 S = square([[1, 1], [2, 2], [1, 2]])
 print(S)
+"""
+
+# 178p 배열 유형 - 위에서 아래로
+"""
+N = int(input())
+numbers = []
+for _ in range(N):
+    numbers.append(int(input()))
+
+'''
+# sorted()함수 사용
+numbers = sorted(numbers, reverse=True)
+'''
+
+# .sort()메서드 사용
+numbers.sort(reverse=True)
+
+for i in numbers:
+    print(i, end=' ')
+"""
+
+
+# 배열 유형 - 성적이 낮은 순서로 학생 출력하기
+"""
+N = int(input())
+members = []
+
+for _ in range(N):
+    members.append(tuple(input().split()))
+
+# sorted() 함수 사용
+'''
+members = sorted(members, key=lambda student: student[1])
+
+for i in members:
+    print(i[0], end=' ')
+'''
+
+# 계수 정렬 사용
+count = [[] for _ in range(101)]
+
+for i in members:
+    count[int(i[1])].append(i[0])
+
+for i in count:
+    if i:
+        for j in i:
+            print(j, end=' ')
+"""
+
+
+# 배열 유형 - 두 배열의 원소 교체
+N, K = map(int, input().split())
+
+A = list(map(int, input().split()))
+B = list(map(int, input().split()))
+
+A.sort()
+B.sort(reverse=True)
+
+for i in range(K):
+    if A[i] < B[i]:
+        A[i], B[i] = B[i], B[i]
+    else:
+        break
+
+print(sum(A))
