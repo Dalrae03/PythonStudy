@@ -1676,6 +1676,7 @@ print(total_count)
 
 # 와 감이 1도 안잡힌다... 역시 난도 3이라서 그런가...
 # 해답
+"""
 from collections import deque
 
 board = [[0, 0, 0, 1, 1],[0, 0, 0, 1, 0],[0, 1, 0, 1, 1],[1, 1, 0, 0, 1],[0, 0, 0, 0, 0]]
@@ -1733,10 +1734,11 @@ def solution(board):
 
 
 print(solution(board))
+"""
 
 
 
-
+# IV. 정렬
 
 
 
