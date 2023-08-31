@@ -1739,6 +1739,42 @@ print(solution(board))
 
 
 # IV. 정렬
+# 23. 국영수 (백준에 등록하진 않았다)
+# https://www.acmicpc.net/problem/10825
+# 와... 꽤 까다롭네... 이걸 못푼다고...? 실버4인데...?
+
+# 국어대로 계수정렬해서 받은다음에 list의 요소 개수가 2가 넘으면 영어로 정렬, 그뒤는 다시 생각해보려고했는데, 아닌것 같아... 영어 sort정렬도 인덱스 3개 필요해...
+"""
+N = int(input())
+student = []
+score = [[] for _ in range(101)]
+
+for _ in range(N):
+    t = tuple(input().split())
+    score[int(t[1])].append(t)
+
+for i in range(100, 1, -1):
+    if len(score[i]) >= 2:
+        score[i].sort(key=score[i][2])
+    elif score[i]:
+        print(score[i][0][0])
+    else:
+        continue
+"""
+
+# 해답
+N = int(input())
+student = []
+
+for _ in range(N):
+    student.append(input().split())  #굳이 튜플로 안바꿔도 되긴 되더라. 이렇게 입력하면 리스트로 받아서 2차원 리스트 된다
+
+student.sort(key= lambda x: (-int(x[1]), int(x[2]), -int(x[3]), x[0]))  #잘익혀두기.. 미쳤어... lambda익혀두자...
+# sort 메서드는 key를 사용하여 조건을 설정할 수도 있고, 정렬시키면 기본적으로 튜플(리스트)를 구성하는 원소 순서에 맞게 정렬 시킨다. (그냥 기본적으로 앞이 같으면 뒤 원소, 뒤원소 이렇게 넘어간다는 소리)
+
+for i in student:
+    print(i[0])
+
 
 
 
