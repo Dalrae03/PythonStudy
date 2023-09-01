@@ -1763,6 +1763,7 @@ for i in range(100, 1, -1):
 """
 
 # 해답
+"""
 N = int(input())
 student = []
 
@@ -1774,12 +1775,47 @@ student.sort(key= lambda x: (-int(x[1]), int(x[2]), -int(x[3]), x[0]))  #잘익�
 
 for i in student:
     print(i[0])
+"""
 
 
+# 24. 안테나
+# https://www.acmicpc.net/problem/18310 (백준에 등록은 하지 않았다)
 
 
+# 백준에서 시간 초과 떠......... 환장하겠넹 ^!^
+"""
+N = int(input())
 
+numbers = set(map(int, input().split()))
 
+numbers = list(numbers)
+numbers.sort()
+N = len(numbers)
+
+Min = 1e10
+result = 0
+
+for i in range(N):
+    temp = 0
+    for j in range(N):
+        temp += abs(numbers[i] - numbers[j])
+    if Min > temp:
+        Min = temp
+        result = numbers[i]
+
+print(result)
+"""
+
+# 해답
+# 대가리를 좀 더 굴려보자... 너무 쉬워서 좀 해탈한걸...
+# 굳이 일일이 다 계산할 필요 없고, 다른 방식, 관점으로 생각하면 더 쉽게 풀 수 있었어... 모든 받은 정보들은 쓸모없지 않아...
+N = int(input())
+
+numbers = lsit(map(int, input().split()))
+numbers.sort()
+
+print(numbers[(n - 1) // 2])
 
     
+
 
