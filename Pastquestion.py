@@ -1809,13 +1809,75 @@ print(result)
 # 해답
 # 대가리를 좀 더 굴려보자... 너무 쉬워서 좀 해탈한걸...
 # 굳이 일일이 다 계산할 필요 없고, 다른 방식, 관점으로 생각하면 더 쉽게 풀 수 있었어... 모든 받은 정보들은 쓸모없지 않아...
+"""
 N = int(input())
 
 numbers = lsit(map(int, input().split()))
 numbers.sort()
 
 print(numbers[(n - 1) // 2])
+"""
 
-    
+
+# 25. 실패율
+# https://school.programmers.co.kr/learn/courses/30/lessons/
+
+N = 5
+stages = [2, 1, 2, 6, 2, 4, 3, 3]
 
 
+# 항상 예외처리 주의
+# 처음에 런타임 에러 - '모든 수를 0으로는 나눌수 없다' 나왔다
+# 조건 잘 읽고 예외처리 확실하게... 런타임에러에도 여러 종류가 있다.
+# '스테이지에 도달한 유저가 없는 경우 해당 스테이지의 실패율은 0으로 정의한다'는 조건 -> 런타임에러 핵심 해결책이었다
+"""
+def solution(N, stages):
+    count = [0 for _ in range(N+2)]
+
+    for i in stages:
+        count[i] += 1
+
+    temp = {}
+
+    for i in range(1, N+1):
+        sum = 0
+        for j in range(i, N+2):
+            sum += count[j]
+        if sum == 0:
+            temp[i] = 0
+        else:
+            temp[i] = count[i] / sum
+
+    result = sorted(temp.items(), key= lambda x: x[1], reverse= True)
+    answer = []
+
+    for i in result:
+        answer.append(i[0])
+
+    return answer
+"""
+
+# 다른 답안
+def solution(N, stages):
+
+    answer = []
+    length = len(stages)
+
+    for i in range(1, N+1):
+        count = stages.count(i)
+
+        if length == 0:
+            fail = 0
+        else:
+            fail = count/length
+        
+        answer.append((i, fail))
+        length -= count
+
+    answer = sorted(answer, key= lambda x: x[1], reverse= True)
+
+    answer = [i[0] for i in answer]
+    return answer
+
+
+print(solution(N,stages))
