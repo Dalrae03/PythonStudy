@@ -1858,6 +1858,7 @@ def solution(N, stages):
 """
 
 # 다른 답안
+"""
 def solution(N, stages):
 
     answer = []
@@ -1881,3 +1882,56 @@ def solution(N, stages):
 
 
 print(solution(N,stages))
+"""
+
+
+# 26. 카드 정렬하기
+# https://www.acmicpc.net/problem/1715
+
+# 답은 잘 나오는데 시간초과 뜬다... 어쩐지 이게 골4인데 이렇게 쉽게 풀릴리가 없다고 생각했어ㅋㅋㅋㅋ 하.........
+# 시간 초과 뜨는 이유: 매번 배열을 정렬하고 0번째 값을 빼주는 것으로는 시간초과가 불가피 => 매번 정렬 하지 말아야한다... 그럼... 조합?
+"""
+N = int(input())
+numbers = []
+result = 0
+
+for _ in range(N):
+    numbers.append(int(input()))
+
+for _ in range(N-1):
+    numbers.sort()
+    fir = numbers.pop(0)
+    sec = numbers.pop(0)
+    temp = fir + sec
+    numbers.append(temp)
+    result += temp
+
+print(result)
+"""
+# 우선순위 큐 -> 원소를 넣다 빼는것만으로도 정렬된 결과를 얻을 수 있다 => sort로 인한 시간초과를 해결할 수 있다.
+# 리스트의 pop과 append, sort를 heapq에 맞게 변형만 시켰다. 나름 알고리즘생각은 나쁘지 않았나봐
+
+import heapq
+
+N = int(input())
+numbers = []
+result = 0
+
+for _ in range(N):
+    heapq.heappush(numbers, int(input()))
+
+while len(numbers) != 1:
+    fir = heapq.heappop(numbers)
+    sec = heapq.heappop(numbers)
+    temp = fir + sec
+    heapq.heappush(numbers, temp)
+    result += temp
+
+print(result)
+
+
+
+
+
+
+
