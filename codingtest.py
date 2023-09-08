@@ -560,7 +560,7 @@ print(sum(A))
 # 197p 이진탐색 유형 - 부품찾기 (실전문제)
 
 """
-입력 예시
+# 입력 예시
 5
 8 3 7 9 2
 3
@@ -641,31 +641,25 @@ while start <= end:
     for i in array:
         if i > mid:
             total += (i - mid)
-    if total >= m:   # 같은것까지 고려 해야함
-        result = mid
-        start = mid + 1
-    else:
+    if total < m:
         end = mid - 1
-       
+    else:
+        result = mid
+        start = mid + 1    
 
 print(result)
 
 
 
 """
+# 입력 예시
 4 6
 19 15 10 17
 
+# 다른 방안 (약간의 변경)
 if total >= m:   # 같은것까지 고려 해야함
     result = mid
     start = mid + 1
 else:
     end = mid - 1
-
-
-if total < m:
-        end = mid - 1
-else:
-    result = mid
-    start = mid + 1 
 """
