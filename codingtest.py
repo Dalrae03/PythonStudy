@@ -271,9 +271,6 @@ print(bfs(0, 0))
 
 
 
-
-
-
 # 선택 정렬 - 처음부터 모두 훑으며 앞으로 보내기
 """
 array = [7, 5, 9, 0, 3, 1, 6, 2, 4, 8]
@@ -540,6 +537,7 @@ for i in count:
 
 
 # 배열 유형 - 두 배열의 원소 교체
+"""
 N, K = map(int, input().split())
 
 A = list(map(int, input().split()))
@@ -555,3 +553,119 @@ for i in range(K):
         break
 
 print(sum(A))
+"""
+
+
+
+# 197p 이진탐색 유형 - 부품찾기 (실전문제)
+
+"""
+입력 예시
+5
+8 3 7 9 2
+3
+5 7 9
+"""
+
+# 1) 이진 탐색으로 풀기
+"""
+def binary_search(array, target, start, end):
+    if start > end:
+        return None
+    mid = (start + end) // 2
+    if array[mid] == target:
+        return mid
+    elif array[mid] > target:
+        return binary_search(array, target, start, mid-1)
+    else:
+        return binary_search(array, target, mid+1, end)
+
+
+n = int(input())
+array = list(map(int, input().split()))
+array.sort()
+m = int(input())
+mlist = list(map(int, input().split()))
+
+for i in mlist:
+    result = binary_search(array, i, 0, n-1)
+    if result != None:
+        print('yes', end=' ')
+    else:
+        print('no', end=' ')
+"""
+
+# 2) 계수 정렬로 풀기
+"""
+n = int(input())
+array = [0] * 1000001
+
+for i in input().split():
+    array[int(i)] += 1
+
+m = int(input())
+mlist = list(map(int, input().split()))
+
+for i in mlist:
+    if array[i] == 1:   # 0이 아닐경우로 설정해도 괜찮지 않을까
+        print('yes', end=' ')
+    else:
+        print('no', end=' ')
+"""
+
+# 3) 집합으로 풀기
+"""
+n = int(input())
+array = set(map(int, input().split()))
+m = int(input())
+mlist = list(map(int, input().split()))
+
+for i in mlist:
+    if i in array:
+        print('yes', end=' ')
+    else:
+        print('no', end=' ')
+"""
+
+
+# 201p 이진탐색 유형 - 떡볶이 떡 만들기 (실전 문제)
+n, m = map(int, input().split())
+array = list(map(int, input().split()))
+
+start = 0
+end = max(array)
+
+while start <= end:
+    total = 0
+    mid = (start + end) // 2
+    for i in array:
+        if i > mid:
+            total += (i - mid)
+    if total >= m:   # 같은것까지 고려 해야함
+        result = mid
+        start = mid + 1
+    else:
+        end = mid - 1
+       
+
+print(result)
+
+
+
+"""
+4 6
+19 15 10 17
+
+if total >= m:   # 같은것까지 고려 해야함
+    result = mid
+    start = mid + 1
+else:
+    end = mid - 1
+
+
+if total < m:
+        end = mid - 1
+else:
+    result = mid
+    start = mid + 1 
+"""
