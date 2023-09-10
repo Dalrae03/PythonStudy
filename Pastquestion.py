@@ -1910,7 +1910,7 @@ print(result)
 """
 # 우선순위 큐 -> 원소를 넣다 빼는것만으로도 정렬된 결과를 얻을 수 있다 => sort로 인한 시간초과를 해결할 수 있다.
 # 리스트의 pop과 append, sort를 heapq에 맞게 변형만 시켰다. 나름 알고리즘생각은 나쁘지 않았나봐
-
+"""
 import heapq
 
 N = int(input())
@@ -1928,10 +1928,84 @@ while len(numbers) != 1:
     result += temp
 
 print(result)
+"""
 
 
+# VI. 이진 탐색
+# 27. 정렬된 배열에서 특정 수의 개수 구하기
+# 조건 1. 1 <= N <= 1,000,000 -> N의 수가 엄청 많고, 원소 값, 숫자의 범위가 넓다 => 이진탐색으로 풀어야 할 가능성이 있다
+# 조건 2. O(log N)의 시간복잡도 알고리즘으로 풀어라
+
+# 내가 푼 답인데, 추가적인 해답으로 bisect을 사용해서 그냥 함수로 묶어버린 해답이 있었다.
+"""
+from bisect import bisect_left, bisect_right
+
+n, x = map(int, input().split())
+numbers = list(map(int, input().split()))
+
+result = bisect_right(numbers, x) - bisect_left(numbers, x)
+
+if result == 0:
+    print(-1)
+else:
+    print(result)
+"""
+
+# 추가적인 해답
+# 이진탐색으로 문제 풀기
+# 정렬되어서 수열이 들어오기 때문에 마지막원소 위치와 첫원소 위치의 차이가 해당 원소의 개수가 된다
+# 원소의 개수를 세는 함수, 첫번째 원소 위치 찾는 함수, 마지막 원소 위치 찾는 함수 총 3개의 함수를 구현한다
+
+def count_by_value(array, value):
+    n = len(array)
+
+    # 마지막이 n-1인 이유는 인덱스가 매개변수로 요구하기 때문
+    a = first(array, value, 0, n-1)
+
+    if a == None:
+        return 0
+
+    b = last(array, value, 0, n-1)
+
+    if b == None:
+        return 0
+
+    return b - a + 1
 
 
+def first(array, target, start, end):
+    if start > end:
+        return None
+    mid = (start+end) // 2
+    # 0을 넣는 이유는 mid가 끝과 끝일때 고려
+    if (mid == 0 or array[mid-1] < target) and array[mid] == target:
+        return mid
+    # 작거나 같을 때로 나누는 것 주의
+    elif array[mid] >= target:
+        return first(array, target, start, mid-1)
+    else:
+        return first(array, target, mid+1, end)
 
 
+def last(array, target, start, end):
+    if start > end:
+        return None
+    mid = (start+end) // 2
+    # n-1을 넣는 이유는 mid가 끝과 끝일때 고려
+    if (mid == n-1 or array[mid+1] > target) and array[mid] == target:
+        return mid
+    # 클때만 고려하는 것 주의 (같은 것이 이제 오른쪽의 끝 원소일 수 있기 때문)
+    elif array[mid] > target:
+        return last(array, target, start, mid-1)
+    else:
+        return last(array, target, mid+1, end)
 
+n, x = map(int, input().split())
+numbers = list(map(int, input().split()))
+
+result = count_by_value(numbers, x)
+
+if result == 0:
+    print(-1)
+else:
+    print(result)
