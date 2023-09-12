@@ -1931,7 +1931,7 @@ print(result)
 """
 
 
-# VI. 이진 탐색
+# V. 이진 탐색
 # 27. 정렬된 배열에서 특정 수의 개수 구하기
 # 조건 1. 1 <= N <= 1,000,000 -> N의 수가 엄청 많고, 원소 값, 숫자의 범위가 넓다 => 이진탐색으로 풀어야 할 가능성이 있다
 # 조건 2. O(log N)의 시간복잡도 알고리즘으로 풀어라
@@ -1955,7 +1955,7 @@ else:
 # 이진탐색으로 문제 풀기
 # 정렬되어서 수열이 들어오기 때문에 마지막원소 위치와 첫원소 위치의 차이가 해당 원소의 개수가 된다
 # 원소의 개수를 세는 함수, 첫번째 원소 위치 찾는 함수, 마지막 원소 위치 찾는 함수 총 3개의 함수를 구현한다
-
+"""
 def count_by_value(array, value):
     n = len(array)
 
@@ -2009,3 +2009,30 @@ if result == 0:
     print(-1)
 else:
     print(result)
+"""
+
+# 28. 고정점 찾기
+# O(logN)의 시간 복잡도로 만들어야한다 -> 이진탐색, 이진탐색 라이브러리 bisect 사용해야할 듯 (근데 어떻게...?)
+# => 인덱스 값 > 요소 값 -> 오른쪽, 더 큰 부분 탐색
+# => 인덱스 값 < 요소 값 -> 왼쪽, 더 작은 부분 탐색
+
+n = int(input())
+numbers = list(map(int, input().split()))
+
+def binary_search(numbers, start, end):
+    if start > end:
+        return None
+    mid = (start + end) // 2
+    if numbers[mid] == mid:
+        return mid
+    elif mid > numbers[mid]:
+        return binary_search(numbers, mid+1, end)
+    else:
+        return binary_search(numbers, 0, mid-1)
+
+result = binary_search(numbers, 0, n-1)
+
+if result != None:
+    print(result)
+else:
+    print(-1)
