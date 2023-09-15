@@ -2015,7 +2015,7 @@ else:
 # O(logN)의 시간 복잡도로 만들어야한다 -> 이진탐색, 이진탐색 라이브러리 bisect 사용해야할 듯 (근데 어떻게...?)
 # => 인덱스 값 > 요소 값 -> 오른쪽, 더 큰 부분 탐색
 # => 인덱스 값 < 요소 값 -> 왼쪽, 더 작은 부분 탐색
-
+"""
 n = int(input())
 numbers = list(map(int, input().split()))
 
@@ -2036,3 +2036,66 @@ if result != None:
     print(result)
 else:
     print(-1)
+"""
+
+# 29. 공유기 설치
+# https://www.acmicpc.net/problem/2110
+
+# 답은 나오는데 백준에서 메모리 초과 나옴...ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 하놔ㅠ
+"""
+from bisect import bisect_right
+from itertools import combinations
+
+n, c = map(int, input().split())
+house = []
+for _ in range(n):
+    x = int(input())
+    y = bisect_right(house, x)
+    house.insert(y, x)
+
+result = list(combinations(house, c))
+
+answer = -1e10
+for i in result:
+    temp = 1e10
+    for j in range(c-1):
+        t = i[j+1] - i[j]
+        temp = min(temp, t)
+    answer = max(answer, temp)
+
+print(answer)
+"""
+
+
+# 해답
+# 각 집의 좌표가 (탐색 범위가) 최대 10억 이므로 이진 탐색을 이용하면 문제를 해결할 수 있다.
+n, c = map(int, input().split(' '))
+
+array = []
+for _ in range(n):
+    array.append(int(input()))
+array.sort()
+
+start = 1
+end = array[-1] - array[0]  # 가능한 최대 거리
+result = 0
+
+while(start <= end):
+    mid = (start + end) // 2  # mid는 가장 인접한 두 공유기 사이의 거리(gap)를 의미
+    value = array[0]
+    count = 1
+    # 현재의 mid의 값을 이용해 공유기를 설치
+    for i in range(1, n):  # 앞에서부터 차근차근 설치
+        if array[i] >= value + mid:
+            value = array[i]
+            count += 1
+    if count >= c:
+        start = mid + 1
+        result = mid  # 최적의 결과를 저장
+    else:
+        end = mid -1
+
+print(result)
+
+
+
