@@ -2039,7 +2039,7 @@ else:
 """
 
 # 29. 공유기 설치
-# https://www.acmicpc.net/problem/2110
+# https://www.acmicpc.net/problem/2110  백준에 등록은 하지 않음
 
 # 답은 나오는데 백준에서 메모리 초과 나옴...ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 하놔ㅠ
 """
