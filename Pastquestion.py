@@ -2069,6 +2069,7 @@ print(answer)
 
 # 해답
 # 각 집의 좌표가 (탐색 범위가) 최대 10억 이므로 이진 탐색을 이용하면 문제를 해결할 수 있다.
+"""
 n, c = map(int, input().split(' '))
 
 array = []
@@ -2096,6 +2097,72 @@ while(start <= end):
         end = mid -1
 
 print(result)
+"""
 
 
+# 30. 가사 검색 (고난도 별 3개...)
+# https://school.programmers.co.kr/learn/courses/30/lessons/60060  프로그래머스에 등록하진 않음
 
+
+# 뭐라도 해보려는 발악... 결국 못했지만... 아니 알고리즘 생각도 안나... 두 리스트의 개수가 2이상 10000이하라서 양이 꽤 많단말이지... 단어 길이들도 길어...
+# 그러려면 이진탐색써야할 것 같은데... 이진탐색을 어떻게 적용시킬지 생각이 나질 않아요...ㅋ..ㅋㅋ.ㅋ.ㅋ.ㅋㅋㅋㅋㅋ
+words = ["frodo", "front", "frost", "frozen", "frame", "kakao"]
+queries = ["fro??", "????o", "fr???", "fro???", "pro?"]
+
+"""
+def solution(words, queries):
+    # 일단은 단어들 중복제거
+    words = set(words)
+    words = list(words)
+
+    N = len(queries)
+    wordsi = 0
+    queriesj = 0
+
+    for i in range(N):
+        index = 0
+        T = ""
+        for l in queries[i]:
+            if l != '?':
+                T += l
+                if index == 0:
+                    index = queries[i].index(l)
+        if len(words[wordsi]) == len(queries[i]) and T in queries[i] and queries[i][index] == words[wordsi][index]:
+            count += 1  #근데 이거 하려면 words리스트를 while이나 아무튼 순차 탐색해야하는데 그럼 이거 취지도 안맞고~ 타임오버나고~ 와... 어카냐....
+
+    answer = []
+    return answer
+"""
+
+# 해답
+
+from bisect import bisect_left, bisect_right
+
+def count_by_range(a, left_value, right_value):
+    right_index = bisect_right(a, right_value)
+    left_index = bisect_left(a, left_value)
+    return right_index - left_index
+
+array = [[] for _ in range(10001)]
+reversed_array = [[] for _ in range(10001)]
+
+def solution(words, queries):
+    answer = []
+    for i in words:
+        array[len(i)].append(i)
+        reversed_array[len(i)].append(i[::-1])
+    
+    for i in range(10001):
+        array[i].sort()
+        reversed_array[i].sort()
+    
+    for i in queries:
+        if i[0] != '?':
+            res = count_by_range(array[len(i)], i.replace('?', 'a'), i.replace('?', 'z'))
+        else:
+            res = count_by_range(reversed_array[len(i)], i[::-1].replace('?', 'a'), i[::-1].replace('?', 'z'))
+        answer.append(res)
+
+    return answer
+
+print(solution(words, queries))
