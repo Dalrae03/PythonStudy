@@ -2136,6 +2136,7 @@ def solution(words, queries):
 
 # 해답
 # bisect라이브러리를 계속 숫자에 한 글자만 사용해서 문자도 되는 걸 잊고있었다. 문자가 뭉텡이로 주어진 것에는 항상 이유가 있을텐데...
+# 문자 묶음을 가지고 bisect라이브러리를 사용할 수 있다.
 # 문자인것을 사용하여 문자 아스키코드 제일 낮은 a와 높은 z를 이용해서 개수를 구할 수 있는 방법이 있다.
 # 정렬요소 만큼 리스트 크기를 만들어서 정렬하는 방법 계수정렬(카운팅 정렬) 사용
 # 카운팅 정렬은 데이터의 크기 범위가 제한되어 정수 형태로 표현할 수 있을 때, 가장 큰 데이터와 작은 데이터의 차이가 1,000,000을 넘지 않을 때, 동일한 값의 데이터가 여러 개 등장할 때 적합
@@ -2147,6 +2148,7 @@ def count_by_range(a, left_value, right_value):
     left_index = bisect_left(a, left_value)
     return right_index - left_index
 
+# 모든 단어를 길이마다 나누어서 저장하기
 array = [[] for _ in range(10001)]
 reversed_array = [[] for _ in range(10001)]
 
@@ -2156,14 +2158,14 @@ def solution(words, queries):
         array[len(i)].append(i)
         reversed_array[len(i)].append(i[::-1])
     
-    for i in range(10001):
+    for i in range(10001):  # 이진 탐색을 수행하기 위해 각 단어 리스트 정렬 수행
         array[i].sort()
         reversed_array[i].sort()
     
     for i in queries:
-        if i[0] != '?':
+        if i[0] != '?':  # 접미사
             res = count_by_range(array[len(i)], i.replace('?', 'a'), i.replace('?', 'z'))
-        else:
+        else:  # 접두사
             res = count_by_range(reversed_array[len(i)], i[::-1].replace('?', 'a'), i[::-1].replace('?', 'z'))
         answer.append(res)
 
