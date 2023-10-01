@@ -629,6 +629,7 @@ for i in mlist:
 
 
 # 201p 이진탐색 유형 - 떡볶이 떡 만들기 (실전 문제)
+"""
 n, m = map(int, input().split())
 array = list(map(int, input().split()))
 
@@ -648,7 +649,7 @@ while start <= end:
         start = mid + 1    
 
 print(result)
-
+"""
 
 
 """
@@ -663,3 +664,76 @@ if total >= m:   # 같은것까지 고려 해야함
 else:
     end = mid - 1
 """
+
+
+
+# 217p 다이나믹 프로그래밍 유형 - 1로 만들기
+"""
+x = int(input())
+
+d = [0] * 30001
+
+for i in range(2, x+1):
+    d[i] = d[i-1] + 1
+    if i % 2 == 0:
+        d[i] = min(d[i], d[i//2]+1)
+    if i % 3 == 0:
+        d[i] = min(d[i], d[i//3]+1)
+    if i % 5 == 0:
+        d[i] = min(d[i], d[i//5]+1)
+
+print(d[x])
+"""
+
+
+# 220p 다이나믹 프로그래밍 유형 - 개미 전사
+"""
+n = int(input())
+
+# 식량정보
+array = list(map(int, input().split()))
+
+d = [0] * 100  # 0 ~ n-1 => n개 (숫자보다 그 갯수, 횟수가 더 중요해서 굳이 101안해도 괜찮음)
+
+d[0] = array[0]
+d[1] = max(array[0], array[1])
+for i in range(2, n):
+    d[i] = max(d[i-1], d[i-2]+array[i])
+
+print(d[n-1])
+"""
+
+
+# 220p 다이나믹 프로그래밍 유형 - 바닥 공사
+"""
+n = int(input())
+
+d = [0] * 1001  # n의 길이, n이 중요해서 1001으로 설정
+
+d[1] = 1
+d[2] = 3
+for i in range(3, n+1):
+    d[i] = (d[i-1] + 2*d[i-2]) % 796796
+
+print(d[n])
+"""
+
+
+# 220p 다이나믹 프로그래밍 유형 - 효율적인 화폐 구성
+n, m = map(int, input().split())
+
+array = []
+for i in range(n):
+    array.append(int(input()))
+
+d = [10001] * (m+1)
+
+for i in range(n):
+    for j in range(array[i], m+1):
+        if d[j-array[i]] != 10001:
+            d[j] = min(d[j], d[j-array[i]]+1)
+
+if d[m] == 10001:
+    print(-1)
+else:
+    print(d[m])
