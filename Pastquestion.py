@@ -2140,7 +2140,7 @@ def solution(words, queries):
 # 문자인것을 사용하여 문자 아스키코드 제일 낮은 a와 높은 z를 이용해서 개수를 구할 수 있는 방법이 있다.
 # 정렬요소 만큼 리스트 크기를 만들어서 정렬하는 방법 계수정렬(카운팅 정렬) 사용
 # 카운팅 정렬은 데이터의 크기 범위가 제한되어 정수 형태로 표현할 수 있을 때, 가장 큰 데이터와 작은 데이터의 차이가 1,000,000을 넘지 않을 때, 동일한 값의 데이터가 여러 개 등장할 때 적합
-
+"""
 from bisect import bisect_left, bisect_right
 
 def count_by_range(a, left_value, right_value):
@@ -2172,3 +2172,62 @@ def solution(words, queries):
     return answer
 
 print(solution(words, queries))
+"""
+
+
+
+# V. 다이나믹 프로그래밍
+# 31. 금광
+
+# 기존의 리스트(2차원이 아닌 그냥 입력받은 것 그대로)에서 인덱싱의 규칙을 찾아서 해결하려 했다. (점화식 만들기 위해)
+# 첫시작으로는 제일 큰거 고르고, 그 숫자의 2차원 위치 이동범위 내 제일 큰 수 골라 result변수에 누적시킨뒤, 인덱스 위치를 변경하고 m-1반복하려했다.
+# 근데 이건 일단 처음부터 흩어져있는 1열의 수들의 인덱스와 수를 어떻게 뽑아낼건지부터 막혀서... (딕셔너리 쓸까 싶었다.)
+# 코드구현하려니까 너무 대가리가 아파서 실패...
+"""
+t = int(input())
+n, m = map(int, input().split())
+gold = list(map(int, input().split()))
+
+result = 0
+"""
+
+# 해답
+# 2차원 테이블을 이용한 다이나믹 프로그래밍
+# 1. 왼쪽위에서 오는 경우, 2. 왼쪽 아래에서 오는 경우, 3. 왼쪽에서 오는 경우 존재하는 3가지 경우 모두 고려, 가장 많은 금을 가지고있는 경우 테이블에 저장
+# 2차원 테이블에 누적해서 테이블 채워 넣기
+# 점화식: dp[i][j] = array[i][j] + max(dp[i-1][j-1], dp[i][j-1], dp[i+1][j-1])
+# dp테이블 접근시 리스트 범위 주의
+
+# 한줄 한번에 입력도 가능 -> for tc in range(int(input())):
+t = int(input())
+for i in range(t):
+    n, m = map(int, input().split())
+    gold = list(map(int, input().split()))
+
+    dp = []
+    index = 0
+    for i in range(n):
+        dp.append(gold[index:index+m])
+        index += m
+
+    for j in range(1, m):
+        for i in range(n):
+            if i == 0:
+                left_up = 0
+            else:
+                left_up = dp[i - 1][j - 1]
+            if i == n -1:
+                left_down = 0
+            else:
+                left_down = dp[i + 1][j - 1]
+            left = dp[i][j - 1]
+            dp[i][j] = dp[i][j] + max(left_up, left_down, left)
+
+    result = 0
+    for i in range(n):
+        result = max(result, dp[i][m-1])
+
+    print(result)
+
+
+
