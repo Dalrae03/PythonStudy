@@ -1254,7 +1254,8 @@ for i in range(len(result)):
     print(result[i], end='')
 '''
 
-# 백준 25206
+# 백준 25206 - 너의 평점은은
+'''
 import sys
 subject = []
 score = 0
@@ -1296,3 +1297,50 @@ for i in range(20):
 
 result = score / S
 print(round(result, 6))
+'''
+
+# 백준 10813 - 공 바꾸기기
+'''
+N, M = map(int, input().split())
+
+basket = [i + 1 for i in range(N)]
+
+for _ in range(M):
+    i, j = map(int, input().split())
+    basket[i-1], basket[j-1] = basket[j-1], basket[i-1]
+
+for i in basket:
+    print(i, end=' ')
+'''
+
+
+# 백준 10811 - 바구니 뒤집기 (와 이걸 못품... / chatgpt검색 참고)
+'''
+N, M = map(int, input().split())
+
+basket = [i + 1 for i in range(N)]
+
+for _ in range(M):
+    i, j = map(int, input().split())
+    # 리스트 슬라이싱으로 푸는 방법
+    basket[i-1:j] = basket[i-1:j][::-1]
+    # reversed함수로 푸는 방법
+    basket[i-1:j] = list(reversed(basket[i-1:j]))
+
+
+for i in basket:
+    print(i, end=' ')
+'''
+
+# 백준 1546 - 평균
+N = int(input())
+score = list(map(int, input().split()))
+
+M = max(score)
+entire = 0
+
+for i in score:
+    entire += i / M * 100
+    
+print(entire/N)
+
