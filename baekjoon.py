@@ -1385,8 +1385,3 @@ while True:
     except EOFError:
         break
 '''
-
-import sys
-s = sys.stdin.readlines().rstrip()
-for i in s:
-    print(i.rstrip())
