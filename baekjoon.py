@@ -1254,7 +1254,7 @@ for i in range(len(result)):
     print(result[i], end='')
 '''
 
-# 백준 25206 - 너의 평점은은
+# 백준 25206 - 너의 평점은
 '''
 import sys
 subject = []
@@ -1299,7 +1299,7 @@ result = score / S
 print(round(result, 6))
 '''
 
-# 백준 10813 - 공 바꾸기기
+# 백준 10813 - 공 바꾸기
 '''
 N, M = map(int, input().split())
 
@@ -1332,7 +1332,9 @@ for i in basket:
     print(i, end=' ')
 '''
 
+
 # 백준 1546 - 평균
+'''
 N = int(input())
 score = list(map(int, input().split()))
 
@@ -1343,4 +1345,48 @@ for i in score:
     entire += i / M * 100
     
 print(entire/N)
+'''
 
+
+# 백준 27866 - 문자와 문자열
+'''
+S = input()
+i = int(input())
+
+print(S[i-1])
+'''
+
+
+# 백준 2743 - 단어 길이 재기
+'''
+S = input()
+print(len(S))
+'''
+
+
+# 백준 11718 - 그대로 출력하기
+# 백준의 입력값을 보고 세 줄을 한꺼번에 입력을 해야한다고 생각했었음. (한줄에 출력 하나씩이더라...)
+# 그래서 엔터와 공백으로 입력이 끝났다는걸 알려야하는데 그걸 어떻게 알리지에서 막혀버림.
+# 아래 코드는 첫번째 한 줄만 입력받고 프린트함. -> 결론 못풀었다는거 (망함...)
+'''
+import sys
+S = sys.stdin.read().rstrip()
+print(S)
+'''
+# 입력값이 없어지는 상황에 발생하는 에러를 사용해야한다 -> 몇번의 입력이 주어지는지 정해지지 않기 때문. -> break가 핵심이겠구나! while도 쓸수도! 라는 생각을...해야함...
+# sys.stdin.readline()은 사용할 수 없다. EOF에러를 받을 때, 오류를 발생시키지 않고, 빈 문자열을 리턴하기 때문이다.
+# (input은 EOF받을 때 EOF에러 일으킴킴)
+# https://www.acmicpc.net/board/view/57241
+# EOF - End Of File의 줄임말. 입력값이 없어지는 상황을 받아줌
+'''
+while True:
+    try:
+        print(input())
+    except EOFError:
+        break
+'''
+
+import sys
+s = sys.stdin.readlines().rstrip()
+for i in s:
+    print(i.rstrip())
