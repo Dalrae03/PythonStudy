@@ -1385,3 +1385,13 @@ while True:
     except EOFError:
         break
 '''
+
+# 백준 9086 - 문자열
+T = int(input())
+Slist = []
+
+for i in range(T):
+    Slist.append(input())
+
+for i in range(T):
+    print(Slist[i][0], Slist[i][len(Slist[i])-1], sep='')
