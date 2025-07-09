@@ -2199,6 +2199,7 @@ result = 0
 # dp테이블 접근시 리스트 범위 주의
 
 # 한줄 한번에 입력도 가능 -> for tc in range(int(input())):
+'''
 t = int(input())
 for i in range(t):
     n, m = map(int, input().split())
@@ -2228,6 +2229,6 @@ for i in range(t):
         result = max(result, dp[i][m-1])
 
     print(result)
-
+'''
 
 

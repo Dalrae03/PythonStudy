@@ -1387,6 +1387,7 @@ while True:
 '''
 
 # 백준 9086 - 문자열
+'''
 T = int(input())
 Slist = []
 
@@ -1395,3 +1396,17 @@ for i in range(T):
 
 for i in range(T):
     print(Slist[i][0], Slist[i][len(Slist[i])-1], sep='')
+'''
+
+# 백준 1439 - 뒤집기
+'''
+S = input()
+count = 0
+
+for i in range(len(S)-1):
+    if S[i] == S[0] and S[i+1] != S[0]:
+        count += 1
+
+print(count)
+'''
+
