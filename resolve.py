@@ -75,6 +75,7 @@ print(count)
 
 
 # 04. 만들 수 없는 금액 (07/09)
+'''
 N = int(input())
 money = list(map(int, input().split()))
 money.sort()
@@ -98,3 +99,39 @@ for i in money:
     target += i
 
 print(target)
+
+'''
+
+
+# 05. 볼링공 고르기 (07/10)
+# 딱 내가 처음 풀었던 방식으로 풀었음... M을 사용하지 않고 2중 for문을 사용하는 방식...
+'''
+N, M = map(int, input().split())
+Balls = list(map(int, input().split()))
+count = 0
+
+for i in range(N-1):
+    Balls[i]
+    for j in range(i+1, N):
+        if Balls[i] != Balls[j]:
+            count += 1
+
+print(count)
+'''
+
+# 다른 방법
+# 다른 효과적 해결 방법. 볼링공의 각 무게마다 개수를 세서 하는 방법.
+# M이 최대 10이라서 가능
+N, M = map(int, input().split())
+Balls = list(map(int, input().split()))
+
+array = [0] * 11
+for x in Balls:
+    array[x] += 1
+
+result = 0
+for i in range(1, M+1):
+    N -= array[i]
+    result += array[i] * N
+
+print(result)
