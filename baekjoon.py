@@ -1410,3 +1410,18 @@ for i in range(len(S)-1):
 print(count)
 '''
 
+
+# 백준 2444 - 별찍기
+
+N = int(input())
+
+for i in range(1, N+1):
+    star = '*' * (2*i-1)
+    print(star.rjust(N+i-1, ' '))
+
+for i in range(N-1, 0, -1):
+    star = '*' * (2*i-1)
+    print(star.rjust(N+i-1, ' '))
+
+
+
