@@ -1412,7 +1412,7 @@ print(count)
 
 
 # 백준 2444 - 별찍기
-
+'''
 N = int(input())
 
 for i in range(1, N+1):
@@ -1422,6 +1422,17 @@ for i in range(1, N+1):
 for i in range(N-1, 0, -1):
     star = '*' * (2*i-1)
     print(star.rjust(N+i-1, ' '))
+'''
 
 
+# 백준 10988 - 팰린드롬인지 확인하기
+# 와... 문자열 뒤집는 방법을 다시 익혀야함...
+# 문자열은 바로 .reverse()사용이 안된다 -> 리스트로 변환하고 join을 사용해서 다시 결합해야함
 
+S = input()
+S_reverse = S[::-1]
+
+if S == S_reverse:
+    print(1)
+else:
+    print(0)
