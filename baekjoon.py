@@ -1429,6 +1429,7 @@ for i in range(N-1, 0, -1):
 # 와... 문자열 뒤집는 방법을 다시 익혀야함...
 # 문자열은 바로 .reverse()사용이 안된다 -> 리스트로 변환하고 join을 사용해서 다시 결합해야함
 # 기본적인 문자열 뒤집기 방법을 잊으면 다시 이 문제 보기.
+'''
 S = input()
 S_reverse = S[::-1]
 
@@ -1436,3 +1437,73 @@ if S == S_reverse:
     print(1)
 else:
     print(0)
+'''
+
+
+# 백준 28278 - 스택 2
+# 이렇게 했는데 틀렸데... 왜? (솔직히 실버4인데 이게 맞으면 너무 쉬운편이긴한데... 왜 틀렸을까... 백준은 이유좀 알려줫음좋겟다.. 진심으로다가....)
+# 출력 답안은 정해진대로 잘 나오는디....
+
+# N = int(input()) -> 이걸 사용하면 시간초과로 틀렸다고 나온데... (아니그럼 시간초과라고해야지 틀렸습니다 왜띄우는데)
+# 결론, 핵심 기능코드는 맞는데 받는게 문제였다...
+# 나중에 출력값 잘 나오는데도 계속 틀렸다하고 채점시간이 오래걸리면 input을 sys.stdin.readline().rstrip()으로 바꿔보자
+'''
+N = int(input())
+stack = list()
+
+for _ in range(N):
+    order = input()
+    x = int(order[0]) #굳이 int로 안바꿔도 되긴해
+
+    if x == 1:
+        stack.append(int(order[2]))
+    elif x == 2:
+        if not stack:
+            print(-1)
+        else:
+            print(stack.pop())
+    elif x == 3:
+        print(len(stack))
+    elif x == 4:
+        if not stack:
+            print(1)
+        else:
+            print(0)
+    else:
+        if not stack:
+            print(-1)
+        else:
+            print(stack[-1])
+'''
+
+# input을 sys사용한것으로, 판단을 굳이 int형이 아닌 문자열로
+# 와 이것도 틀렸다는데 그 이유가 order[2]로 파싱하는게 잘못됨... -> 이렇게 하면 넣고 싶은 정수가 2자리가 넘어갈때 첫번째 숫자만 담겨서... (ex. 10을 넣었을 때 1만 들어감)
+# 그래서 시간초과가 아닌 틀렸다가 뜨는거였고...
+# split() 공백 기준으로 명령어를 나눠서 처리해야함
+import sys
+
+N = int(sys.stdin.readline().rstrip())
+stack = list()
+
+for _ in range(N):
+    order = sys.stdin.readline().rstrip().split() #split추가 -> 공백기준으로 리스트로 변경
+
+    if order[0] == '1':
+        stack.append(int(order[1])) #이것도 굳이 int로 전환이 필요없긴해
+    elif order[0] == '2':
+        if not stack:
+            print(-1)
+        else:
+            print(stack.pop())
+    elif order[0] == '3':
+        print(len(stack))
+    elif order[0] == '4':
+        if not stack:
+            print(1)
+        else:
+            print(0)
+    else:
+        if not stack:
+            print(-1)
+        else:
+            print(stack[-1])
