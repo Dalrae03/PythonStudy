@@ -1480,6 +1480,7 @@ for _ in range(N):
 # 와 이것도 틀렸다는데 그 이유가 order[2]로 파싱하는게 잘못됨... -> 이렇게 하면 넣고 싶은 정수가 2자리가 넘어갈때 첫번째 숫자만 담겨서... (ex. 10을 넣었을 때 1만 들어감)
 # 그래서 시간초과가 아닌 틀렸다가 뜨는거였고...
 # split() 공백 기준으로 명령어를 나눠서 처리해야함
+'''
 import sys
 
 N = int(sys.stdin.readline().rstrip())
@@ -1507,3 +1508,85 @@ for _ in range(N):
             print(-1)
         else:
             print(stack[-1])
+'''
+
+
+
+# 백준 12789 - 도키도키 간식드리미
+# 밑에는 실패한 코드. 할 수 있을것같았는데... 아래 코드로 하면 Sad가 나와서 실패.
+# next와 stack의 비교를 stack[-1]로 해서 index error를 내지 않기 위해 ' '로 초기화를 했지만 (물론 이 방법은 매우매우 안좋다는걸 안다.)
+# 백준 예시로 돌렸을 때 6번째 반복에서 마지막의 elif에 걸려 ' '를 pop할 수 있기 때문에 pop을 해버리고 빈 스택과 i의 조건이 맞아져
+# Sad가 출력이 되어버리는 것...
+# stack을 무조건 빈 것으로 초기화시켜서 판단하는데 사용하는 것이 당연한 것인디... 나는 혹시했지...
+# 그리고 map함수를 까먹어서 일일히 int로 전환해야하는 방법을 사용했다.
+
+'''
+import sys
+
+N = int(input())
+student = sys.stdin.readline().rstrip().split()  # 리스트들로 존재 할 것임.
+next = 1
+stack = [' ']
+i = 0
+
+while True:
+    if next != int(student[i]) and next != stack[-1]:
+        stack.append(int(student[i]))
+        i += 1
+
+    elif next == int(student[i]) and next != stack[-1]:
+        i += 1
+        next += 1
+
+    elif next == stack[-1] and (next != int(student[i]) or i == N):
+        stack.pop()
+        next += 1
+
+
+    if stack[-1] == ' ' and i == N:
+        print('Nice')
+        break
+    elif stack[-1] != ' ' and i == N:
+        print('Sad')
+        break
+'''
+
+# 인터넷 검색 해답
+# 내가 걱정했던 stack[-1]의 인덱스 오류를 그냥 첫 요소를 stack안에 바로 넣어버리면서 해결해버림
+# 그리고 일단 무조건적으로 stack에 넣고 stack에서 비교를 함.
+# 발상의 전환이 필요!!!!!
+
+import sys
+
+N = int(input())
+student = list(map(int, sys.stdin.readline().rstrip().split()))  # 정수형 리스트들로 존재 할 것임
+next = 1
+stack = []  # list 초기화시 아무것도 없는 조건이라면 무조건 초기화도 빈 것으로. (' ' 뭐 이딴 초기화 금지)
+
+for i in student:
+    stack.append(i)
+    while stack and stack[-1] == next:
+        stack.pop()
+        next += 1
+
+if stack:
+    print('Sad')
+else:
+    print('Nice')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
