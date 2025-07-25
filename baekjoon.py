@@ -1555,7 +1555,7 @@ while True:
 # 내가 걱정했던 stack[-1]의 인덱스 오류를 그냥 첫 요소를 stack안에 바로 넣어버리면서 해결해버림
 # 그리고 일단 무조건적으로 stack에 넣고 stack에서 비교를 함.
 # 발상의 전환이 필요!!!!!
-
+'''
 import sys
 
 N = int(input())
@@ -1573,16 +1573,60 @@ if stack:
     print('Sad')
 else:
     print('Nice')
+'''
 
 
 
+# 백준 28279 - 덱 2
 
+from collections import deque
+import sys
 
+N = int(sys.stdin.readline().rstrip())
+dq = deque()
 
+for _ in range(N):
+    order = sys.stdin.readline().rstrip().split()
 
+    if order[0] == '1':
+        dq.appendleft(order[1])
 
+    elif order[0] == '2':
+        dq.append(order[1])
 
+    elif order[0] == '3':
+        if not dq:
+            print(-1)
+        else:
+            print(dq.popleft())
 
+    elif order[0] == '4':
+        if not dq:
+            print(-1)
+        else:
+            print(dq.pop())
+
+    elif order[0] == '5':
+        print(len(dq))
+
+    elif order[0] == '6':
+        if not dq:
+            print(1)
+        else:
+            print(0)
+
+    elif order[0] == '7':
+        if dq:
+            print(dq[0])
+        else:
+            print(-1)
+
+    elif order[0] == '8':
+        if dq:
+            print(dq[-1])
+        else:
+            print(-1)
+   
 
 
 
