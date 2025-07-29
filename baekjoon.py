@@ -1578,7 +1578,7 @@ else:
 
 
 # 백준 28279 - 덱 2
-
+'''
 from collections import deque
 import sys
 
@@ -1626,10 +1626,70 @@ for _ in range(N):
             print(dq[-1])
         else:
             print(-1)
-   
+'''
+
+# 백준 2346 - 풍선 터트리기
+# 코드가 좀 매우매우 더럽고 구리지만 답은 잘 나오는데 틀렸데... 아니 왜????????????? (솔직히 스택, 덱, 큐 중에서 하나 써야하긴하는데(의무는아니지만) 아무것도 안쓰긴함....)
+# i = (i + move) % N 이 부분을 계산하고 넘어가는데, 이제 넘어가는 요소들 사이에 0이 있을 수 있기때문에 틀림
+# -> 왜냐면, 살아있는 풍선로만 개수를 세서 넘어가야하기 때문.
+"""
+N = int(input())
+numbers = list(map(int, input().split()))
+i = 0
+result = []
+
+# 이동은 하는데 터진 풍선은 빼고 이동해야함. -> 0으로 초기화를하자. 종이에 0은 적혀있지않다고했으니까.
+for _ in range(N):
+    if numbers[i] != 0:
+        result.append(i+1)
+        move = numbers[i]
+        numbers[i] = 0
+        i = (i + move) % N
+    else:
+        while numbers[i] == 0:
+            if move < 0:
+                i -= 1
+                if i < 0:
+                    i = N-1
+
+            else:
+                i += 1
+                if i > (N-1):
+                    i = 0
+        result.append(i+1)
+        move = numbers[i]
+        numbers[i] = 0
+        i = (i + move) % N
+
+result = map(str, result)
+print(' '.join(result))
+"""
 
 
+# 인터넷 검색 해답
+# enumerate와 rotate를 알았다면 이걸 풀 수 있었을 텐뎅...
 
+import sys
+from collections import deque
+
+# input이라는 이름의 전역 변수를 새로 정의 (기존의 내장함수 input()은 사용 X, readline끝에 괄호 없애야함)
+input = sys.stdin.readline
+
+N = int(input())
+dq = deque(enumerate(map(int, input().split())))
+result = []
+
+while dq:
+    idx, move = dq.popleft()
+    result.append(idx + 1)
+
+    if move > 0:
+        dq.rotate(-(move-1))  #move그대로 돌면 우리가 예상했던 번째의 수도 넘겨버림
+    else:
+        dq.rotate(-move)
+
+
+print(' '.join(map(str, result)))
 
 
 
