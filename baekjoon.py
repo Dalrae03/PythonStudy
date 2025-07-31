@@ -1668,7 +1668,7 @@ print(' '.join(result))
 
 # 인터넷 검색 해답
 # enumerate와 rotate를 알았다면 이걸 풀 수 있었을 텐뎅...
-
+'''
 import sys
 from collections import deque
 
@@ -1690,7 +1690,175 @@ while dq:
 
 
 print(' '.join(map(str, result)))
+'''
+
+# 백준 24511 - queuestack
+# 출력도 잘 나오고 sys도 썼는데 시간초과라고~~~?~?~?~? 말도안돼ㅠㅠㅠㅠㅠㅠㅠㅠㅠ
+# 근데 굳이 stack은 넣었다가 안빼도 괜찮긴해.... 왜냐면 넣은거 그대로 뺄거니까.
+# 와 스택부분 pass써도 시간초과나옴 아 에바야~~~~~~~~~~~~~
+'''
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+
+N = int(input())
+Type = list(map(int, input().split()))
+numbers = list(map(int, input().split()))
+M = int(input())
+input_numbers = list(map(int, input().split()))
+
+qu_stack = []
+result = []
+
+for i in range(N):
+    qu = deque()
+    qu.append(numbers[i])
+    qu_stack.append((Type[i], qu))
+
+for i in range(M):
+    inumber = input_numbers[i]
+    for j in range(N):
+        if qu_stack[j][0] == 0: #큐일때
+            qu_stack[j][1].append(inumber)
+            inumber = qu_stack[j][1].popleft()
+        
+        else: #스택일때
+            pass
+
+    result.append(inumber)
+
+print(' '.join(map(str, result)))  
+'''
+#join은 문자열만 다룰 수 있는 함수이기 때문에 무조건 str전환 필요.
+# result가 문자열 리스트라면 바로 print(' '.join(result))사용 가능
 
 
+# 굳이 qu_stack리스트의 원소를 튜플로 묶지말아보자
+# 얘도 시간초과뜸................
+'''
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+
+N = int(input())
+Type = list(map(int, input().split()))
+numbers = list(map(int, input().split()))
+M = int(input())
+input_numbers = list(map(int, input().split()))
+
+qu_stack = []
+result = []
+
+for i in range(N):
+    qu = deque()
+    qu.append(numbers[i])
+    qu_stack.append(qu)
+
+for i in range(M):
+    inumber = input_numbers[i]
+    for j in range(N):
+        if Type[j] == 0: #큐일때
+            qu_stack[j].append(inumber)
+            inumber = qu_stack[j].popleft()
+        
+        else: #스택일때
+            pass
+
+    result.append(inumber)
+
+print(' '.join(map(str, result)))
+'''
 
 
+# 큐 있는 부분만 큐만들면 되긴해
+# 아니 얘도 시간초과임 for문을 하나로 줄였는데 시간초과임. queue도 필요한것만 만들었는데 시간초과임 이게 맞아?
+'''
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+
+N = int(input())
+Type = list(map(int, input().split()))
+numbers = list(map(int, input().split()))
+M = int(input())
+input_numbers = list(map(int, input().split()))
+
+result = []
+
+for i in range(M):
+    inumber = input_numbers[i]
+    for j in range(N):
+        if Type[j] == 0: #큐일때
+            qu = deque()
+            qu.append(numbers[j])
+            qu.append(inumber)
+            inumber = qu.popleft()
+            numbers[j] = qu.popleft()  #여기를 popleft가 아니라 넣은 수로 바꿔보자, 어차피 새로 넣는 수가 남는거잖아
+        
+        else: #스택일때
+            pass
+
+    result.append(inumber)
+
+print(' '.join(map(str, result)))
+'''
+
+
+# 어차피 새로 넣는 수가 남는거라서 두 수를 교체하면 됨 굳이 deque안쓰고.
+# 이것도 시간초관데... 그냥 이중for문이 문제인건가 싶긴함...
+'''
+import sys
+
+input = sys.stdin.readline
+
+N = int(input())
+Type = list(map(int, input().split()))
+numbers = list(map(int, input().split()))
+M = int(input())
+input_numbers = list(map(int, input().split()))
+
+result = []
+
+for i in range(M):
+    inumber = input_numbers[i]
+    for j in range(N):
+        if Type[j] == 0: #큐일때
+            inumber, numbers[j] = numbers[j], inumber
+        
+        else: #스택일때
+            pass
+
+    result.append(inumber)
+
+print(' '.join(map(str, result)))
+'''
+
+
+# 인터넷 검색해답
+# 역시 2중 for문이 문제였음...하...
+# stack은 영향을 주지 않는다는 건 알았는데 그걸 아예 생략해서 queue에 해당하는 것만 모아서 계산해도 되는거였음. (왜 하나를 생각하고 둘은 생각 못하니...)
+# 그니까 pass로 넘기지말고 애초에 pass를 쓸 여지도 주지 말자는 것.
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+
+N = int(input())
+Type = list(map(int, input().split()))
+numbers = list(map(int, input().split()))
+M = int(input())
+input_numbers = list(map(int, input().split()))
+
+result = []
+
+qu = deque()
+for i in range(N):
+    if Type[i] == 0:
+        qu.append(numbers[i])
+
+for i in range(M):
+    qu.appendleft(input_numbers[i])
+    print(qu.pop(), end=' ')
