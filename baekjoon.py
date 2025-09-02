@@ -1947,6 +1947,7 @@ else:
 # 3을 "하나씩" 빼가면서 5로 나뉘어지는지 확인해봐야한다.
 # => 냅다 3으로 싹다 나누면 안된다는 소리다 (그리고 이게 11이 들어왔을 때 풀 수 있는 키워드)
 
+'''
 N = int(input())
 
 answer = 0
@@ -1959,8 +1960,54 @@ while N >= 0:
     answer += 1
 else:
     print(-1)
+'''
 
 # while문을 좀 더 자주 떠올려보고 사용할 수 있도록 하자.
+
+
+
+# 백준 1654 - 랜선 자르기
+K, N = map(int, input().split())  #필요 랜선개수 N
+line = []
+
+for i in range(K):
+    line.append(int(input()))
+
+All = sum(line)
+end = All // N
+start = 1
+result = 0  #중간 저장 변수로 최적해를 찾아도 하단의 else나 if로 영향 못받게 함
+
+while start <= end:
+    answer = 0
+    mid = (start + end) // 2
+    
+    for i in line:
+        answer += (i // mid)
+    
+    if answer < N:
+        end = mid - 1
+
+    else:
+        result = mid
+        start = mid + 1
+
+print(result)  #예제1 을 입력했을 경우 - 200이 아닌 201출력... 아무래도 마지막의 else에 영향을 받은듯 하다...
+# 그렇다고 중간에 N과 같을 경우를 넣는다면 그것이 최대 길이인지 장담을 못하지 않나 
+# -> gpt의 도움을 받아 중간 변수를 넣는 방향으로 해결! 이것만 수정했듬. 전체적인 알고리즘은 나쁘지 않았던 것 같다!
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
