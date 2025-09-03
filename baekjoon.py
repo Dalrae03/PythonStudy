@@ -2048,6 +2048,8 @@ print(house[result] - house[0])  #이러면 안되지요... result 가 가운데
 # 4. 설치할 수 있는 공유기 개수가 c개를 넘어가면 더 넓게 설치할 수 있다는 이야기 = 설치거리를 mid + 1 로 설정. 앞 집부터 다시 설치
 # 5. c개를 넘어가지 않는다면 더 좁게 설치해야 한다는 이야기 이므로 mid - 1로 설정.
 
+# 약간 모든 경우의 수를 구하는 것마냥 하는 것 같음.
+
 N, C = map(int, input().split())  #N - 집 개수, C - 공유기의 개수
 house = []
 
@@ -2067,20 +2069,14 @@ while start <= end:
     count = 1  #설치 공유기 count
 
     for i in range(1, len(house)):
-        if house[i] >= current + mid:
-            count += 1
-            current = house[i]
-    
-
-    for i in range(1, len(house)):
-        if house[i] >= current + mid:
+        if house[i] >= current + mid:  #중간 길이와 앞 집 좌표 더하기
             count += 1
             current = house[i]
 
-    if count >= C:
+    if count >= C:  #공유기 개수보다 많으면, 더 넓게 설치 가능
         start = mid + 1
         answer = mid
-    else:
+    else:  #더 좁게 설치해야함
         end = mid - 1
 
 
