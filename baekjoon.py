@@ -1967,6 +1967,7 @@ else:
 
 
 # 백준 1654 - 랜선 자르기
+'''
 K, N = map(int, input().split())  #필요 랜선개수 N
 line = []
 
@@ -1992,23 +1993,98 @@ while start <= end:
         result = mid
         start = mid + 1
 
-print(result)  #예제1 을 입력했을 경우 - 200이 아닌 201출력... 아무래도 마지막의 else에 영향을 받은듯 하다...
+print(result)  
+'''
+# 처음한 mid를 프린트 하면 예제1 을 입력했을 경우 - 200이 아닌 201출력... 아무래도 마지막의 else에 영향을 받은듯 하다...
 # 그렇다고 중간에 N과 같을 경우를 넣는다면 그것이 최대 길이인지 장담을 못하지 않나 
 # -> gpt의 도움을 받아 중간 변수를 넣는 방향으로 해결! 이것만 수정했듬. 전체적인 알고리즘은 나쁘지 않았던 것 같다!
 
 
 
+# 백준 2110 - 공유기 설치
+# C개의 공유기. N개의 집에 적당히 설치해서, 가장 인접한 두 공유기 사이의 거리를 최대로 하기.
+
+# 최대한 먼 거리를 유지하려면 끝과 끝에 공유기 확정. 나머지 공유기들의 위치는 가운데에서 고루 분배.
+# 끝과 끝수를 더해서 공유기 설치하게되면 나올 칸수로 나누고 그 길이와 가깝게 유사한 애를 고르는 것.
+'''
+N, C = map(int, input().split())  #N - 집 개수, C - 공유기의 개수
+house = []
+
+for i in range(N):
+    house.append(int(input()))
+
+house.sort()
+average = (house[0] + house[-1]) // (C - 1)  #끝과 끝집 사이의 고른 간격이 나옴. -> 고르게 분포시키기 위해서 최대의 간격일지도.
+
+start = 0
+end = N-1
+result = 0
+
+# 이걸 공유기 - 2만큼 반복해야할텐디요....
+while start <= end:
+    mid = (start + end) // 2
+
+    if average < house[mid] - house[start]:
+        end = mid - 1
+        
+    elif average == house[mid] - house[start]:
+        result = mid
+        break
+
+    else:
+        result = mid
+        start = mid + 1
+
+print(result)
+print(house[result] - house[0])  #이러면 안되지요... result 가 가운데중 1번째가 아닐테니까요....
+'''
 
 
+# 40분 고민하면서 풀고 해답 검색했다... (사실 40분 넘었을지도)
+# 해답
+# 1. 좌표입력 받은 다음에 정렬 <- 이건 했음
+# 2. start = 1, end = houst[-1] - house[0] (시작값: 최소 거리, 최대값: 최대 거리)
+# 3. 앞 집 부터 공유기 설치
+# 4. 설치할 수 있는 공유기 개수가 c개를 넘어가면 더 넓게 설치할 수 있다는 이야기 = 설치거리를 mid + 1 로 설정. 앞 집부터 다시 설치
+# 5. c개를 넘어가지 않는다면 더 좁게 설치해야 한다는 이야기 이므로 mid - 1로 설정.
+
+N, C = map(int, input().split())  #N - 집 개수, C - 공유기의 개수
+house = []
+
+for i in range(N):
+    house.append(int(input()))
+
+house.sort()
+
+start = 1
+end = house[-1] - house[0]
+answer = 0
 
 
+while start <= end:
+    mid = (start + end) // 2
+    current = house[0]
+    count = 1  #설치 공유기 count
+
+    for i in range(1, len(house)):
+        if house[i] >= current + mid:
+            count += 1
+            current = house[i]
+    
+
+    for i in range(1, len(house)):
+        if house[i] >= current + mid:
+            count += 1
+            current = house[i]
+
+    if count >= C:
+        start = mid + 1
+        answer = mid
+    else:
+        end = mid - 1
 
 
-
-
-
-
-
+print(answer)
 
 
 
