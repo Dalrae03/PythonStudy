@@ -2132,7 +2132,7 @@ print(numbers[mid])  #mid와 k의 값이 똑같음
 # ex) 10*10에서 20보다 작거나 같은 수를 생각해보면, 20을 행으로 나눈 몫의 값들이 개수가 되는 것을 알 수 있다. -> 이것을 응용!
 # 해당 임의의 숫자(인덱스가 아니라 실제 값, mid)보다 작거나 같은 숫자들을 전부 찾아줌으로써 mid가 몇 번째 위치한 숫자인지 알아내기 가능 
 # 이분탐색과 약간의 점화식을 생각해야했다.
-
+'''
 N = int(input())
 k = int(input())
 
@@ -2158,19 +2158,36 @@ while start <= end:
         start = mid +1
     
 print(answer)
+'''
 
 
 
+# 백준 2720 - 세탁소 사장 동혁
+# 평범한 거스름돈 문제랄까
 
+N = int(input())
+unit = [25, 10, 5, 1]
+money = []
+result = []
 
+for i in range(N):
+    money.append(int(input()))
 
+for i in money:
+    r = []
+    for j in unit:
+        temp = i // j
+        i %= j
+        r.append(temp)
+    result.append(r)
 
-
-
-
-
-
-
+for i in result:
+    for j in i:
+        print(j, end=' ')
+    print()
+    
+# print 할 때 print('\n')을 사용하면 추가로 한 줄 더 띄워서 빈 줄이 생김 (총 2번의 엔터)
+# 줄바꿈을 원한다면 print('\n') 대신 print()만 사용하기
 
 
 
