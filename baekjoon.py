@@ -2164,7 +2164,7 @@ print(answer)
 
 # 백준 2720 - 세탁소 사장 동혁
 # 평범한 거스름돈 문제랄까
-
+'''
 N = int(input())
 unit = [25, 10, 5, 1]
 money = []
@@ -2185,12 +2185,30 @@ for i in result:
     for j in i:
         print(j, end=' ')
     print()
-    
+'''    
 # print 할 때 print('\n')을 사용하면 추가로 한 줄 더 띄워서 빈 줄이 생김 (총 2번의 엔터)
 # 줄바꿈을 원한다면 print('\n') 대신 print()만 사용하기
 
 
 
+# 백준 18870 - 좌표압축
+# Xi를 좌표 압축한 결과 X'i의 값은 Xi > Xj를 만족하는 서로 다른 좌표 Xj의 개수와 같아야 한다
+
+N = int(input())
+numbers = list(map(int, input().split()))  #공백으로 요소들을 각각의 요소로 리스트 만드는 것 다시 숙지하기
+
+s_numbers = sorted(numbers)  #s_unmbers는 정렬이 된 상태
+result = {}  #후에 딕셔너리 정리 필요. 오랜만에 쓰려니까 기억이 잘 안난다...
+order = 0
+
+for i in range(N):
+    if s_numbers[i] not in result.keys():
+        result[s_numbers[i]] = order
+        order += 1
+
+for i in numbers:
+    print(result[i], end=' ')
+    
 
 
 
