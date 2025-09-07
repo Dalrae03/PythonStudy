@@ -2193,7 +2193,7 @@ for i in result:
 
 # 백준 18870 - 좌표압축
 # Xi를 좌표 압축한 결과 X'i의 값은 Xi > Xj를 만족하는 서로 다른 좌표 Xj의 개수와 같아야 한다
-
+'''
 N = int(input())
 numbers = list(map(int, input().split()))  #공백으로 요소들을 각각의 요소로 리스트 만드는 것 다시 숙지하기
 
@@ -2208,7 +2208,32 @@ for i in range(N):
 
 for i in numbers:
     print(result[i], end=' ')
-    
+'''
+
+
+
+# 백준 7785 - 회사에 있는 사람
+N = int(input())
+members = {}
+leave = []
+
+for i in range(N):
+    a, b = input().split()
+    members[a] = b
+
+
+for i in members.keys():
+    if members[i] == 'enter':
+        leave.append(i)
+
+leave.sort()
+for i in range(len(leave)):
+    print(leave.pop())
+
+
+
+
+
 
 
 
