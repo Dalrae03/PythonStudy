@@ -2238,11 +2238,6 @@ for i in range(len(leave)):
 N = int(input())
 result = 2**N + 1
 
-
-
-
-
-
 print(result*result)
 
 
