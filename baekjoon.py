@@ -2213,6 +2213,7 @@ for i in numbers:
 
 
 # 백준 7785 - 회사에 있는 사람
+'''
 N = int(input())
 members = {}
 leave = []
@@ -2229,11 +2230,19 @@ for i in members.keys():
 leave.sort()
 for i in range(len(leave)):
     print(leave.pop())
+    '''
+
+
+
+# 백준 2903 - 중앙 이동 알고리즘
+N = int(input())
+result = 2**N + 1
 
 
 
 
 
 
+print(result*result)
 
 
