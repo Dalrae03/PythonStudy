@@ -2235,9 +2235,18 @@ for i in range(len(leave)):
 
 
 # 백준 2903 - 중앙 이동 알고리즘
+'''
 N = int(input())
 result = 2**N + 1
 
 print(result*result)
+'''
 
 
+
+# 백준 1037 - 약수
+N_count = int(input())
+numbers = list(map(int, input().split()))
+
+numbers.sort()
+print(numbers[0]*numbers[-1])
