@@ -2245,8 +2245,35 @@ print(result*result)
 
 
 # 백준 1037 - 약수
+'''
 N_count = int(input())
 numbers = list(map(int, input().split()))
 
 numbers.sort()
 print(numbers[0]*numbers[-1])
+'''
+
+
+
+# 백준 1193 - 분수 찾기
+
+N = int(input())
+
+temp = 1
+t = 1
+
+while temp < N:
+    t += 1
+    temp += t
+
+if t % 2 == 0:  #짝수일때
+    a = temp - N
+    print(f"{t - a}/{1 + a}")
+
+else:  #홀수일때
+    a = N - (temp - t) - 1
+    print(f"{t - a}/{1 + a}")
+
+
+
+
