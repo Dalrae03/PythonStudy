@@ -2256,7 +2256,7 @@ print(numbers[0]*numbers[-1])
 
 
 # 백준 1193 - 분수 찾기
-
+'''
 N = int(input())
 
 temp = 1
@@ -2273,6 +2273,33 @@ if t % 2 == 0:  #짝수일때
 else:  #홀수일때
     a = N - (temp - t) - 1
     print(f"{t - a}/{1 + a}")
+'''
+
+
+
+# 백준 2501 - 약수 구하기
+
+N, K = map(int,input().split())
+count = 0
+
+for i in range(1, N+1):
+    if N % i == 0:
+        count += 1
+    
+    if count == K:
+        print(i)
+        break
+
+else:  #모든 for문에 걸리지 않는다면 실행하기를 하기 위해서 else사용
+    print(0)
+
+
+
+
+
+
+
+
 
 
 
