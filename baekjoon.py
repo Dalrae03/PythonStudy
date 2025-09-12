@@ -2278,7 +2278,7 @@ else:  #홀수일때
 
 
 # 백준 2501 - 약수 구하기
-
+'''
 N, K = map(int,input().split())
 count = 0
 
@@ -2292,12 +2292,24 @@ for i in range(1, N+1):
 
 else:  #모든 for문에 걸리지 않는다면 실행하기를 하기 위해서 else사용
     print(0)
+'''
 
 
 
+# 백준 1978 - 소수 구하기
+N = int(input())
+numbers = list(map(int, input().split()))
+result = 0
 
+for i in numbers:
+    count = 0
+    for j in range(1, i+1):
+        if i % j == 0:
+            count += 1
+    if count == 2:
+        result += 1
 
-
+print(result)
 
 
 
