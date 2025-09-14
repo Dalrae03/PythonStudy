@@ -2297,6 +2297,7 @@ else:  #모든 for문에 걸리지 않는다면 실행하기를 하기 위해서
 
 
 # 백준 1978 - 소수 구하기
+'''
 N = int(input())
 numbers = list(map(int, input().split()))
 result = 0
@@ -2310,9 +2311,37 @@ for i in numbers:
         result += 1
 
 print(result)
+'''
 
 
 
+# 백준 2581 - 소수
+
+M = int(input())
+N = int(input())
+num = 0
+numbers = []
+
+def find_decimal(R):
+    count = 0
+    for j in range(1, R+1):
+        if R % j == 0:
+            count += 1
+    if count == 2:
+        return 1
+    return 0 
 
 
+for i in range(M, N+1):
+    if find_decimal(i):
+        num += i
+        numbers.append(i)
+    
 
+if num == 0:
+    print(-1)
+
+
+else:
+    print(num)
+    print(min(numbers))
