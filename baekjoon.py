@@ -2316,7 +2316,7 @@ print(result)
 
 
 # 백준 2581 - 소수
-
+'''
 M = int(input())
 N = int(input())
 num = 0
@@ -2345,3 +2345,31 @@ if num == 0:
 else:
     print(num)
     print(min(numbers))
+'''
+
+
+
+# 백준 5086 - 배수와 약수
+
+while True:
+    
+    N, M = map(int, input().split())
+    if N == 0 and M == 0:
+        break
+
+    if M % N == 0:
+        print("factor")
+    elif N % M == 0:
+        print("multiple")
+    else:
+        print("neither")
+
+
+
+
+
+
+
+
+
+
