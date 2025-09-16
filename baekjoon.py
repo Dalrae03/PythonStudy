@@ -2350,7 +2350,7 @@ else:
 
 
 # 백준 5086 - 배수와 약수
-
+'''
 while True:
     
     N, M = map(int, input().split())
@@ -2363,11 +2363,38 @@ while True:
         print("multiple")
     else:
         print("neither")
+'''
 
 
 
+# 백준 9506 - 약수들의 합
+def find_measure(R):
+    numbers = []
+    for j in range(1, R):
+        if R % j == 0:
+            numbers.append(j)
+    return numbers
+    
 
 
+while True:
+    
+    M = int(input())
+    if M == -1:
+        break
+
+    numbers = find_measure(M)
+    if sum(numbers) == M:
+        print(f'{M} = {numbers[0]}', end='')
+        for i in range(1, len(numbers)):
+            print(f' + {numbers[i]}', end='')
+        print('')
+        
+    else:
+        print(f'{M} is NOT perfect.')
+
+
+    
 
 
 
