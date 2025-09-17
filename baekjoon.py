@@ -2368,14 +2368,13 @@ while True:
 
 
 # 백준 9506 - 약수들의 합
+'''
 def find_measure(R):
     numbers = []
     for j in range(1, R):
         if R % j == 0:
             numbers.append(j)
     return numbers
-    
-
 
 while True:
     
@@ -2392,11 +2391,18 @@ while True:
         
     else:
         print(f'{M} is NOT perfect.')
-
+'''
 
     
 
+# 백준 27433 - 팩토리얼
+N = int(input())
+
+def factorial(N):
+    if N == 1 or N == 0:
+        return 1
+    else:
+        return factorial(N-1) * N
 
 
-
-
+print(factorial(N))
