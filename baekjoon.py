@@ -2396,6 +2396,7 @@ while True:
     
 
 # 백준 27433 - 팩토리얼
+'''
 N = int(input())
 
 def factorial(N):
@@ -2406,3 +2407,15 @@ def factorial(N):
 
 
 print(factorial(N))
+'''
+
+
+
+# 백준 27323 - 직사각형
+A = int(input())
+B = int(input())
+
+print(A*B)
+
+
+
