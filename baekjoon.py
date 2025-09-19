@@ -2412,10 +2412,16 @@ print(factorial(N))
 
 
 # 백준 27323 - 직사각형
+'''
 A = int(input())
 B = int(input())
 
 print(A*B)
+'''
 
 
+
+# 백준 15439 - 베라의 패션
+N = int(input())
+print(N*(N-1))
 
