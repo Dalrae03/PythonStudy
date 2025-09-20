@@ -2422,6 +2422,26 @@ print(A*B)
 
 
 # 백준 15439 - 베라의 패션
+'''
 N = int(input())
 print(N*(N-1))
+'''
 
+
+
+# 백준 10101 - 삼각형 외우기
+
+angle = []
+for i in range(3):
+    angle.append(int(input()))
+
+if sum(angle) != 180:
+    print("Error")
+
+elif (angle[0] == 60 and angle[1] == 60) or (angle[1] == 60 and angle[2] == 60) or (angle[0] == 60 and  angle[2] == 60):
+    print("Equilateral")
+
+elif (angle[0] == angle[1]) or (angle[1] == angle[2]) or (angle[0] == angle[2]):
+    print("Isosceles")
+else:
+    print("Scalene")
