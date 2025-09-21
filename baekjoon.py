@@ -2430,7 +2430,7 @@ print(N*(N-1))
 
 
 # 백준 10101 - 삼각형 외우기
-
+'''
 angle = []
 for i in range(3):
     angle.append(int(input()))
@@ -2445,3 +2445,17 @@ elif (angle[0] == angle[1]) or (angle[1] == angle[2]) or (angle[0] == angle[2]):
     print("Isosceles")
 else:
     print("Scalene")
+'''
+
+
+
+# 백준 1085 - 직사각형에서 탈출
+x, y, w, h = map(int,input().split())
+distance = [x, y, w-x, h-y]
+print(min(distance))
+
+
+
+
+
+
