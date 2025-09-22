@@ -2450,12 +2450,38 @@ else:
 
 
 # 백준 1085 - 직사각형에서 탈출
+'''
 x, y, w, h = map(int,input().split())
 distance = [x, y, w-x, h-y]
 print(min(distance))
+'''
 
 
 
+# 백준 3009 - 네 번째 점
 
+from collections import Counter
 
+dot = []
+for i in range(3):
+    a, b = map(int, input().split())
+    dot.append((a,b))
 
+f_dot = []
+s_dot = []
+
+for i in dot:
+    f_dot.append(i[0])
+    s_dot.append(i[1])
+
+f_count = Counter(f_dot)
+s_count = Counter(s_dot)
+
+for i, j in f_count.items():
+    if j == 1:
+        a = i
+for i, j in s_count.items():
+    if j == 1:
+        b = i
+
+print(a, b)
