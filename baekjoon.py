@@ -2459,7 +2459,7 @@ print(min(distance))
 
 
 # 백준 3009 - 네 번째 점
-
+'''
 from collections import Counter
 
 dot = []
@@ -2485,3 +2485,14 @@ for i, j in s_count.items():
         b = i
 
 print(a, b)
+'''
+
+
+
+# 백준 3009 - 네 번째 점
+n = int(input())
+
+if n == 1:
+    print(4)
+else:
+    print(n*3 + (n-1) + 1)
