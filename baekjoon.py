@@ -2490,9 +2490,27 @@ print(a, b)
 
 
 # 백준 15894 - 수학은 체육과목 입니다.
+'''
 n = int(input())
 
 if n == 1:
     print(4)
 else:
     print(n*3 + (n-1) + 1)
+'''
+
+
+
+# 백준 1620 - 나는야 포켓몬 마스터 이다솜
+N, M = map(int, input().split())
+
+pokemon = {}
+
+for i in range(1, N+1):
+    name = input()
+    pokemon[str(i)] = name
+    pokemon[name] = i
+
+for j in range(M):
+    question = input()
+    print(pokemon[question])
