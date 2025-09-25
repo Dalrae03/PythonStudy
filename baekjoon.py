@@ -2502,6 +2502,7 @@ else:
 
 
 # 백준 1620 - 나는야 포켓몬 마스터 이다솜
+'''
 N, M = map(int, input().split())
 
 pokemon = {}
@@ -2514,3 +2515,24 @@ for i in range(1, N+1):
 for j in range(M):
     question = input()
     print(pokemon[question])
+'''
+
+
+
+# 백준 11653 - 소인수분해
+# 소수 리스트를 뽑아서 받은 수를 싹 소수 리스트를 돌려가면서 소인수 한 수 리스트를 받은다음에 sort로 정렬후 하나씩 출력
+
+
+# 소수 판별 알고리즘은 검색의 도움을 받음... 이미 내가 소수판별 알고리즘을 몇개 짰지만 계속 for 돌리는 거라 너무 오래걸릴 것 같았기 때문...
+import math
+
+N = int(input())
+decimal = []
+
+for j in range(2, N+1):
+    for i in range(2, math.sqrt(N)+1):
+        if N % i == 0:
+            break
+    decimal.append(i)
+
+
