@@ -2553,6 +2553,7 @@ while True:
 '''
 
 # 해답 (with. claude)
+'''
 N = int(input())
 
 if N == 1:
@@ -2569,8 +2570,17 @@ else:
 
     if N > 1:
         print(N)
+'''
 
 
 
+# 백준 11050 - 이항 계수1
+# 이항 계수 구하는 식: n! / (k!(n-k)!)
+# -> 팩토리얼을 구현하면 될 듯하다.
+N, K = map(int, input().split())
+
+def factorial(n):
 
 
+
+print(factorial(N)/factorial(K)*factorial(N-K))
