@@ -2521,18 +2521,56 @@ for j in range(M):
 
 # 백준 11653 - 소인수분해
 # 소수 리스트를 뽑아서 받은 수를 싹 소수 리스트를 돌려가면서 소인수 한 수 리스트를 받은다음에 sort로 정렬후 하나씩 출력
+# -> 그리고 이렇게 하고 시간초과를 받음ㅋㅋ 소수를 모두구한다음에 나누는건 비효율적이래...
 
-
+# 하단은 시간초과 받은 내 코드...
+'''
 # 소수 판별 알고리즘은 검색의 도움을 받음... 이미 내가 소수판별 알고리즘을 몇개 짰지만 계속 for 돌리는 거라 너무 오래걸릴 것 같았기 때문...
 import math
 
 N = int(input())
 decimal = []
 
+if N == 1:
+    print('')
+
 for j in range(2, N+1):
-    for i in range(2, math.sqrt(N)+1):
-        if N % i == 0:
+    for i in range(2, int(math.sqrt(j))+1):
+        if j % i == 0:
             break
-    decimal.append(i)
+    else:
+        decimal.append(j)
+
+# decimal차례대로 한번씩 나눠보고 0되면 append, 그리고 다시 새 수를 decimal차례로 나눔
+while True:
+    for i in decimal:
+        if N % i == 0:
+            print(i)
+            N //= i
+            break
+    else:
+        break
+'''
+
+# 해답 (with. claude)
+N = int(input())
+
+if N == 1:
+    pass
+
+else:
+    i = 2
+    # i*i는 sqrt()랑 같은 의미
+    while i * i <= N:
+        while N % i == 0:
+            print(i)
+            N //= i
+        i += 1
+
+    if N > 1:
+        print(N)
+
+
+
 
 
