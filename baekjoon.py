@@ -2577,10 +2577,21 @@ else:
 # 백준 11050 - 이항 계수1
 # 이항 계수 구하는 식: n! / (k!(n-k)!)
 # -> 팩토리얼을 구현하면 될 듯하다.
+# 근데 이러니까 런타임 에러남... 재귀함수로 풀면 안되려나봐 -> 그래서 for문으로 바꿧듬
 N, K = map(int, input().split())
 
+'''
 def factorial(n):
+    if n == 1:
+        return 1
+    else:
+        return n*factorial(n-1)
+'''
 
+def factorial(n):
+    result = 1
+    for i in range(2, n+1):
+        result *= i
+    return result
 
-
-print(factorial(N)/factorial(K)*factorial(N-K))
+print(factorial(N)//(factorial(K)*factorial(N-K)))
