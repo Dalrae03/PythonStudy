@@ -2578,6 +2578,7 @@ else:
 # 이항 계수 구하는 식: n! / (k!(n-k)!)
 # -> 팩토리얼을 구현하면 될 듯하다.
 # 근데 이러니까 런타임 에러남... 재귀함수로 풀면 안되려나봐 -> 그래서 for문으로 바꿧듬
+"""
 N, K = map(int, input().split())
 
 '''
@@ -2595,3 +2596,53 @@ def factorial(n):
     return result
 
 print(factorial(N)//(factorial(K)*factorial(N-K)))
+"""
+
+
+
+# 백준 5073 - 삼각형과 세 변
+
+while True:
+    length = list(map(int, input().split()))
+
+    if length[0] == 0:
+        break
+
+    elif (sum(length)-max(length)) <= max(length):
+        print("Invalid")
+
+    elif length[0] == length[1] == length[2]:
+        print("Equilateral")
+
+    elif (length[0] == length[1]) or (length[2] == length[1]) or (length[0] == length[2]):
+        print("Isosceles")
+
+    else:
+        print("Scalene")
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
