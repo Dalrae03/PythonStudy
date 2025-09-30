@@ -2601,7 +2601,7 @@ print(factorial(N)//(factorial(K)*factorial(N-K)))
 
 
 # 백준 5073 - 삼각형과 세 변
-
+'''
 while True:
     length = list(map(int, input().split()))
 
@@ -2619,12 +2619,30 @@ while True:
 
     else:
         print("Scalene")
-
-    
-
+'''
 
 
 
+# 백준 24723 - 녹색 거탑
+# 1층은 1+1, 2층은 1+2+1, 3층은 1+3+3+1, 4층은 1+4+6+4+1 로 각각의 두 요소를 두개씩 더한게 점점 늘어나고 그것들의 총합이 내려오는 경우의 수.
+# input으로 주어질 N이 5이하기 때문에 재귀나 반복으로 누적해서 해도 시간 초과가 안날 것 같다.
+# 그래서 하고있긴한데... 코드를 처음부터 다시짜야할 듯...
+# 각 층마다 생길 떨어질 공간의 경우의 수를 요소로 list만들어서 sum을 할 생각
+# 더 세세한 방법이나 각각의 정보는 굿노트에 필기한 것 참고. 나중에 다시시도할 예정
+
+N = int(input())
+num = []
+
+for n in range(1, N+1):
+    numbers = num
+    num = []
+    num.append(1)
+    if (N != 1):
+        for i in range(n):
+            num.append(numbers[i]+numbers[i+1])
+    num.append(1)
+
+print(sum(num))
 
 
 
