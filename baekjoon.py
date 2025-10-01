@@ -2633,7 +2633,6 @@ while True:
 N = int(input())
 num = [1, 1]
 
-
 if N != 1:
     for j in range(N-1):
         temp = []
@@ -2642,7 +2641,6 @@ if N != 1:
             temp.append(num[i]+num[i+1])
         temp.append(1)
         num[:] = temp
-
 
 print(sum(num))
 
