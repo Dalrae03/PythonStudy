@@ -2631,20 +2631,20 @@ while True:
 # 더 세세한 방법이나 각각의 정보는 굿노트에 필기한 것 참고. 나중에 다시시도할 예정
 
 N = int(input())
-num = []
+num = [1, 1]
 
-for n in range(1, N+1):
-    numbers = num
-    num = []
-    num.append(1)
-    if (N != 1):
-        for i in range(n):
-            num.append(numbers[i]+numbers[i+1])
-    num.append(1)
+
+if N != 1:
+    for j in range(N-1):
+        temp = []
+        temp.append(1)
+        for i in range(len(num)-1):
+            temp.append(num[i]+num[i+1])
+        temp.append(1)
+        num[:] = temp
+
 
 print(sum(num))
-
-
 
 
 
