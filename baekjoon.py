@@ -2693,7 +2693,23 @@ print(day)
 
 
 
+# 백준 25192 - 인사성 밝은 곰곰이
 
+N = int(input())
+result = 0
+members = set()
+
+for i in range(N):
+    temp = input()
+    if temp == 'ENTER':
+        result += len(members)
+        members = set()
+    else:
+        members.add(temp)
+        
+result += len(members)
+
+print(result)
 
 
 
