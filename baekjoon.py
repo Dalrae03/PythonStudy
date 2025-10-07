@@ -2694,7 +2694,7 @@ print(day)
 
 
 # 백준 25192 - 인사성 밝은 곰곰이
-
+'''
 N = int(input())
 result = 0
 members = set()
@@ -2711,7 +2711,25 @@ result += len(members)
 
 print(result)
 
+'''
 
+
+
+# 백준 26069 - 붙임성 좋은 총총이
+N = int(input())
+members = set()
+
+for i in range(N):
+    meet = list(input().split())
+    if 'ChongChong' in meet:
+        members.update(meet)
+    
+    # meet으로 묶인 두 명의 사람 중 한명이라도 members에 있다면 총총춤을 추고 있을테니까 나머지 사람도 members에 넣어야함.
+    # any() - 파이썬 내장 함수. 주어진 iterable(반복 가능한 것)” 안에 True가 하나라도 있으면 True를 반환
+    elif any(person in members for person in meet):
+        members.update(meet)
+
+print(len(members))
 
 
 
