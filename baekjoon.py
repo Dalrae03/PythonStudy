@@ -2716,6 +2716,8 @@ print(result)
 
 
 # 백준 26069 - 붙임성 좋은 총총이
+# elif의 조건은 gpt의 도움을 좀 받았당... 그래도 알고리즘 구상은 내가함!!
+'''
 N = int(input())
 members = set()
 
@@ -2730,6 +2732,32 @@ for i in range(N):
         members.update(meet)
 
 print(len(members))
+'''
+
+
+
+# 백준 20920 - 영단어 암기는 괴로워
+# N: 단어의 개수 / M: 외울 단어의 길이 기준 
+from collections import Counter
+
+N, M = map(int, input().split()) 
+words = []
+# result = []
+
+for i in range(N):
+    word = input()
+    if len(word) >= M:
+        words.append(word)
+
+temp = dict(Counter(words))
+
+# 1. vlaue값을 기준으로 정렬
+# 2. 빈도수가 같으면 길이 정렬 (key)
+# 3. 길이가 같으면 알파벳 사전순 앞의 단어 배치 (key)
+
+sorted(temp.items(), key=lambda x:x[1], reverse=True)
+
+
 
 
 
