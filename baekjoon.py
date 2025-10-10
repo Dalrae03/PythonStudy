@@ -2738,9 +2738,10 @@ print(len(members))
 
 # 백준 20920 - 영단어 암기는 괴로워
 # N: 단어의 개수 / M: 외울 단어의 길이 기준 
+'''
 from collections import Counter
 
-N, M = map(int, input().split()) 
+N, M = map(int, input().split())
 words = []
 # result = []
 
@@ -2755,10 +2756,32 @@ temp = dict(Counter(words))
 # 2. 빈도수가 같으면 길이 정렬 (key)
 # 3. 길이가 같으면 알파벳 사전순 앞의 단어 배치 (key)
 
-sorted(temp.items(), key=lambda x:x[1], reverse=True)
+print(sorted(temp.items(), key=lambda x:x[1], reverse=True))
+'''
 
+# 해답
+# 도저히 알고리즘이 떠오르지않아서...
+# 딕셔너리로 빈도수 정렬하는건 알겠고, count(), len(), sorted() or .sort() 이거 사용하면 되는건 알겠는데 결합을 못하겠네
+# 딕셔너리 value값에 리스트나 튜플이나 다양한 값을 넣을 수 있다는 점을 명심
 
+# 그냥 input 쓰면 시간초과 나와서 sys그거 써야함
 
+import sys
+input = sys.stdin.readline
+N, M = map(int, input().rstrip().split())
+words = {}
 
+for _ in range(N):
+    word = input().rstrip()
+    if len(word) >= M:
+        if word in words:
+            words[word][0] += 1
+        else:
+            # 우선순위에 따라 빈도수, 길이, 그냥 단어정렬
+            words[word] = [1, len(word), word]
+    
+# 람다식에서 정렬 우선순위를 여러개 지정 할 수 있다는 점 명시. (이걸 몰랐어)
+for word in sorted(words, key = lambda x: (-words[x][0], -words[x][1], words[x][2])):
+    print(word)
 
 
