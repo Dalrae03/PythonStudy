@@ -2765,7 +2765,7 @@ print(sorted(temp.items(), key=lambda x:x[1], reverse=True))
 # 딕셔너리 value값에 리스트나 튜플이나 다양한 값을 넣을 수 있다는 점을 명심
 
 # 그냥 input 쓰면 시간초과 나와서 sys그거 써야함
-
+'''
 import sys
 input = sys.stdin.readline
 N, M = map(int, input().rstrip().split())
@@ -2783,5 +2783,32 @@ for _ in range(N):
 # 람다식에서 정렬 우선순위를 여러개 지정 할 수 있다는 점 명시. (이걸 몰랐어)
 for word in sorted(words, key = lambda x: (-words[x][0], -words[x][1], words[x][2])):
     print(word)
+'''
 
+
+
+# 백준 1934 - 최소공배수
+# 최대공약수만 구해도 최소공배수를 구할 수 있다. -> 두 수의 곱 = 최대공약수 X 최소공배수
+# 최대 공약수 구하는게 관건인데...
+# 공약수 = 소수로 나눈거 다 곱하는건데...
+# 하나의 약수를 구하고, 그걸 돌아가면서 나머지 수로 나누면 되려나
+
+N = int(input())
+
+for _ in range(N):
+    A, B = map(int, input().split())
+
+    temp = []
+    for i in range(1, A+1):
+        if A % i == 0:
+            temp.append(i)
+
+    result_temp = []
+    for i in temp:
+        if B % i == 0:
+            result_temp.append(i)
+
+    M = max(result_temp)
+    result = (A*B) // M
+    print(result)
 
