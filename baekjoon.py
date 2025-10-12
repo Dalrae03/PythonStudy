@@ -2792,7 +2792,7 @@ for word in sorted(words, key = lambda x: (-words[x][0], -words[x][1], words[x][
 # 최대 공약수 구하는게 관건인데...
 # 공약수 = 소수로 나눈거 다 곱하는건데...
 # 하나의 약수를 구하고, 그걸 돌아가면서 나머지 수로 나누면 되려나
-
+'''
 N = int(input())
 
 for _ in range(N):
@@ -2811,4 +2811,29 @@ for _ in range(N):
     M = max(result_temp)
     result = (A*B) // M
     print(result)
+'''
+
+
+
+# 백준 9063 - 대지
+N = int(input())
+x = []
+y = []
+
+for _ in range(N):
+    X, Y = map(int, input().split())
+    x.append(X)
+    y.append(Y)
+
+if N == 1:
+    print(0)
+
+else:
+    x_l = max(x)-min(x)
+    y_l = max(y)-min(y)
+
+    print(x_l*y_l)
+
+
+
 
