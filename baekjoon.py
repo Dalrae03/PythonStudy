@@ -2816,6 +2816,7 @@ for _ in range(N):
 
 
 # 백준 9063 - 대지
+'''
 N = int(input())
 x = []
 y = []
@@ -2833,6 +2834,38 @@ else:
     y_l = max(y)-min(y)
 
     print(x_l*y_l)
+'''
+
+
+
+# 백준 14215 - 세 막대
+a, b, c = map(int, input().split())
+numbers = [a, b, c]
+numbers.sort()
+
+if numbers[2] >= numbers[0]+numbers[1]:
+    print(2 * (numbers[0]+numbers[1]) - 1)
+
+else:
+    print(sum(numbers))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
