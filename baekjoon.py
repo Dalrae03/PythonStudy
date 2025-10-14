@@ -2839,6 +2839,7 @@ else:
 
 
 # 백준 14215 - 세 막대
+'''
 a, b, c = map(int, input().split())
 numbers = [a, b, c]
 numbers.sort()
@@ -2848,7 +2849,43 @@ if numbers[2] >= numbers[0]+numbers[1]:
 
 else:
     print(sum(numbers))
+'''
 
+
+
+# 백준 13241 - 최소공배수
+# 유클리드 호제법: a = bq + r  /  r=0 이라면, a, b의 최대 공약수는 b가 됨.
+'''
+A, B = map(int, input().split())
+
+numbers =[A, B]
+
+A = min(numbers)
+B = max(numbers)
+
+# 지금 수가 B > A
+if B % A == 0:
+    # A가 최대공약수가 됨
+    # 두 수의 곱 = 최대공약수 X 최소공배수
+    print (B)
+
+else:
+    print(A*B)
+'''
+# 내가 한건 else부분이 틀렸어..... 6, 9일때 최소공배수는 3인데 54를 반환해서 망했다는거지
+
+
+# 두 수의 최대공약수는 "큰 수를 작은 수로 나눈 나머지"와 "작은 수"의 최대공약수와 같다
+# GCD(9, 6) = GCD(6, 3) = GCD(3, 0) = 3
+
+# 해답
+A, B = map(int, input().split())
+temp = A*B
+
+while B:
+    A, B = B, A%B
+
+print(temp // A)
 
 
 
