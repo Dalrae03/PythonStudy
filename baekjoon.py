@@ -2879,6 +2879,7 @@ else:
 # GCD(9, 6) = GCD(6, 3) = GCD(3, 0) = 3
 
 # 해답
+'''
 A, B = map(int, input().split())
 temp = A*B
 
@@ -2886,7 +2887,33 @@ while B:
     A, B = B, A%B
 
 print(temp // A)
+'''
 
+
+
+# 백준 13909 - 창문 닫기
+
+# 1: 창문 열기 / 0: 창문 닫기
+N = int(input())
+
+windows = []
+for _ in range(N):
+    windows.append(0)
+
+for i in range(N):
+    k = 0
+    j = 0
+    while j < N:
+        if windows[j] == 0:
+            windows[j] = 1
+        else:
+            windows[j] = 0
+        j += k
+        print(windows)
+    k = i+1
+
+print(windows)
+        
 
 
 
