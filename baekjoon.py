@@ -2894,26 +2894,34 @@ print(temp // A)
 # 백준 13909 - 창문 닫기
 
 # 1: 창문 열기 / 0: 창문 닫기
+
+# 이대로 하면 답이 맞긴한데 메모리초과래 미친~~
+# 초과될것같긴했어ㅠ 범주가 (1 ≤ N ≤ 2,100,000,000)이거니까ㅠ
 N = int(input())
 
 windows = []
 for _ in range(N):
-    windows.append(0)
+    windows.append(1)
 
-for i in range(N):
-    k = 0
-    j = 0
-    while j < N:
-        if windows[j] == 0:
-            windows[j] = 1
+for i in range(2, N+1):
+    index = i - 1
+    while index < N:
+        if windows[index] == 0:
+            windows[index] = 1
         else:
-            windows[j] = 0
-        j += k
-        print(windows)
-    k = i+1
-
+            windows[index] = 0
+        index += i
+    
 print(windows)
         
+
+# 설마 최소공배수 이런거 쓰나 약수와 배수 카테고리긴했는데
+# 각각의 수의 약수의 개수가 1빼고 짝수여야함 (1 넣으면 홀수가 되겠지) -> 그래야 최종적으로 1이 됨. 아니면 0으로 바뀜
+# 각각의 약수의 개수를 구하는 알고리즘을 써야할듯
+# 1~n을 반복하면서 각각의 수의 약수의 개수가 홀수인지 짝수인지만 알수있다면 한번 싹돌고 끝낼 수 있는데 문제는 약수의 개수를 어떻게 빨리 세느냐
+# 그 뭐냐 반절만 구하면 반절의 개수는 구할 수 있다했는데... 그거 쓰면 좀 빠르게 구할 수 있을것같은데...
+
+
 
 
 
