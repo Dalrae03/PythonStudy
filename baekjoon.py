@@ -2928,20 +2928,52 @@ print(windows)
 # 제곱근: 제곱해서 a가 되는 수
 
 # 해답
+'''
 import sys
 
 # x**y : x의 y 제곱승
 N = int(sys.stdin.readline())
 print(int(N**0.5))
-
+'''
 # 약수의 개수와 연관이 있고 어떤 경우가 해당되어 내가 필요한건지 파악은 했으나 
 # 약수의 개수를 구하는 것이나 조건에 맞는걸 찾는 방법을 몰랐다....
 
 
 
+# 백준 24416 - 알고리즘 수업-피보나치 수1
+
+# 아니 피보나치 수 재귀호출 코드 실행횟수 출력하래서 그거 썻는데 왜 시간초과 나는거임?
+# 재귀함수로 반복을 안해도 얼마나 재귀호출을 해야하는지 알 수 있는거임?
+
+N = int(input())
+
+count1 = 0
+count2 = 0
+
+# 코드1
+def fib(n):
+    global count1
+    if n == 1 or n == 2:
+        count1 += 1
+        return 1
+    else:
+        return (fib(n - 1) + fib(n - 2))
 
 
+# 코드2
+def fibonacci(n):
+    global count2
+    f = [0] * (n + 1)
+    f[1] = f[2] = 1
+    for i in range(3, n+1):
+        count2 += 1
+        f[i] = f[i - 1] + f[i - 2]
+    return f[n]
 
+fib(N)
+fibonacci(N)
+
+print(count1, count2)
 
 
 
