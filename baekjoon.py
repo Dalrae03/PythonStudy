@@ -2940,11 +2940,59 @@ print(int(N**0.5))
 
 
 
+# 백준 24262 - 알고리즘 수업-알고리즘의 수행시간
+
+N = int(input())
+
+numbers =[]
+numbers = [0] * N
+
+count = 0
+
+def MenOfPassion(A, n):
+    global count
+    i = int(n/2)
+    count += 1
+    return A[i]
+
+a = MenOfPassion(numbers, count)
+
+print(count)
+print(a)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 백준 24416 - 알고리즘 수업-피보나치 수1
 
 # 아니 피보나치 수 재귀호출 코드 실행횟수 출력하래서 그거 썻는데 왜 시간초과 나는거임?
 # 재귀함수로 반복을 안해도 얼마나 재귀호출을 해야하는지 알 수 있는거임?
-
+'''
 N = int(input())
 
 count1 = 0
@@ -2974,8 +3022,7 @@ fib(N)
 fibonacci(N)
 
 print(count1, count2)
-
-
+'''
 
 
 
