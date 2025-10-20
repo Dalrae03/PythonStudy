@@ -2941,7 +2941,7 @@ print(int(N**0.5))
 
 
 # 백준 24262 - 알고리즘 수업-알고리즘의 수행시간
-
+'''
 N = int(input())
 
 numbers =[]
@@ -2960,17 +2960,31 @@ a = MenOfPassion(numbers, count)
 print(count)
 print(a)
 
+'''
 
 
 
+# 백준 24263 - 알고리즘 수업-알고리즘의 수행시간2
 
+N = int(input())
 
+numbers =[]
+numbers = [0] * N
 
+count = 0
 
+def MenOfPassion(A, n):
+    global count
+    sum = 0
+    for i in range(n):
+        sum += A[i]
+        count += 1
+    return sum
 
+MenOfPassion(numbers, N)
 
-
-
+print(count)
+print(1)
 
 
 
