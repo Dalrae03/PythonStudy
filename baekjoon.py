@@ -2988,11 +2988,39 @@ print(1)
 '''
 
 # 백준 24264 - 알고리즘 수업-알고리즘의 수행 시간 3
-
+'''
 N = int(input())
 
 print(N*N)
 print(2)
+'''
+
+
+
+# 백준 1735 - 분수 합
+
+A = list(map(int, input().split()))
+B = list(map(int, input().split()))
+
+result = [(A[0]*B[1]+A[1]*B[0]), A[1]*B[1]]
+
+# 둘을 약분할라면 최소공약수를 구하는게 맞는것같은데...
+
+# 응 역시 이건 시간초과... 최적의 약분하는 방법이 필요한데... 걍 소수 리스트를 만들어버려..?
+for i in range(1, min(result)+1):
+    if result[0] % i == 0 and result[1] % i == 0:
+        result[0] //= i
+        result[1] //= i
+
+print(result[0], result[1])
+
+
+
+
+
+
+
+
 
 
 
