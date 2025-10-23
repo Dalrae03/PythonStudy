@@ -2998,21 +2998,40 @@ print(2)
 
 
 # 백준 1735 - 분수 합
+# 이렇게 하고 예시를 100 350 3 5 들어서 잘 뽑았는데도 불구하고 틀렸데... 다음번에는 답을보자...
+
+
 
 A = list(map(int, input().split()))
 B = list(map(int, input().split()))
 
-result = [(A[0]*B[1]+A[1]*B[0]), A[1]*B[1]]
-
 # 둘을 약분할라면 최소공약수를 구하는게 맞는것같은데...
-
 # 응 역시 이건 시간초과... 최적의 약분하는 방법이 필요한데... 걍 소수 리스트를 만들어버려..?
-for i in range(1, min(result)+1):
-    if result[0] % i == 0 and result[1] % i == 0:
-        result[0] //= i
-        result[1] //= i
 
+
+
+# 이거 중복약분이 될수도있잖아 한번약분하면 다시 앞부터 봐야함
+def abbreviation(L):
+    i = 2
+    while i <= min(L):
+        if L[0] % i == 0 and L[1] % i == 0:
+            L[0] //= i
+            L[1] //= i
+            i = 2
+        else:
+            i += 1
+
+
+abbreviation(A)
+abbreviation(B)
+
+
+result = [(A[0]*B[1]+A[1]*B[0]), A[1]*B[1]]
 print(result[0], result[1])
+
+# 원래는 다 곱하고 약분하는게 한번만 약분해서 단순하니까 그렇게 했는데, 시간초과 났고
+# 지금 각각의 분수를 약분해가지고 곱했는데 틀렸다네... 값 변경해서 해봤는데 그건 잘 나오던데......... 왜 틀렸지
+
 
 
 
