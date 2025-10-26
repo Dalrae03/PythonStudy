@@ -3031,25 +3031,21 @@ print(result[0], result[1])
 
 
 # 해답
+# 최대공약수를 구하는게 정답이었다.
+# 유클리드 호제법을 사용하는 것이 빠르게 가능
 A, B = map(int, input().split())
 C, D = map(int, input().split())
-
 
 top = A*D + B*C
 bottom = B*D
 
+t = top
+b = bottom
 
+while b:
+    t, b = b, t%b
 
-def gcd(x, y):
-    
-
-A, B = map(int, input().split())
-temp = A*B
-
-while B:
-    A, B = B, A%B
-
-print(temp // A)
+print(top//t, bottom//t)
 
 
 
