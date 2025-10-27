@@ -3033,6 +3033,7 @@ print(result[0], result[1])
 # 해답
 # 최대공약수를 구하는게 정답이었다.
 # 유클리드 호제법을 사용하는 것이 빠르게 가능
+'''
 A, B = map(int, input().split())
 C, D = map(int, input().split())
 
@@ -3046,11 +3047,22 @@ while b:
     t, b = b, t%b
 
 print(top//t, bottom//t)
+'''
 
 
 
+# 백준 24265 - 알고리즘의 수행 시간 4
+
+n = int(input())
+
+count = 0
+
+for i in range(n):
+    count+=i
 
 
+print(count)
+print(2)
 
 
 
