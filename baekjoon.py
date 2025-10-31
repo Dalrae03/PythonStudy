@@ -3077,6 +3077,7 @@ print(3)
 
 
 # 백준 24267 - 알고리즘의 수행 시간 6
+"""
 n = int(input())
 
 '''
@@ -3101,6 +3102,37 @@ for i in range(1, n-1):
 
 print(sum)
 print(3)
+"""
+
+
+
+# 백준 24313 - 알고리즘 수업-점근적 표기1
+
+# 아니 90퍼까지 잘 가다가 틀렸데 에바야 왜?
+a1, a2 = map(int, input().split())
+c = int(input())
+n = int(input())
+
+
+f = a1*n + a2
+g = c * n
+
+# 이걸 추가했는데도 90퍼까지 잘 가다가 틀렸다네 왜?
+f2 = a1*(n+1) + a2
+g2 = c * (n+1)
+
+
+if g >= f and g2 >= f2:
+    print(1)
+
+else:
+    print(0)
+
+
+
+
+
+
 
 
 
