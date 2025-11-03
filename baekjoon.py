@@ -3107,7 +3107,7 @@ print(3)
 
 
 # 백준 24313 - 알고리즘 수업-점근적 표기1
-
+"""
 # 아니 90퍼까지 잘 가다가 틀렸데 에바야 왜?
 a1, a2 = map(int, input().split())
 c = int(input())
@@ -3136,6 +3136,51 @@ if g >= f:
 
 else:
         print(0)
+"""
+
+
+
+# 백준 2485 - 가로수
+
+N = int(input())
+trees = []
+count = 0
+
+for i in range(N):
+    trees.append(int(input()))
+
+print(trees)
+
+gap = 100000
+
+# 최소 gap을 구해서 그거를 기준으로 나무를 심기
+for i in range(N-1):
+    if gap > trees[i+1]-trees[i]:
+        gap = trees[i+1]-trees[i]
+"""
+    elif gap == trees[i+1]-trees[i]:
+        tmp += 1"""
+
+print(gap)
+
+for i in range(N-1):
+    new = trees[i] + gap
+    if new not in trees:
+        trees.append(new)
+        count += 1
+trees.sort()
+
+# 이 두개의 과정을 gap이 갱신되지않고 다 똑같아질때까지 반복하면 되는데...
+
+print(trees)
+print(count)
+
+
+
+
+
+
+
 
 
 
