@@ -3141,10 +3141,10 @@ else:
 
 
 # 백준 2485 - 가로수
+# 약수, 배수와 소수 파트 안에 있는거니까 이 세개 중 하나로 할 수 있을 것 같긴한데...
+# 최소공배수, 최대공약수, 소수
 
-# 최소 gap을 구하기 / 그것을 기준으로 나무를 심기
-# -> 갭이 갱신이 되지 않으면 (다 똑같으면) 심기 완료
-# => 이거 하니까 시간초과떳어........
+import math
 
 N = int(input())
 trees = []
@@ -3153,7 +3153,34 @@ count = 0
 for i in range(N):
     trees.append(int(input()))
 
+
+# 해답
+# key point: 모든 '간격'의 최대 공약수
+gaps = []
+for i in range(N-1):
+    gaps.append(trees[i+1]-trees[i])
+
+result_gap = gaps[0]
+for i in gaps[1:]:
+    result_gap = math.gcd(result_gap, i)
+
+for i in gaps:
+    count += (i//result_gap) - 1
+
+print(count)
+
+
+
+
+
+
+
+# 최소 gap을 구하기 / 그것을 기준으로 나무를 심기
+# -> 갭이 갱신이 되지 않으면 (다 똑같으면) 심기 완료
+# => 이거 하니까 시간초과떳어........
+
 # 최소 gap을 구해서 그거를 기준으로 나무를 심기
+"""
 while True:
     gap = 100000
     for i in range(N-1):
@@ -3181,7 +3208,7 @@ while True:
 # 이 두개의 과정을 gap이 갱신되지않고 다 똑같아질때까지 반복하면 되는데...
 
 print(count)
-
+"""
 
 
 
