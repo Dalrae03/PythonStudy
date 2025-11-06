@@ -3143,7 +3143,7 @@ else:
 # 백준 2485 - 가로수
 # 약수, 배수와 소수 파트 안에 있는거니까 이 세개 중 하나로 할 수 있을 것 같긴한데...
 # 최소공배수, 최대공약수, 소수
-
+"""
 import math
 
 N = int(input())
@@ -3168,12 +3168,7 @@ for i in gaps:
     count += (i//result_gap) - 1
 
 print(count)
-
-
-
-
-
-
+"""
 
 # 최소 gap을 구하기 / 그것을 기준으로 나무를 심기
 # -> 갭이 갱신이 되지 않으면 (다 똑같으면) 심기 완료
@@ -3209,6 +3204,32 @@ while True:
 
 print(count)
 """
+
+
+
+# 백준 4134 - 다음 소수
+# 하.. 또 예제 입력 넣었을때는 잘 나왔는데 틀렸데 왜?
+import math
+
+N = int(input())
+numbers = []
+decimal = []
+
+for i in range(N):
+    numbers.append(int(input()))
+
+for i in numbers:
+    for j in range(i,4*10**9):
+        for k in range(2, int(math.sqrt(j))+1):
+            if j % k == 0:
+                break
+        else:
+            decimal.append(j)
+            break
+
+for i in decimal:
+    print(i)
+
 
 
 
