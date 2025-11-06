@@ -3209,6 +3209,8 @@ print(count)
 
 # 백준 4134 - 다음 소수
 # 하.. 또 예제 입력 넣었을때는 잘 나왔는데 틀렸데 왜?
+# 2 이하일 경우 잘못 답이 나오기 때문에 2관련된거 수정했는데도 틀렸다네... 그냥 비효율적이고 시간초과라서 틀렸다고하는건가...
+# 아니 근데 그러면 보통 시간초과가 뜨지않나?
 import math
 
 N = int(input())
@@ -3219,13 +3221,16 @@ for i in range(N):
     numbers.append(int(input()))
 
 for i in numbers:
-    for j in range(i,4*10**9):
-        for k in range(2, int(math.sqrt(j))+1):
-            if j % k == 0:
+    if i <= 2:
+        decimal.append(2)
+    else:
+        for j in range(i,4*10**9):
+            for k in range(2, int(math.sqrt(j))+1):
+                if j % k == 0:
+                    break
+            else:
+                decimal.append(j)
                 break
-        else:
-            decimal.append(j)
-            break
 
 for i in decimal:
     print(i)
