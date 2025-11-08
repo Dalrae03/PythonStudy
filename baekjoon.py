@@ -3211,6 +3211,7 @@ print(count)
 # 하.. 또 예제 입력 넣었을때는 잘 나왔는데 틀렸데 왜?
 # 2 이하일 경우 잘못 답이 나오기 때문에 2관련된거 수정했는데도 틀렸다네... 그냥 비효율적이고 시간초과라서 틀렸다고하는건가...
 # 아니 근데 그러면 보통 시간초과가 뜨지않나?
+"""
 import math
 
 N = int(input())
@@ -3224,7 +3225,7 @@ for i in numbers:
     if i <= 2:
         decimal.append(2)
     else:
-        for j in range(i,4*10**9):
+        for j in range(i,4*10**9+1):
             for k in range(2, int(math.sqrt(j))+1):
                 if j % k == 0:
                     break
@@ -3234,17 +3235,35 @@ for i in numbers:
 
 for i in decimal:
     print(i)
+"""
+
+# 해답
+# 나는 굳이 함수로 따로 안빼도 될 거라고 생각했는데 내가 짠게 매우 비효율적이래... 함수로 따로 빼고 sys로 받는게 좋데
+# 그리고 나는 한꺼번에 받아서 한꺼번에 출력하게 만들었는데,
+# 해답에서는 한번 넣으면 바로 답이 나오게해야 정답이었더라 (그래서 계속 답의 수는 맞는데 틀렸다고 나온걸지도...)
+import sys, math
+
+input = sys.stdin.readline().rstrip
+
+def prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            return False
+    return True
 
 
+N = int(input())
 
-
-
-
-
-
-
-
-
+for _ in range(N):
+    n = int(sys.stdin.readline())
+    while True: #소수를 찾을때까지 +1씩 해가며 찾음
+        if prime(n):
+            print(n)
+            break
+        else:
+            n += 1
 
 
 
