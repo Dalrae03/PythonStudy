@@ -3241,6 +3241,7 @@ for i in decimal:
 # 나는 굳이 함수로 따로 안빼도 될 거라고 생각했는데 내가 짠게 매우 비효율적이래... 함수로 따로 빼고 sys로 받는게 좋데
 # 그리고 나는 한꺼번에 받아서 한꺼번에 출력하게 만들었는데,
 # 해답에서는 한번 넣으면 바로 답이 나오게해야 정답이었더라 (그래서 계속 답의 수는 맞는데 틀렸다고 나온걸지도...)
+"""
 import sys, math
 
 input = sys.stdin.readline().rstrip
@@ -3264,8 +3265,7 @@ for _ in range(N):
             break
         else:
             n += 1
-
-
+"""
 
 
 # 백준 24416 - 알고리즘 수업-피보나치 수1
@@ -3291,7 +3291,7 @@ def fib(n):
 # 코드2
 def fibonacci(n):
     global count2
-    f = [0] * (n + 1)
+    f = [0] * (n+1)
     f[1] = f[2] = 1
     for i in range(3, n+1):
         count2 += 1
@@ -3304,9 +3304,15 @@ fibonacci(N)
 print(count1, count2)
 '''
 
+N = int(input())
 
+for i in range(1, N+1):
+    f = [0] * (N+1)
+    f[1] = f[2] = 1
+    for i in range(3, N+1):
+        f[i] = f[i - 1] + f[i - 2]
 
-
+print(f[N], N-2)
 
 
 
