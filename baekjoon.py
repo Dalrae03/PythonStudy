@@ -3303,7 +3303,7 @@ fibonacci(N)
 
 print(count1, count2)
 '''
-
+"""
 N = int(input())
 
 for i in range(1, N+1):
@@ -3313,7 +3313,28 @@ for i in range(1, N+1):
         f[i] = f[i - 1] + f[i - 2]
 
 print(f[N], N-2)
+"""
 
+
+
+# 백준 1929 - 소수 구하기
+import math
+
+N, M = map(int, input().split())
+
+def prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+for i in range(N, M+1):
+    if prime(i):
+        print(i)
+    else:
+        pass
 
 
 
