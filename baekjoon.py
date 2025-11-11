@@ -3318,6 +3318,7 @@ print(f[N], N-2)
 
 
 # 백준 1929 - 소수 구하기
+'''
 import math
 
 N, M = map(int, input().split())
@@ -3335,6 +3336,48 @@ for i in range(N, M+1):
         print(i)
     else:
         pass
+'''
+
+
+
+# 백준 4948 - 베르트랑 공준
+
+# 이렇게 했을때, 답은 나오지만 시간 초과. 베르트랑 공준을 써야할 듯 싶다.
+import math
+
+def prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+
+while True:
+    count = 0
+    N = int(input())
+    if N == 0:
+        break
+
+    for i in range(N, 2*N+1):
+        if prime(i):
+            count += 1
+        else:
+            pass
+    print(count)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
