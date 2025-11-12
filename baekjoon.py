@@ -3391,7 +3391,6 @@ def prime(n):
 max = 123456
 is_prime = prime(2*max)
 
-
 while True:
     count = 0
     N = int(input())
