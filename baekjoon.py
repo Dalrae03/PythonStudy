@@ -3343,6 +3343,7 @@ for i in range(N, M+1):
 # 백준 4948 - 베르트랑 공준
 
 # 이렇게 했을때, 답은 나오지만 시간 초과. 베르트랑 공준을 써야할 듯 싶다.
+# 여기서 시간을 어떻게 더 줄이지..?
 import math
 
 def prime(n):
@@ -3360,7 +3361,7 @@ while True:
     if N == 0:
         break
 
-    for i in range(N, 2*N+1):
+    for i in range(N+1, 2*N+1):
         if prime(i):
             count += 1
         else:
@@ -3369,7 +3370,37 @@ while True:
 
 
 
+# 범위의 절반만 소수 개수를 구해서 *2를 하려는 꼼수는 선택적으로 예시에 맞아서 실패.
 
+# 해답
+# '에라토스테네스의 체' 를 사용하래 (- 1부터 정해진 범주까지 배수에 해당하는 수를 다 지우며 가는 방법)
+
+import math
+
+def prime(n):
+    is_prime = [True] * (n+1)
+    is_prime[0] = is_prime[1] = False
+
+    for i in range(2, int(math.sqrt(n))+1):
+        if is_prime[i]:
+            for j in range(i*i, n+1, i):
+                is_prime[j] = False
+    
+    return is_prime
+
+max = 123456
+is_prime = prime(2*max)
+
+
+while True:
+    count = 0
+    N = int(input())
+    if N == 0:
+        break
+
+    count = sum(is_prime[N+1:2*N+1])
+
+    print(count)
 
 
 
