@@ -3344,6 +3344,7 @@ for i in range(N, M+1):
 
 # 이렇게 했을때, 답은 나오지만 시간 초과. 베르트랑 공준을 써야할 듯 싶다.
 # 여기서 시간을 어떻게 더 줄이지..?
+"""
 import math
 
 def prime(n):
@@ -3367,14 +3368,14 @@ while True:
         else:
             pass
     print(count)
-
+"""
 
 
 # 범위의 절반만 소수 개수를 구해서 *2를 하려는 꼼수는 선택적으로 예시에 맞아서 실패.
 
 # 해답
 # '에라토스테네스의 체' 를 사용하래 (- 1부터 정해진 범주까지 배수에 해당하는 수를 다 지우며 가는 방법)
-
+"""
 import math
 
 def prime(n):
@@ -3400,8 +3401,67 @@ while True:
     count = sum(is_prime[N+1:2*N+1])
 
     print(count)
+"""
 
 
+
+# 백준 4779 - 칸토어 집합
+from sys import stdin
+
+input = stdin.readline
+
+def cantor(start, end, n):
+    if n == 1:
+        index_number.append(start)
+        return 0
+    
+    n = n // 3
+    cantor(start, start+n-1, n)
+    cantor(end-n+1, end, n)
+
+
+# 나오게 만들긴 했는데 예제입력처럼 4개를 어떻게 한꺼번에 넣지? 
+# 꼭 예제입력처럼 4개만 넣으라는 말도 없고 그냥 '임의의 N'이라고만 되어있는데, while써도 종결문 없이 계속 반복되잖아
+# 그냥 한번의 입력과 한번의 결과만 나오면 되는건가? 예제 입력을 이해를 못하겠네
+
+# => 이런경우 파일의 끝에서 입력을 멈추므로 while문과 try except 구문을 이용하여 EOF에러 발생 시 끝나게 설정해 주면 해결된데
+
+while True:
+    try:
+        N = int(input())
+        index_number = []
+        cantor(0, 3**N-1, 3**N)
+
+        for i in range(3**N):
+            if i in index_number:
+                print("-", end='')
+            else:
+                print(" ", end='')
+        print("")
+    except:
+        break
+
+# 이렇게 따로 for을 또 쓰니까 시간초과난다 그럼 함수 안에 print를 넣는게 좋겠는걸...
+
+
+
+
+
+
+
+
+
+
+"""
+# 백준 17103 - 골드바흐 파티션
+
+T = int(input())
+
+
+
+for _ in range(T):
+    N = int(input())
+"""
 
 
 
