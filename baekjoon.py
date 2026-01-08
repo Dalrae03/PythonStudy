@@ -3406,6 +3406,7 @@ while True:
 
 
 # 백준 4779 - 칸토어 집합
+'''
 from sys import stdin
 
 input = stdin.readline
@@ -3418,14 +3419,12 @@ def cantor(start, end, n):
     n = n // 3
     cantor(start, start+n-1, n)
     cantor(end-n+1, end, n)
-
-
+'''
 # 나오게 만들긴 했는데 예제입력처럼 4개를 어떻게 한꺼번에 넣지? 
 # 꼭 예제입력처럼 4개만 넣으라는 말도 없고 그냥 '임의의 N'이라고만 되어있는데, while써도 종결문 없이 계속 반복되잖아
 # 그냥 한번의 입력과 한번의 결과만 나오면 되는건가? 예제 입력을 이해를 못하겠네
-
 # => 이런경우 파일의 끝에서 입력을 멈추므로 while문과 try except 구문을 이용하여 EOF에러 발생 시 끝나게 설정해 주면 해결된데
-
+'''
 while True:
     try:
         N = int(input())
@@ -3440,13 +3439,34 @@ while True:
         print("")
     except:
         break
-
+'''
 # 이렇게 따로 for을 또 쓰니까 시간초과난다 그럼 함수 안에 print를 넣는게 좋겠는걸...
 
+# 해답 참고 후 작성
+# for문을 없애기만해도 맞았다고 뜸!!! 시간초과는 진짜 반복문이 문젠듯...
+
+from sys import stdin
+
+input = stdin.readline
+
+def cantor(start, end, n):
+    if n == 1:
+        result[start] = '-'
+        return 0
+    
+    n = n // 3
+    cantor(start, start+n-1, n)
+    cantor(end-n+1, end, n)
 
 
-
-
+while True:
+    try:
+        N = int(input())
+        result = [' ']*(3**N)
+        cantor(0, 3**N-1, 3**N)
+        print(''.join(result))
+    except:
+        break
 
 
 
