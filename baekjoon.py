@@ -3445,7 +3445,7 @@ while True:
 # 해답 참고 후 작성
 # for문을 없애기만해도 맞았다고 뜸!!! 시간초과는 진짜 반복문이 문젠듯...
 # 공백을 다 만들어 놓고 해당하는 인덱스에 -를 삽입하는 방식으로 진행 (내가 참고한 해답은 -있는상태에서 자르는 형식이었음)
-
+"""
 from sys import stdin
 
 input = stdin.readline
@@ -3468,7 +3468,31 @@ while True:
         print(''.join(result))
     except:
         break
+"""
 
+# 이건 가지고온 추가 답안
+# 1은 그냥 반환하고 1이전 단계에서 '- -'덩어리를 만들어 합쳐 문자열을 만드는 형식
+
+from sys import stdin
+
+input = stdin.readline
+
+def cantor(n):
+    if n == 1:
+        return "-"
+
+    cantor_unit = cantor(n // 3)
+    cantor_res = cantor_unit + " " * (n // 3) + cantor_unit
+
+    return cantor_res
+
+
+while True:
+    try:
+        N = int(input())
+        print(cantor(3**N))
+    except:
+        break
 
 
 
